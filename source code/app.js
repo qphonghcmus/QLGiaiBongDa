@@ -7,13 +7,14 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.static(__dirname+'/'));
+app.use(express.static('public'));
 
 // view engine setup
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','ejs');
 
 app.get('/', (req,res) => {
-    res.end('First run');
+    res.render('./layouts/main.ejs');
 });
 
 app.listen(3000, () => {
