@@ -1,0 +1,10 @@
+<script src="../../public/vendors/jquery/dist/jquery.min.js"></script>
+<script src="../../public/vendors/popper.js/dist/umd/popper.min.js"></script>
+<script src="../../public/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../public/assets/js/main.js"></script>
+
+<% if (typeof(jsfiles) != 'undefined') { %>
+    <%jsfiles.forEach(function(element){%>
+        <script src="<%=element%>"></script>
+    <%});%>
+<%}%>

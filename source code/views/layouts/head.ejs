@@ -1,0 +1,10 @@
+<link rel="stylesheet" href="../../public/vendors/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../public/vendors/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../public/assets/css/style.css">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+<% if (typeof(cssfiles) != 'undefined') { %>
+    <%cssfiles.forEach(function(element){%>
+        <link rel="stylesheet" href="<%=element%>">
+    <%});%>
+<%}%>

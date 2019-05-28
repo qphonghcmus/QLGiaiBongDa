@@ -13,6 +13,9 @@ app.use(express.static('public'));
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','ejs');
 
+// db connection
+require('./utils/db.connection');
+
 app.get('/', (req,res) => {
     res.render('./layouts/main.ejs');
 });
