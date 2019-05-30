@@ -17,7 +17,7 @@ app.set('view engine','ejs');
 require('./utils/db.connection');
 
 app.get('/', (req,res) => {
-    res.render('./layouts/main.ejs');
+    // res.render('./layouts/main.ejs');
 });
 
 app.listen(3000, () => {

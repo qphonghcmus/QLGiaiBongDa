@@ -16,3 +16,57 @@ const thamsoSchema = new mongoose.Schema({
     soDoiDuC1: {type: Number, default: 4},
     soDoiDuC2: {type: Number, default: 3}
 })
+
+module.exports = {
+    find: () => {
+        return new Promise((resolve, reject) =>{
+            var thamso = mongoose.model('thamsos',thamsoSchema);
+            thamso.find().exec((err,succ) => {
+                if(err)
+                    reject(err);
+                else
+                    resolve(succ);
+            })
+        });
+    },
+
+    updateAll: entity => {
+        return new Promise((resolve, reject) =>{
+            var thamso = mongoose.model('thamsos',thamsoSchema);
+            thamso.updateOne({},{
+                tuoiMin: entity.tuoiMin,
+                tuoiMax: entity.tuoiMax,
+                soCauThuMin: entity.soCauThuMin,
+                soCauThuMax: entity.soCauThuMax,
+                soNgoaiBinhMax: entity.soNgoaiBinhMax,
+                soPhutBuGioMax: entity.soPhutBuGioMax,
+                diemSoThang: entity.diemSoThang,
+                diemSoHoa: entity.diemSoHoa,
+                diemSoThua: entity.diemSoThua,
+                thuTuUuTien: entity.thuTuUuTien,
+                soDoiXuongHang: entity.soDoiXuongHang,
+                soDoiDuC1: entity.soDoiDuC1,
+                soDoiDuC2: entity.soDoiDuC2
+            }).exec((err,succ) => {
+                if(err)
+                    reject(err);
+                else
+                    resolve(succ.changedRows);
+            })
+        });
+    },
+
+    update1Property: (key,value) => {
+        return new Promise((resolve, reject) =>{
+            var thamso = mongoose.model('thamsos',thamsoSchema);
+            thamso.updateOne({},{
+                $set: {key:value}
+            }).exec((err,succ) => {
+                if(err)
+                    reject(err);
+                else
+                    resolve(succ.changedRows);
+            })
+        });
+    }
+}

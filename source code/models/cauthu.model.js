@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+var autoIncrement = require('mongoose-sequence')(mongoose);
 // schema
 
 var cauthuSchema = new mongoose.Schema({
@@ -17,6 +17,9 @@ var cauthuSchema = new mongoose.Schema({
     viTriThiDau: {type: Number, min:1,max:4},
     soTranGiuSachLuoi:Number
 })
+
+// auto increment _id
+cauthuSchema.plugin(autoIncrement,{inc_field: 'idCauThu'});
 
 module.exports = {
     find: () => {
@@ -61,7 +64,6 @@ module.exports = {
             var cauthu = mongoose.model('cauthus',cauthuSchema);
 
             var obj = new cauthu({
-                idCauThu: entity.idCauThu,
                 tenCauThu: entity.tenCauThu,
                 loaiCauThu: entity.loaiCauThu,
                 quocTich: entity.quocTich,
@@ -87,7 +89,6 @@ module.exports = {
     update: (entity) => {
         return new Promise((resolve, reject) => {
             var cauthu = mongoose.model('cauthus',cauthuSchema);
-            console.log(entity);
             
             cauthu.updateOne({idCauThu: entity.idCauThu},{
                 tenCauThu: entity.tenCauThu,

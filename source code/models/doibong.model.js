@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var autoIncrement = require('mongoose-sequence')(mongoose);
 
 // schema
 var doibongSchema = new mongoose.Schema({
@@ -10,6 +11,8 @@ var doibongSchema = new mongoose.Schema({
     dsTranDau: [Number],
     soCauThuNuocNgoai: Number
 })
+
+doibongSchema.plugin(autoIncrement,{inc_field:'idDoiBong'});
 
 module.exports = {
     find: () => {
@@ -27,7 +30,7 @@ module.exports = {
     findById: (id) => {
         return new Promise((resolve, reject) =>{
             var doibong = mongoose.model('doibongs',doibongSchema);
-            doibong.find({idDoiBong: id}).exec((err,dbs) => {
+            doibong.findOne({idDoiBong: id}).exec((err,dbs) => {
                 if(err)
                     reject(err);
                 else
@@ -53,7 +56,6 @@ module.exports = {
         return new Promise((resolve, reject) =>{
             var doibong = mongoose.model('doibongs',doibongSchema);
             var obj = new doibong({
-                idDoiBong: entity.idDoiBong,
                 tenDoiBong: entity.tenDoiBong,
                 svd: entity.svd,
                 hlv: entity.hlv,
@@ -74,7 +76,7 @@ module.exports = {
     update: (entity) => {
         return new Promise((resolve, reject) => {
             var doibong = mongoose.model('doibongs',doibongSchema);
-            doibong.update({idDoiBong:entity.idDoiBong},{
+            doibong.updateOne({idDoiBong:entity.idDoiBong},{
                 tenDoiBong: entity.tenDoiBong,
                 svd: entity.svd,
                 hlv: entity.hlv,
@@ -93,7 +95,7 @@ module.exports = {
     delete: (id) => {
         return new Promise((resolve, reject) => {
             var doibong = mongoose.model('doibongs',doibongSchema);
-            doibong.remove({idDoiBong:id}).exec((err, dbs) => {
+            doibong.removeOne({idDoiBong:id}).exec((err, dbs) => {
                 if(err)
                     reject(err);
                 else{
