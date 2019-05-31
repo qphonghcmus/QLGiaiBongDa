@@ -16,9 +16,7 @@ app.set('view engine','ejs');
 // db connection
 require('./utils/db.connection');
 
-app.get('/', (req,res) => {
-    // res.render('./layouts/main.ejs');
-});
+app.get('/', require('./routes/index'));
 
 app.listen(3000, () => {
     console.log("Web server is running at port 3000");

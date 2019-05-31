@@ -1,10 +1,5 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
 <html class="no-js" lang="en">
-<!--<![endif]-->
 
 <head>
     <meta charset="utf-8">
@@ -24,57 +19,72 @@
         <nav class="navbar navbar-expand-sm navbar-default">
 
             <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./"><p></p></a>
+                <a class="navbar-brand" href="./">
+                    <p></p>
+                </a>
                 <!-- <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a> -->
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Trang chủ </a>
+                    <li class="<% if( typeof(activeAdmin) != 'undefined' && activeAdmin === true){ %> active <% } %>">
+                        <a href="#"> <i class="menu-icon fa fa-dashboard"></i>Trang chủ </a>
                     </li>
 
                     <h3 class="menu-title">Hồ sơ Mùa giải</h3><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-group"></i>Đội bóng</a>
+                    <li
+                        class="menu-item-has-children dropdown <% if( typeof(activeDoibong) != 'undefined' && activeDoibong === true){ %> active <% } %>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-group"></i>Đội bóng</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-list"></i><a href="#">Danh sách các đội</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="#">Đăng ký đội bóng</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Cầu thủ</a>
+                    <li
+                        class="menu-item-has-children dropdown <% if( typeof(activeCauthu) != 'undefined' && activeCauthu === true){ %> active <% } %>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Cầu thủ</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-search"></i><a href="#">Tra cứu cầu thủ</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>Lịch thi đấu</a>
+                    <li
+                        class="menu-item-has-children dropdown <% if( typeof(activeLichthidau) != 'undefined' && activeLichthidau === true){ %> active <% } %>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>Lịch thi đấu</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-calendar-o"></i><a href="#">Xem lịch thi đấu</a></li>
                             <li><i class="menu-icon fa fa-plus-square-o"></i><a href="#">Lập lịch thi đấu</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-paste"></i>Kết quả vòng đấu</a>
+                    <li
+                        class="menu-item-has-children dropdown <% if( typeof(activeKetqua) != 'undefined' && activeKetqua === true){ %> active <% } %>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-paste"></i>Kết quả vòng đấu</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-plus-square"></i><a href="#">Ghi nhận kết quả</a></li>
                             <li><i class="menu-icon fa fa-list-alt"></i><a href="#">Xem kết quả</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Báo cáo</a>
+                    <li
+                        class="menu-item-has-children dropdown <% if( typeof(activeBaocao) != 'undefined' && activeBaocao === true){ %> active <% } %>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Báo cáo</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-th-list"></i><a href="#">Bảng xếp hạng</a></li>
                             <li><i class="menu-icon fa fa-list-ol"></i><a href="#">Danh sách ghi bàn</a></li>
                             <li><i class="menu-icon fa fa-list"></i><a href="#">Danh sách kiến tạo</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file-text"></i>Điều lệ giải</a>
+                    <li
+                        class="menu-item-has-children dropdown <% if( typeof(activeDieule) != 'undefined' && activeDieule === true){ %> active <% } %>">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-file-text"></i>Điều lệ giải</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-pencil"></i><a href="#">Thay đổi quy định</a></li>
                         </ul>
@@ -114,7 +124,17 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <!-- <h1>Trang chủ</h1> -->
+                        <h1>
+                            <% if( typeof(activeAdmin) != 'undefined' && activeAdmin === true){ %> Trang chủ <% } %>
+                            <% if( typeof(activeDoibong) != 'undefined' && activeDoibong === true){ %> Đội bóng <% } %>
+                            <% if( typeof(activeCauthu) != 'undefined' && activeCauthu === true){ %> Cầu thủ <% } %>
+                            <% if( typeof(activeLichthidau) != 'undefined' && activeLichthidau === true){ %> Lịch thi
+                            đấu <% } %>
+                            <% if( typeof(activeKetqua) != 'undefined' && activeKetqua === true){ %> Kết quả <% } %>
+                            <% if( typeof(activeBaocao) != 'undefined' && activeBaocao === true){ %> Báo cáo <% } %>
+                            <% if( typeof(activeDieule) != 'undefined' && activeDieule === true){ %> Điều lệ giải
+                            <% } %>
+                        </h1>
                     </div>
                 </div>
             </div>
@@ -122,7 +142,7 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <!-- <li class="active">Trang chủ</li> -->
+                            <li class="active"><%= chuyenmuc%></li>
                         </ol>
                     </div>
                 </div>
