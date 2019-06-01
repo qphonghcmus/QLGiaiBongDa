@@ -18,6 +18,7 @@ require('./utils/db.connection');
 
 app.get('/', require('./routes/index'));
 app.use('/baocao', require('./routes/baocao/route.baocao'));
+app.use('/player',require('./routes/player/route.player'));
 
 app.listen(3000, () => {
     console.log("Web server is running at port 3000");
