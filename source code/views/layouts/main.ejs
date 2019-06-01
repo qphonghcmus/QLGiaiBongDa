@@ -32,14 +32,14 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="<% if( typeof(activeAdmin) != 'undefined' && activeAdmin === true){ %> active <% } %>">
-                        <a href="#"> <i class="menu-icon fa fa-home"></i>Trang chủ </a>
+                        <a href="#"> <i class="menu-icon fa fa-dashboard"></i>Trang chủ </a>
                     </li>
 
                     <h3 class="menu-title">Hồ sơ Mùa giải</h3><!-- /.menu-title -->
                     <li
                         class="menu-item-has-children dropdown <% if( typeof(activeDoibong) != 'undefined' && activeDoibong === true){ %> active <% } %>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Đội bóng</a>
+                            aria-expanded="false"> <i class="menu-icon fa fa-group"></i>Đội bóng</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-list"></i><a href="#">Danh sách các đội</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="#">Đăng ký đội bóng</a></li>
@@ -50,7 +50,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Cầu thủ</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-search"></i><a href="/player/lookup">Tra cứu cầu thủ</a></li>
+                            <li><i class="fa fa-search"></i><a href="#">Tra cứu cầu thủ</a></li>
                         </ul>
                     </li>
                     <li
@@ -58,8 +58,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>Lịch thi đấu</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-calendar-alt"></i><a href="#">Xem lịch thi đấu</a></li>
-                            <li><i class="menu-icon fa fa-plus-square"></i><a href="#">Lập lịch thi đấu</a></li>
+                            <li><i class="menu-icon fa fa-calendar-o"></i><a href="#">Xem lịch thi đấu</a></li>
+                            <li><i class="menu-icon fa fa-plus-square-o"></i><a href="#">Lập lịch thi đấu</a></li>
                         </ul>
                     </li>
                     <li
@@ -84,11 +84,12 @@
                     <li
                         class="menu-item-has-children dropdown <% if( typeof(activeDieule) != 'undefined' && activeDieule === true){ %> active <% } %>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-file-alt"></i>Điều lệ giải</a>
+                            aria-expanded="false"> <i class="menu-icon fa fa-file-text"></i>Điều lệ giải</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-edit"></i><a href="#">Thay đổi quy định</a></li>
+                            <li><i class="menu-icon fa fa-pencil"></i><a href="#">Thay đổi quy định</a></li>
                         </ul>
                     </li>
+
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
