@@ -1,0 +1,11 @@
+
+<div class=" col-lg-12  ">
+        <% for(var i=1; i < 5; i++) { %>
+            <div class=" card ">
+                    <div class="card-header">
+                        <strong class="card-title">Vòng <%= i %></strong>
+                    </div>
+                    <%- include('./result-round') -%>
+            </div>
+         <% } %>
+    </div>

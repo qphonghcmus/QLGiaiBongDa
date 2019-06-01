@@ -33,6 +33,12 @@
 .fa-file-green{
   color:rgb(118, 216, 25);
 }
+.home-away{
+  display : flexbox;
+  justify-content: center;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
 .gaugejs-wrap {
   position: relative;
   margin: 0 auto; }
