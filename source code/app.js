@@ -22,6 +22,7 @@ app.use('/player',require('./routes/player/route.player'));
 app.use('/fixture',require('./routes/fixture/router.fixture'));
 app.use('/result',require('./routes/result/router.result'));
 app.use('/dieule',require('./routes/dieule/route.dieule'));
+app.use('/club',require('./routes/club/route.club'));
 
 app.listen(3000, () => {
     console.log("Web server is running at port 3000");
