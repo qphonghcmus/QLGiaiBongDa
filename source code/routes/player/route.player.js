@@ -17,4 +17,16 @@ router.get('/lookup', (req,res) => {
     })
 })
 
+router.get('/add', (req,res) => {
+    res.render('./layouts/main',{
+        chuyenmuc: 'Đăng ký cầu thủ',
+        filename: '../player/add-player',
+        activeCauthu: true,
+        cssfiles: [
+        ],
+        jsfiles: [
+        ]
+    })
+})
+
 module.exports = router;

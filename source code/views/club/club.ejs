@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="alert  alert-success alert-dismissible fade show" role="alert">
+            <span class="badge badge-pill badge-success">Đội bóng</span>
+            <i class="fa fa-pen close" style="margin-right: 30px"></i>
+            <i class="fa fa-ban close"></i>
+        </div>
+    </div>
+</div>
+
+
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Thông tin</strong>
+                </div>
+                <div class="card-body card-block">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+                        <div class="row form-group">
+
+                            <div class="col col-md-3 "><label for="tendoibong" class=" form-control-label ">Tên đội
+                                    bóng</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="tendoibong" name="tendoibong" placeholder="Tên đội bóng"
+                                    class="form-control">
+                            </div>
+
+
+
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3 "><label for="svd" class=" form-control-label ">Sân vận
+                                    động</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="svd" name="svd" placeholder="Sân vận động" class="form-control">
+
+                            </div>
+
+                        </div>
+
+                        <div class="row form-group">
+
+                            <div class="col col-md-3 "><label for="hlv" class=" form-control-label ">Huấn luyện
+                                    viên</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="hlv" name="hlv" placeholder="Huấn luyện viên"
+                                    class="form-control">
+
+                            </div>
+
+                        </div>
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Logo</strong>
+                </div>
+                <div class="card-body card-block">
+                    <img class="logo-team"
+                        src="https://upload.wikimedia.org/wikipedia/vi/thumb/a/a1/Man_Utd_FC_.svg/1011px-Man_Utd_FC_.svg.png"
+                        alt="image">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- .animated -->
+<div class="animated fadeIn">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Danh sách cầu thủ</strong>
+                </div>
+                <div class="card-body">
+                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>TT</th>
+                                <th><i class="fa fa-user"></i> Cầu thủ</th>
+                                <th><i class="fa fa-calendar-alt"></i> Ngày sinh</th>
+                                <th><i class="fa fa-running"> Số trận ra sân</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=1; i < 5; i++) { %>
+                            <tr>
+                                <td><%=i%></td>
+
+                                <td>Scott McTominay</td>
+                                <td>01/01/1999</td>
+                                <td>38</td>
+
+                            </tr>
+                            <% } %>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

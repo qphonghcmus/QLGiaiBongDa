@@ -1,0 +1,69 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Form đăng ký</strong>
+                </div>
+                <div class="card-body card-block">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="row form-group">
+                            <div class="col col-md-3 "><label for="tendoibong" class=" form-control-label ">Tên đội
+                                    bóng</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="tendoibong" name="tendoibong" placeholder="Tên đội bóng"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3 "><label for="svd" class=" form-control-label ">Sân vận
+                                    động</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="svd" name="svd" placeholder="Sân vận động" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+
+                            <div class="col col-md-3 "><label for="hlv" class=" form-control-label ">Huấn luyện
+                                    viên</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="hlv" name="hlv" placeholder="Huấn luyện viên"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3 "><label for="#" class=" form-control-label ">Danh sách cầu
+                                    thủ</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <select data-placeholder="Chọn cầu thủ..." multiple class="standardSelect">
+                                    <% for(var i=1; i < 5; i++) { %>
+                                    <option value="United States">1 - Ronaldo</option>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="logo" class=" form-control-label">Logo</label></div>
+                            <div class="col-12 col-md-9"><input type="file" id="logo" name="logo"
+                                    class="form-control-file"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-check"></i> Đăng ký
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Hủy đăng ký
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
