@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
     <div class="row">
         <div class="col-lg-2"></div>
-        <div class="col-lg-8">
+        <div class="col-lg-9">
             <div class="card">
                 <div class="card-header">
                     <strong>Thông tin cầu thủ</strong>
@@ -10,45 +10,49 @@
                     <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
 
                         <div class="row form-group">
-
-                            <div class="col col-md-3 "><label for="tencauthu" class=" form-control-label ">Tên cầu
-                                    thủ</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <input type="text" id="tencauthu" name="tencauthu" placeholder="Tên đội bóng"
+                            <div class="col-12 col-md-12">
+                                    <label for="tencauthu" class=" form-control-label ">Tên cầu
+                                            thủ</label>
+                                <input type="text" id="tencauthu" name="tencauthu"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-3 "><label for="loaicauthu" class=" form-control-label ">Loại cầu
-                                    thủ</label>
+                                <div class="col-12 col-md-12">
+                                        <label for="loaicauthu" class=" form-control-label ">Loại cầu thủ</label>
+                                    <input type="text" id="loaicauthu" name="loaicauthu"
+                                        class="form-control">
+                                </div>
                             </div>
-                            <div class="col-12 col-md-9">
-                                <input type="text" id="loaicauthu" name="loaicauthu" placeholder="Loại cầu thủ"
-                                    class="form-control">
-                            </div>
-                        </div>
                         <div class="row form-group">
-
-                            <div class="col col-md-3 "><label for="quoctich" class=" form-control-label ">Quốc
-                                    tịch</label>
+                                <div class="col-12 col-md-12">
+                                        <label for="quoctich" class=" form-control-label ">Quốc tịch</label>
+                                    <input type="text" id="quoctich" name="quoctich"
+                                        class="form-control">
+                                </div>
                             </div>
-                            <div class="col-12 col-md-9">
-                                <input type="text" id="quoctich" name="quoctich" placeholder="Quốc tịch"
-                                    class="form-control">
-
-                            </div>
-                        </div>
                         <div class="row form-group">
-
-                            <div class="col col-md-3 "><label for="dob" class=" form-control-label ">Ngày sinh</label>
+                                <div class="col-12 col-md-12">
+                                        <label for="doibong" class=" form-control-label ">Đội bóng</label>
+                        
+                                        <select id="doibong" name="doibong" class="form-control">
+                                                <option selected>Chọn CLB</option>
+                                                <option>MU</option>
+                                                <option>Chelsea</option>
+                                                <option>City</option>
+                                                <option>Spurs</option>
+                                              </select>
+                                        
+                                </div>
                             </div>
-                            <div class="col-12 col-md-9">
-                                <input type="text" id="dob" name="dob" placeholder="Ngày sinh" class="form-control">
-
+                            <div class="row form-group">
+                                    
+                                    <div class="col-12 col-md-9">
+                                            <label for="logo" class=" form-control-label">Hình ảnh</label>
+                                            <input type="file" id="logo" name="logo"
+                                            
+                                            class="form-control-file"></div>
                             </div>
-
-                        </div>
                     </form>
                 </div>
                 <div class="card-footer">

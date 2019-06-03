@@ -17,4 +17,20 @@ router.get('/result-detail', (req,res) => {
     })
 })
 
+router.get('/add-result', (req,res) => {
+    res.render('./layouts/main',{
+        chuyenmuc: 'Cập nhật kết qủả thi đấu',
+        filename: '../result/add-result',
+        activeKetqua: true,
+        cssfiles: [
+            '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',
+        ],
+        jsfiles: [
+            '../../public/vendors/datatables.net/js/jquery.dataTables.min.js',
+            '../../public/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js',
+            '../../public/assets/js/script.js'
+        ]
+    })
+})
+
 module.exports = router;

@@ -1,21 +1,8 @@
-
-    <div class="card-body">
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col" ><i>Trận đấu</th>
-                    <th scope="col" ><i class="fa fa-check-square fa-map-marker-alt"></i> Sân vận động</th>
-                    <th scope="col" ><i class="fa fa-check-square fa-stopwatch"></i> Thời gian</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for(var i=1; i <= 10; i++) { %>
-                    <tr>
-                        <th scope="row"><%= i %></th>
-                        <%- include('./fixture-match') -%>
-                    </tr>
-                 <% } %>
-            </tbody>
-        </table>
-    </div>
+<tbody>
+    <% for(var i=1; i <= 10; i++) { %>
+        <tr>
+            <td><%= i%></td>
+            <%- include('./fixture-match') -%>
+        </tr>
+    <% } %>
+</tbody>
