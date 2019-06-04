@@ -58,6 +58,24 @@
   background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
   background-image: linear-gradient(to top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
 }
+.info-result{
+  display: flex;
+  justify-content: space-around;
+}
+.info-result{
+  display: flex;
+  justify-content: space-around;
+}
+.side-side{
+  display:flex;
+  flex-direction: column;
+  justify-content:flex-start;
+}
+.component-side{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 .multiple-val-input ul li a{
   display: inline;
   color: #333;
