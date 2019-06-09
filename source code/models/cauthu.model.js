@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-sequence')(mongoose);
+const Schema = mongoose.Schema;
 // schema
 
 var cauthuSchema = new mongoose.Schema({
@@ -8,14 +9,17 @@ var cauthuSchema = new mongoose.Schema({
     loaiCauThu: {type: Number, min: 0, max: 1},
     quocTich: String,
     ngaySinh: String,
-    // ds tran dau: 1 array cac object: {idTranDau, soPhuThiDau}
-    dsTranDau: {type: Array, default: []},
-    soBanThang: Number,
-    soKienTao: Number,
-    soTheDo: Number,
-    soTheVang: Number,
+    tenDoiBong: {type: String, default: "Cầu thủ tự do"},
+    doiBong: [Schema.Types.ObjectId],
+    // Thay đổi ds trận đấu chỉ ghi id trận đấu, và thêm trường số phút thi đấu
+    dsTranDau: [Schema.Types.ObjectId],
+    soPhutThiDau: { Type : Number, default : 0},
+    soBanThang: {type: Number, default: 0},
+    soKienTao: {type: Number, default: 0},
+    soTheDo: {type: Number, default: 0},
+    soTheVang: {type: Number, default: 0},
     viTriThiDau: {type: Number, min:1,max:4},
-    soTranGiuSachLuoi:Number
+    soTranGiuSachLuoi:{type: Number, default: 0},
 })
 
 // auto increment _id
@@ -69,6 +73,9 @@ module.exports = {
                 quocTich: entity.quocTich,
                 ngaySinh: entity.ngaySinh,
                 dsTranDau: entity.dsTranDau,
+                tenDoiBong: entity.tenDoiBong,
+                soPhutThiDau: entity.soPhutThiDau,
+                doiBong: entity.doiBong,
                 soBanThang: entity.soBanThang,
                 soKienTao: entity.soKienTao,
                 soTheDo: entity.soTheDo,

@@ -7,31 +7,56 @@
                     <strong>Thông tin cầu thủ</strong>
                 </div>
                 <div class="card-body card-block">
-                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-
+                    <form id="registerForm" action="/player/add" method="post" class="form-horizontal">
+                        <% if (success) { %>
+                        <div class="alert alert-success" role="alert">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Success!</strong>
+                            <%= messagesSuccess %>
+                        </div>
+                        <% } %>
                         <div class="row form-group">
                             <div class="col-12 col-md-12">
-                                    <label for="tencauthu" class=" form-control-label ">Tên cầu
-                                            thủ</label>
-                                <input type="text" id="tencauthu" name="tencauthu"
-                                    class="form-control">
+                                <label for="tenCauThu" class=" form-control-label ">Tên cầu
+                                    thủ</label>
+                                <input type="text" id="tenCauThu" name="tenCauThu" class="form-control"
+                                    required="required">
                             </div>
                         </div>
                         <div class="row form-group">
-                                <div class="col-12 col-md-12">
-                                        <label for="loaicauthu" class=" form-control-label ">Loại cầu thủ</label>
-                                    <input type="text" id="loaicauthu" name="loaicauthu"
-                                        class="form-control">
-                                </div>
+                            <div class="col-12 col-md-12">
+                                <label for="loaiCauThu" class=" form-control-label ">Loại cầu thủ</label>
+                                <!-- <input type="text" id="loaicauthu" name="loaicauthu" class="form-control"> -->
+                                <select id="loaiCauThu" name="loaiCauThu" class="form-control" required="required">
+                                    <option value="1" selected>Cầu thủ nội</option>
+                                    <option value="0">Cầu thủ ngoại</option>
+                                </select>
                             </div>
+                        </div>
                         <div class="row form-group">
-                                <div class="col-12 col-md-12">
-                                        <label for="quoctich" class=" form-control-label ">Quốc tịch</label>
-                                    <input type="text" id="quoctich" name="quoctich"
-                                        class="form-control">
-                                </div>
+                            <div class="col-12 col-md-12">
+                                <label for="viTriThiDau" class=" form-control-label ">Vị trí thi đấu</label>
+                                <!-- <input type="text" id="loaicauthu" name="loaicauthu" class="form-control"> -->
+                                <select id="viTriThiDau" name="viTriThiDau" class="form-control" required="required">
+                                    <option value="1" selected>Thủ môn</option>
+                                    <option value="2">Hậu vệ</option>
+                                    <option value="3">Tiền vệ</option>
+                                    <option value="4">Tiền đạo</option>
+                                </select>
                             </div>
+                        </div>
                         <div class="row form-group">
+                            <div class="col-12 col-md-12">
+                                <label for="quocTich" class=" form-control-label ">Quốc tịch</label>
+                                <input type="text" id="quocTich" name="quocTich" class="form-control"
+                                    required="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="txtDOB">Date of birth</label>
+                                <input type="text" class="form-control" id="txtDOB" name="dob">
+                              </div>
+                        <!-- <div class="row form-group">
                                 <div class="col-12 col-md-12">
                                         <label for="doibong" class=" form-control-label ">Đội bóng</label>
                         
@@ -44,19 +69,16 @@
                                               </select>
                                         
                                 </div>
-                            </div>
-                            <div class="row form-group">
-                                    
-                                    <div class="col-12 col-md-9">
-                                            <label for="logo" class=" form-control-label">Hình ảnh</label>
-                                            <input type="file" id="logo" name="logo"
-                                            
-                                            class="form-control-file"></div>
-                            </div>
+                            </div> -->
+                        <div class="row form-group">
+                            <div class="col-12 col-md-9">
+                                <label for="logo" class=" form-control-label">Hình ảnh</label>
+                                <input type="file" id="avatar" name="avatar" class="form-control-file"></div>
+                        </div>
                     </form>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary btn-sm">
+                    <button type="submit" form="registerForm" class="btn btn-primary btn-sm">
                         <i class="fa fa-check"></i> Đăng ký
                     </button>
                     <button type="reset" class="btn btn-danger btn-sm">
@@ -67,3 +89,12 @@
         </div>
     </div>
 </div>
+<!-- <script>
+        $(function () {
+          $('#txtDOB').datetimepicker({
+            format: 'd/m/Y',
+            timepicker: false,
+            mask: true,
+          });
+        })
+</script> -->
