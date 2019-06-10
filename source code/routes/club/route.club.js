@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const club = require('../../models/doibong.model.js')
+
 router.get('/', (req,res) => {
     res.render('./layouts/main',{
         chuyenmuc: 'Danh sách đội bóng',
@@ -14,15 +16,29 @@ router.get('/', (req,res) => {
 })
 
 router.get('/list', (req,res) => {
-    res.render('./layouts/main',{
-        chuyenmuc: 'Danh sách đội bóng',
-        filename: '../club/list',
-        activeDoibong: true,
-        cssfiles: [
-            '../../public/assets/css/style.logo.css',
-        ],
-        jsfiles:[]
+
+    club.find().then(succ=>{
+
+        console.log(succ);
+
+        res.render('./layouts/main',{
+            edit: false,
+            danhsachdoibong: succ,
+            chuyenmuc: 'Danh sách đội bóng',
+            filename: '../club/list',
+            activeDoibong: true,
+            cssfiles: [
+                '../../public/assets/css/style.logo.css',
+            ],
+            jsfiles:[]
+        })
+
     })
+    .catch(err=>{
+        console.log(err);
+    })
+
+
 })
 
 router.get('/add', (req,res) => {
@@ -40,21 +56,90 @@ router.get('/add', (req,res) => {
             'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
             'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
             '../../public/assets/js/club.img.upload.js',         
-        ]
+        ],
+        success: false,
     })
 })
 
-router.get('/info/:club', (req,res) => {
-    res.render('./layouts/main',{
-        chuyenmuc: 'Thông tin đội bóng',
-        filename: '../club/club',
-        activeDoibong: true,
-        cssfiles: [
-            '../../public/assets/css/style.logo.css',
-        ],
-        jsfiles:[
-        ]
-    })
+
+router.post('/add',(req,res)=>{
+
+    let entity = req.body;
+
+
+    club.add(entity)
+        .then(succ=>{
+            const messagesSuccess = "Đã thêm đội bóng  \" " + entity.tendoibong + " \" thành công";
+            res.render('./layouts/main',{
+                chuyenmuc: 'Đăng ký đội bóng',
+                filename: '../club/add',
+                activeDoibong: true,
+                cssfiles: [
+                    '../../public/vendors/chosen/chosen.min.css',
+                    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css'
+                ],
+                jsfiles:[
+                    '../../public/vendors/chosen/chosen.jquery.min.js',
+                    '../../public/assets/js/multiple.select.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
+                    '../../public/assets/js/club.img.upload.js',         
+                ],
+                success: true,
+                messagesSuccess : messagesSuccess
+                
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        });
+})
+
+router.get('/info/:clubID&:edit', (req,res) => {
+
+    let clubID = req.params.clubID;
+
+    let edit = req.params.edit;
+
+
+    club.findById(clubID)
+        .then(succ=>{
+            res.render('./layouts/main',{
+                edit : edit,
+                thongtindoibong : succ,
+                chuyenmuc: 'Thông tin đội bóng',
+                filename: '../club/club',
+                activeDoibong: true,
+                cssfiles: [
+                    '../../public/assets/css/style.logo.css',
+                ],
+                jsfiles:[
+                ]
+            })
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+
+
+})
+
+router.post('/info/update/:id',(req,res)=>{
+
+    let id = req.params.id;
+
+    let entity = req.body;
+
+    let redirect = '/club/info/'+id+"&false";
+
+    club.findByIdAndUpdate(entity,id)
+        .then(succ=>{
+            console.log(succ);
+            res.redirect(redirect);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
 })
 
 module.exports = router;

@@ -70,7 +70,7 @@ module.exports = {
                 tenCauThu: entity.tenCauThu,
                 loaiCauThu: entity.loaiCauThu,
                 quocTich: entity.quocTich,
-                ngaySinh: entity.ngaySinh,
+                ngaySinh: entity.dob,
                 dsTranDau: entity.dsTranDau,
                 tenDoiBong: entity.tenDoiBong,
                 soPhutThiDau: entity.soPhutThiDau,

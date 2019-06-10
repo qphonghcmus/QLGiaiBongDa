@@ -1,14 +1,18 @@
+
+<% for(var i = 0; i < danhsachdoibong.length; i++) { %>
 <div class="col-sm-6 col-lg-3">
     <div class="card shadow-lg">
         <div class="card-body">
-          <h5 class="card-title" style="text-align: center">Manchester United</h5>
-          <img class="rounded-circle logo-team" src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t1.svg" alt="image">
-          <p style="text-align: center">Old Trafford</p>
-          <a href="/club/info/manutd" class="btn btn-primary col-sm-12">Profile</a>
+          <h5 class="card-title" style="text-align: center"><%=danhsachdoibong[i].tenDoiBong%></h5>
+          <img class="rounded-circle logo-team" src="<%=danhsachdoibong[i].logo%>" alt="image">
+          <p style="text-align: center"><%=danhsachdoibong[i].svd%></p>
+          <a href="/club/info/<%=danhsachdoibong[i]._id%>&false" class="btn btn-primary col-sm-12">Profile</a>
         </div>
+
       </div>
 </div>
-<div class="col-sm-6 col-lg-3">
+<% } %>
+<!-- <div class="col-sm-6 col-lg-3">
         <div class="card shadow-lg">
                 <div class="card-body">
                   <h5 class="card-title" style="text-align: center">Arsenal</h5>
@@ -22,7 +26,7 @@
         <div class="card shadow-lg">
                 <div class="card-body">
                   <h5 class="card-title" style="text-align: center">Chelsea</h5>
-                  <img class="rounded-circle logo-team" src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t8.svg" alt="image">
+                  <img class="rounded-circle logo-team" src="https://platform-static-files.s3.Oldamazonaws.com/premierleague/badges/t8.svg" alt="image">
                   <p style="text-align: center">Stamford bridge</p>
                   <a href="#" class="btn btn-primary col-sm-12">Profile</a>
                 </div>
@@ -37,4 +41,4 @@
                   <a href="#" class="btn btn-primary col-sm-12">Profile</a>
                 </div>
               </div>
-</div>
+</div> -->

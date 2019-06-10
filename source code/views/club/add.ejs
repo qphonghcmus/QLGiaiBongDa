@@ -8,14 +8,21 @@
                     <strong>Form đăng ký</strong>
                 </div>
                 <div class="card-body card-block">
-                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <form id="register" action="/club/add" method="post" class="form-horizontal">
+                        <% if (success) { %>
+                            <div class="alert alert-success" role="alert">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Success!</strong>
+                                <%= messagesSuccess %>
+                            </div>
+                        <% } %>
                         <div class="row form-group">
                             <div class="col col-md-3 "><label for="tendoibong" class=" form-control-label ">Tên đội
                                     bóng</label>
                             </div>
                             <div class="col-12 col-md-9">
                                 <input type="text" id="tendoibong" name="tendoibong" placeholder="Tên đội bóng"
-                                    class="form-control">
+                                    class="form-control" required>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -23,20 +30,20 @@
                                     động</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="text" id="svd" name="svd" placeholder="Sân vận động" class="form-control">
+                                <input type="text" id="svd" name="svd" placeholder="Sân vận động" class="form-control" required>
                             </div>
                         </div>
                         <div class="row form-group">
 
                             <div class="col col-md-3 "><label for="hlv" class=" form-control-label ">Huấn luyện
-                                    viên</label>
+                                    viên </label>
                             </div>
                             <div class="col-12 col-md-9">
                                 <input type="text" id="hlv" name="hlv" placeholder="Huấn luyện viên"
-                                    class="form-control">
+                                    class="form-control" required>
                             </div>
                         </div>
-                        <div class="row form-group">
+                        <!-- <div class="row form-group">
                             <div class="col col-md-3 "><label for="#" class=" form-control-label ">Danh sách cầu
                                     thủ</label>
                             </div>
@@ -47,12 +54,12 @@
                                     <% } %>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="logo" class=" form-control-label">Logo</label></div>
                             <div class="col-12 col-md-9">
                                 <div class="file-loading">
-                                    <input id="logo" name="logo" type="file" multiple>
+                                    <input value=null id="logo" name="logo" type="file" multiple>
                                 </div>
                             </div>
                             <input type="hidden" id="imgPath" name="imgPath" value="">
@@ -60,12 +67,13 @@
                     </form>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary btn-sm">
+                    <button form="register" type="submit" class="btn btn-primary btn-sm">
                         <i class="fa fa-check"></i> Đăng ký
                     </button>
-                    <button type="reset" class="btn btn-danger btn-sm">
-                        <i class="fa fa-ban"></i> Hủy đăng ký
+                    <button form="register"  type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"> </i> Hủy đăng ký
                     </button>
+                    
                 </div>
             </div>
         </div>

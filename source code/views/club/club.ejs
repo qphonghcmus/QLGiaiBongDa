@@ -2,8 +2,12 @@
     <div class="col-sm-12">
         <div class="alert  alert-success alert-dismissible fade show" role="alert">
             <span class="badge badge-pill badge-success">Đội bóng</span>
-            <i class="fa fa-pen close" style="margin-right: 30px"></i>
-            <i class="fa fa-ban close"></i>
+            <% if (edit=="true") { %>
+                <a <i href="/club/info/<%=thongtindoibong._id%>&false" class="fa fa-ban close "></i> Tắt chỉnh sửa </a>
+            <% } else { %>
+                <a <i href="/club/info/<%=thongtindoibong._id%>&true" class="fa fa-pen close" style="margin-right: 30px"> Chỉnh sửa </i></a>
+            <%}%>
+            
         </div>
     </div>
 </div>
@@ -17,16 +21,18 @@
                     <strong>Thông tin</strong>
                 </div>
                 <div class="card-body card-block">
-                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <form action="/club/info/update/<%=thongtindoibong._id%>" method="post" id="update" class="form-horizontal">
 
                         <div class="row form-group">
 
-                            <div class="col col-md-3 "><label for="tendoibong" class=" form-control-label ">Tên đội
-                                    bóng</label>
+                            <div class="col col-md-3 "><label for="tendoibong" class=" form-control-label "> Tên đội bóng</label>
                             </div>
                             <div class="col-12 col-md-9">
                                 <input type="text" id="tendoibong" name="tendoibong" placeholder="Tên đội bóng"
-                                    class="form-control">
+                                    class="form-control" value="<%=thongtindoibong.tenDoiBong%>"
+                                    <% if (edit=="false") { %>
+                                        disabled
+                                    <% } %> >
                             </div>
 
 
@@ -37,7 +43,10 @@
                                     động</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="text" id="svd" name="svd" placeholder="Sân vận động" class="form-control">
+                                <input type="text" id="svd" name="svd" placeholder="Sân vận động" class="form-control"
+                                value="<%=thongtindoibong.svd%>" <% if (edit=="false") { %>
+                                    disabled
+                                <% } %>>
 
                             </div>
 
@@ -50,14 +59,16 @@
                             </div>
                             <div class="col-12 col-md-9">
                                 <input type="text" id="hlv" name="hlv" placeholder="Huấn luyện viên"
-                                    class="form-control">
+                                    class="form-control" value="<%=thongtindoibong.hlv%>" <% if (edit=="false") { %>
+                                        disabled
+                                    <% } %> >
 
                             </div>
-
                         </div>
-
-
-
+                        <button form="update" type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-check"></i> Cập nhật
+                        </button>
+                        <form><input type="button" class="btn btn-danger btn-sm" value="Refresh" onclick="history.go(0)" value="Reset"></form>
                     </form>
                 </div>
             </div>
@@ -70,7 +81,7 @@
                 </div>
                 <div class="card-body card-block">
                     <img class="logo-team"
-                        src="https://upload.wikimedia.org/wikipedia/vi/thumb/a/a1/Man_Utd_FC_.svg/1011px-Man_Utd_FC_.svg.png"
+                        src="../<%=thongtindoibong.logo%>"
                         alt="image">
 
                 </div>

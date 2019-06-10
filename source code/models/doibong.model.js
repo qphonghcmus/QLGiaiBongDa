@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-sequence')(mongoose);
 
+
+
 // schema
 var doibongSchema = new mongoose.Schema({
     idDoiBong: Number,
@@ -9,7 +11,8 @@ var doibongSchema = new mongoose.Schema({
     hlv: String,
     dsCauThu: [Number],
     dsTranDau: [Number],
-    soCauThuNuocNgoai: Number
+    soCauThuNuocNgoai: Number,
+    logo: {type:String, default:'../public/HAGL.png'}
 })
 
 doibongSchema.plugin(autoIncrement,{inc_field:'idDoiBong'});
@@ -28,13 +31,13 @@ module.exports = {
     },
 
     findById: (id) => {
-        return new Promise((resolve, reject) =>{
+        return new Promise((resolve, reject) => {
             var doibong = mongoose.model('doibongs',doibongSchema);
-            doibong.findOne({idDoiBong: id}).exec((err,dbs) => {
-                if(err)
+            doibong.findById(id).exec((err, succ) => {
+                if (err)
                     reject(err);
                 else
-                    resolve(dbs);
+                    resolve(succ);
             })
         });
     },
@@ -56,18 +59,19 @@ module.exports = {
         return new Promise((resolve, reject) =>{
             var doibong = mongoose.model('doibongs',doibongSchema);
             var obj = new doibong({
-                tenDoiBong: entity.tenDoiBong,
+                tenDoiBong: entity.tendoibong,
                 svd: entity.svd,
                 hlv: entity.hlv,
                 dsCauThu: entity.dsCauThu,
                 dsTranDau: entity.dsTranDau,
-                soCauThuNuocNgoai: entity.soCauThuNuocNgoai
+                soCauThuNuocNgoai: entity.soCauThuNuocNgoai,
+                logo: entity.logo
             })
-            obj.save((err,dbs) => {
+            obj.save((err,succ) => {
                 if(err)
                     reject(err);
                 else{
-                    resolve(dbs);
+                    resolve(succ);
                 }
             })
         });
@@ -103,5 +107,24 @@ module.exports = {
                 }
             })
         });
-    },      
+    },   
+    
+    findByIdAndUpdate: (entity, id)  => {
+        return new Promise((resolve, reject) => {
+            var doibong = mongoose.model('doibongs',doibongSchema);
+            var obj = {
+                tenDoiBong: entity.tendoibong,
+                svd: entity.svd,
+                hlv: entity.hlv,
+            };
+
+            doibong.findByIdAndUpdate(id, obj).exec((err, succ) => {
+                if (err)
+                    reject(err);
+                else
+                    resolve(succ);
+            })
+        })
+    }
+    
 }

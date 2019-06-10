@@ -74,9 +74,9 @@ router.post('/add', (req, res) => {
 
     let entity = req.body;
 
+
     player.add(entity)
         .then(succ => {
-            console.log(req.body);
             const messagesSuccess = "Đã thêm cầu thủ  \" " + succ.tenCauThu + " \" thành công";
             res.render('./layouts/main', {
                 chuyenmuc: 'Đăng ký cầu thủ',
@@ -91,7 +91,7 @@ router.post('/add', (req, res) => {
             })
         })
         .catch(err => {
-            console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"+err);
+            console.log(err);
         });
 
 
