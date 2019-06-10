@@ -66,7 +66,6 @@ module.exports = {
     add: (entity) => {
         return new Promise((resolve, reject) =>{
             var cauthu = mongoose.model('cauthus',cauthuSchema);
-
             var obj = new cauthu({
                 tenCauThu: entity.tenCauThu,
                 loaiCauThu: entity.loaiCauThu,

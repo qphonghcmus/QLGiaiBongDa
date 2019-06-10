@@ -15,6 +15,8 @@ app.set('view engine','ejs');
 
 // db connection
 require('./utils/db.connection');
+// upload img
+require('./utils/upload')(app);
 
 app.get('/', require('./routes/index'));
 app.use('/baocao', require('./routes/baocao/route.baocao'));

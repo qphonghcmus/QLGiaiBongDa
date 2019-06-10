@@ -50,8 +50,12 @@
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-3"><label for="logo" class=" form-control-label">Logo</label></div>
-                            <div class="col-12 col-md-9"><input type="file" id="logo" name="logo"
-                                    class="form-control-file"></div>
+                            <div class="col-12 col-md-9">
+                                <div class="file-loading">
+                                    <input id="logo" name="logo" type="file" multiple>
+                                </div>
+                            </div>
+                            <input type="hidden" id="imgPath" name="imgPath" value="">
                         </div>
                     </form>
                 </div>

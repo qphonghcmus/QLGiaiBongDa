@@ -4,8 +4,10 @@ var router = express.Router();
 const player = require('../../models/cauthu.model');
 
 router.get('/lookup', (req, res) => {
-
+    console.log('xxxxxxxxxx');
     player.find().then(succ =>{
+    console.log('yyyyyyyyyy');
+
         res.render('./layouts/main', {
         danhsachcauthu : succ,
         chuyenmuc: 'Tra cứu cầu thủ',
@@ -52,16 +54,17 @@ router.get('/add', (req, res) => {
         filename: '../player/add-player',
         activeCauthu: true,
         cssfiles: [
-            // 'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
-            // 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css',
-            // "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
+            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css'
+
         ],
         jsfiles: [
-            // 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js,',
-            // 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js',
-            // 'https://code.jquery.com/jquery-3.3.1.min.js',
-            // 'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js',
-            // 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js',
+            '../../public/assets/js/add.player.validation.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
+            '../../public/assets/js/upload.img.js',            
         ],
         success: false,
     })
