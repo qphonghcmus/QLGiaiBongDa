@@ -1,17 +1,17 @@
 <div class="col-sm-12">
     <div class="alert  alert-success alert-dismissible fade show" role="alert">
         <span class="badge badge-pill badge-success">Hồ sơ giải đấu</span>
-        <i class="fa fa-plus-square close"></i>
+        <a href="./season/add"> <i class="fa fa-plus-square close"></i></a>
     </div>
 </div>
-<% for(var i=1; i < 5; i++) { %>
+<% for(var i=0; i < listSeason.length; i++) { %>
 <div class="col-sm-6 col-lg-3">
     <div class="card shadow-sm">
         <div class="card-body">
-            <h5 class="card-title">Mùa giải 2015 - 2016</h5>
-            <img src="https://taiphanmempc.net/wp-content/uploads/2018/12/fifa-2019-game-bong-da-fifa-2019-1.jpg" alt="image">
+            <h5 class="card-title"><%= listSeason[i].tenMuaGiai %></h5>
+            <img src="../public/assets/img/season/<%= listSeason[i].cover %>" alt="image">
             <p></p>
-            <a href="#" class="btn btn-primary col-sm-12">Xem chi tiết</a>
+            <a href="./season/info/<%=listSeason[i].idMuaGiai%>&false" class="btn btn-primary col-sm-12">Xem chi tiết</a>
         </div>
     </div>
 </div>

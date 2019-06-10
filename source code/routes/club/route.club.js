@@ -66,7 +66,6 @@ router.post('/add',(req,res)=>{
 
     let entity = req.body;
 
-
     club.add(entity)
         .then(succ=>{
             const messagesSuccess = "Đã thêm đội bóng  \" " + entity.tendoibong + " \" thành công";

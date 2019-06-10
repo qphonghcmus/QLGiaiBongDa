@@ -1,12 +1,18 @@
 var express = require('express');
 var router = express.Router();
+var muagiai = require('../models/muagiai.model');
 
 router.get('/', (req,res) => {
-    res.render('./layouts/main',{
-        chuyenmuc: 'Trang chủ',
-        filename: '../home',
-        activeAdmin: true
-    })
+    muagiai.find().then(succ => {
+        console.log(succ);
+        res.render('./layouts/main',{
+            chuyenmuc: 'Trang chủ',
+            filename: '../home',
+            activeAdmin: true,
+            listSeason: succ
+        })
+    }).catch(err => console.log(err))
+   
 })
 
 module.exports = router;

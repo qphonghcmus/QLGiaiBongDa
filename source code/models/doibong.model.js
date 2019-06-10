@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-sequence')(mongoose);
 
-
-
 // schema
 var doibongSchema = new mongoose.Schema({
     idDoiBong: Number,
@@ -12,7 +10,7 @@ var doibongSchema = new mongoose.Schema({
     dsCauThu: [Number],
     dsTranDau: [Number],
     soCauThuNuocNgoai: Number,
-    logo: {type:String, default:'../public/HAGL.png'}
+    logo: {type:String, default:'../public/assets/img/logo/HAGL.png'}
 })
 
 doibongSchema.plugin(autoIncrement,{inc_field:'idDoiBong'});

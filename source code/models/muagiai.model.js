@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-sequence')(mongoose);
+const Schema = mongoose.Schema;
 
 // schema
 var muagiaiSchema = new mongoose.Schema({
@@ -7,12 +8,17 @@ var muagiaiSchema = new mongoose.Schema({
     tenMuaGiai: String,
     ngayBatDau: String,
     ngayKetThuc: String,
-    soDoiThamDu: Number,
+    soDoiThamDu: {type: Number, default: 0},
     viTriXuongHang: [Number],
     viTriDuC1: [Number],
     viTriDuC2: [Number],
-    dsDoiBong: [Number],
-    dsVongDau: [Number]
+    // moi object gom 2 truong: ma doi (idDoiBong) va ten doi (tenDoiBong)
+    // dsDoiBong: [Schema.Types.ObjectId],
+    // dsDoiBong: {type:[Schema.Types.ObjectId], default:[]},
+    dsDoiBong: [String],
+
+    dsVongDau: [Number],
+    cover: String
 })
 
 // auto increment id
@@ -69,7 +75,8 @@ module.exports = {
                 viTriDuC1: entity.viTriDuC1,
                 viTriDuC2: entity.viTriDuC2,
                 dsDoiBong: entity.dsDoiBong,
-                dsVongDau: entity.dsVongDau
+                dsVongDau: entity.dsVongDau,
+                cover: entity.cover,
             })
             obj.save((err,succ) => {
                 if(err)
@@ -84,7 +91,7 @@ module.exports = {
     update: (entity) => {
         return new Promise((resolve, reject) => {
             var muagiai = mongoose.model('muagiais',muagiaiSchema);
-            
+            console.log('updating');
             muagiai.updateOne({idMuaGiai: entity.idMuaGiai},{
                 tenMuaGiai: entity.tenMuaGiai,
                 ngayBatDau: entity.ngayBatDau,
@@ -94,7 +101,8 @@ module.exports = {
                 viTriDuC1: entity.viTriDuC1,
                 viTriDuC2: entity.viTriDuC2,
                 dsDoiBong: entity.dsDoiBong,
-                dsVongDau: entity.dsVongDau
+                dsVongDau: entity.dsVongDau,
+                cover:entity.cover
             }).exec((err, succ) => {
                 if(err)
                     reject(err);

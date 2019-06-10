@@ -4,10 +4,7 @@ var router = express.Router();
 const player = require('../../models/cauthu.model');
 
 router.get('/lookup', (req, res) => {
-    console.log('xxxxxxxxxx');
     player.find().then(succ =>{
-    console.log('yyyyyyyyyy');
-
         res.render('./layouts/main', {
         danhsachcauthu : succ,
         chuyenmuc: 'Tra cứu cầu thủ',

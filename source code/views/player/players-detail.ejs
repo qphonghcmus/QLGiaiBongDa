@@ -1,130 +1,112 @@
+<div class="animated fadeIn">
+  <div class="row">
 
-            <div class="animated fadeIn">
-                <div class="row">
-
-                    <div class="col-md-12">
-                        <!-- filter -->
+    <div class="col-md-12">
+      <!-- filter -->
       <div class="row align-items-center justify-content-center">
-            <div class="col pt-3">
-              <div class="form-group">
-                <select id="categories" class="form-control">
-                  <option selected>Vị trí thi đấu</option>
-                  <option>Thủ môn</option>
-                  <option>Hậu vệ</option>
-                  <option>Tiền vệ</option>
-                  <option>Tiền đạo</option>
-                </select>
-              </div>
-            </div>
-            <div class="col pt-3">
-              <div class="form-group">
-                <select id="categories" class="form-control">
-                  <option selected>CLB</option>
-                  <option>Manchester City</option>
-                  <option>Manchester United</option>
-                  <option>Chelsea</option>
-                  <option>Arsenal</option>
-                </select>
-              </div>
-            </div>
-            <div class="col pt-3">
-              <div class="form-group">
-                <select id="tasg" class="form-control">
-                  <option selected>Tuổi min</option>
-                  <option>20</option>
-                  <option>21</option>
-                  <option>22</option>
-                  <option>23</option>
-                  <option>24</option>
-                  <option>25</option>
-                </select>
-              </div>
-            </div>
-            <div class="col pt-3">
-                    <div class="form-group">
-                      <select id="tasg" class="form-control">
-                        <option selected>Tuổi max</option>
-                        <option>30</option>
-                        <option>31</option>
-                        <option>32</option>
-                        <option>33</option>
-                        <option>34</option>
-                        <option>35</option>
-                      </select>
-                    </div>
-                  </div>
-            <div class="col-md-3">
-              <button type="button" class="btn btn-primary btn-block"><i class="fas fa-filter"></i> Lọc</button>
-            </div>
-          </div> <!-- end filter-->
-                        <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">Danh sách các cầu thủ</strong>
-                            </div>
-                            <div class="card-body">
-                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th><i class="fa fa-user"></i> Cầu thủ</th>
-                                            <th><i class="fa fa-calendar-alt"></i> Ngày sinh</th>
-                                            <th><i class="fa fa-users"></i> Đội bóng</th>
-                                            <th><i class="fa fa-running"> Số trận ra sân</th>
-                                            <th><i class="fa fa-futbol"></th>
-                                            <th><i class="fa fa-shoe-prints"></th>
-                                            <th><i class="fa fa-file fa-file-yellow"></th>
-                                            <th><i class="fa fa-file fa-file-red"></th>
-                                            <th><i class="fa fa-check-square fa-file-green"></th>
-                                            <th><i class="fa fa-check-square fa-stopwatch"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- <% for(var i=1; i < 5; i++) { %>
-                                            <tr>
-                                                    <td>Scott McTominay</td>
-                                                    <td>01/01/1999</td>
-                                                    <td>Manchester United</td>
-                                                    <td>38</td>
-                                                    <td>5</td>
-                                                    <td>5</td>
-                                                    <td>5</td>
-                                                    <td>5</td>
-                                                    <td>5</td>
-                                                    <td>5</td>
-                                                </tr>
-                                         <% } %> -->
-                                         <% for(var i = 0; i < danhsachcauthu.length; i++) { %>
-                                          <tr>
-                                            <td><strong><%= danhsachcauthu[i].tenCauThu %></strong></br>
-                                              <% if (danhsachcauthu[i].viTriThiDau == 1) { %>
-                                                Thủ môn
-                                              <% } %> 
-                                              <% if (danhsachcauthu[i].viTriThiDau == 2) { %>
-                                                Hậu vệ
-                                              <% } %> 
-                                              <% if (danhsachcauthu[i].viTriThiDau == 3) { %>
-                                                Tiền vệ
-                                              <% } %> 
-                                              <% if (danhsachcauthu[i].viTriThiDau == 4) { %>
-                                                Tiền đạo
-                                              <% } %> </td>
-                                            <td><%= danhsachcauthu[i].ngaySinh %></td>
-                                            <td><%= danhsachcauthu[i].tenDoiBong %></td>
-                                            <td><%= danhsachcauthu[i].dsTranDau.length %></td>
-                                            <td><%= danhsachcauthu[i].soBanThang %></td>
-                                            <td><%= danhsachcauthu[i].soKienTao %></td>
-                                            <td><%= danhsachcauthu[i].soTheVang %></td>
-                                            <td><%= danhsachcauthu[i].soTheDo %></td>
-                                            <td><%= danhsachcauthu[i].soTranGiuSachLuoi %></td>
-                                            <td><%= danhsachcauthu[i].soPhutThiDau %></td>
-                                        </tr>
-                                        <% } %>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- .animated -->
-
-            
-
+        <div class="col pt-3">
+          <div class="form-group">
+            <select id="categories" class="form-control">
+              <option selected>Vị trí thi đấu</option>
+              <option>Thủ môn</option>
+              <option>Hậu vệ</option>
+              <option>Tiền vệ</option>
+              <option>Tiền đạo</option>
+            </select>
+          </div>
+        </div>
+        <div class="col pt-3">
+          <div class="form-group">
+            <select id="categories" class="form-control">
+              <option selected>CLB</option>
+              <option>Manchester City</option>
+              <option>Manchester United</option>
+              <option>Chelsea</option>
+              <option>Arsenal</option>
+            </select>
+          </div>
+        </div>
+        <div class="col pt-3">
+          <div class="form-group">
+            <select id="tasg" class="form-control">
+              <option selected>Tuổi min</option>
+              <option>20</option>
+              <option>21</option>
+              <option>22</option>
+              <option>23</option>
+              <option>24</option>
+              <option>25</option>
+            </select>
+          </div>
+        </div>
+        <div class="col pt-3">
+          <div class="form-group">
+            <select id="tasg" class="form-control">
+              <option selected>Tuổi max</option>
+              <option>30</option>
+              <option>31</option>
+              <option>32</option>
+              <option>33</option>
+              <option>34</option>
+              <option>35</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <button type="button" class="btn btn-primary btn-block"><i class="fas fa-filter"></i> Lọc</button>
+        </div>
+      </div> <!-- end filter-->
+      <div class="card">
+        <div class="card-header">
+          <strong class="card-title">Danh sách các cầu thủ</strong>
+        </div>
+        <div class="card-body">
+          <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th><i class="fa fa-user"></i> Cầu thủ</th>
+                <th><i class="fa fa-calendar-alt"></i> Ngày sinh</th>
+                <th><i class="fa fa-users"></i> Đội bóng</th>
+                <th><i class="fa fa-running"> Số trận ra sân</th>
+                <th><i class="fa fa-futbol"></th>
+                <th><i class="fa fa-shoe-prints"></th>
+                <th><i class="fa fa-file fa-file-yellow"></th>
+                <th><i class="fa fa-file fa-file-red"></th>
+                <th><i class="fa fa-check-square fa-file-green"></th>
+                <th><i class="fa fa-check-square fa-stopwatch"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i = 0; i < danhsachcauthu.length; i++) { %>
+              <tr>
+                <td><strong><%= danhsachcauthu[i].tenCauThu %></strong></br>
+                  <% if (danhsachcauthu[i].viTriThiDau == 1) { %>
+                  Thủ môn
+                  <% } %>
+                  <% if (danhsachcauthu[i].viTriThiDau == 2) { %>
+                  Hậu vệ
+                  <% } %>
+                  <% if (danhsachcauthu[i].viTriThiDau == 3) { %>
+                  Tiền vệ
+                  <% } %>
+                  <% if (danhsachcauthu[i].viTriThiDau == 4) { %>
+                  Tiền đạo
+                  <% } %> </td>
+                <td><%= danhsachcauthu[i].ngaySinh %></td>
+                <td><%= danhsachcauthu[i].tenDoiBong %></td>
+                <td><%= danhsachcauthu[i].dsTranDau.length %></td>
+                <td><%= danhsachcauthu[i].soBanThang %></td>
+                <td><%= danhsachcauthu[i].soKienTao %></td>
+                <td><%= danhsachcauthu[i].soTheVang %></td>
+                <td><%= danhsachcauthu[i].soTheDo %></td>
+                <td><%= danhsachcauthu[i].soTranGiuSachLuoi %></td>
+                <td><%= danhsachcauthu[i].soPhutThiDau %></td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- .animated -->
