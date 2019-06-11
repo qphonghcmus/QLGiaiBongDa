@@ -63,7 +63,7 @@ module.exports = {
                 dsCauThu: entity.dsCauThu,
                 dsTranDau: entity.dsTranDau,
                 soCauThuNuocNgoai: entity.soCauThuNuocNgoai,
-                logo: entity.logo
+                logo: entity.imgPath
             })
             obj.save((err,succ) => {
                 if(err)
@@ -84,7 +84,8 @@ module.exports = {
                 hlv: entity.hlv,
                 dsCauThu: entity.dsCauThu,
                 dsTranDau: entity.dsTranDau,
-                soCauThuNuocNgoai: entity.soCauThuNuocNgoai
+                soCauThuNuocNgoai: entity.soCauThuNuocNgoai,
+                logo: entity.imgPath
             }).exec((err, dbs) => {
                 if(err)
                     reject(err);
@@ -114,6 +115,7 @@ module.exports = {
                 tenDoiBong: entity.tendoibong,
                 svd: entity.svd,
                 hlv: entity.hlv,
+                logo: entity.imgPath
             };
 
             doibong.findByIdAndUpdate(id, obj).exec((err, succ) => {

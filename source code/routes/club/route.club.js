@@ -4,14 +4,25 @@ var router = express.Router();
 const club = require('../../models/doibong.model.js')
 
 router.get('/', (req,res) => {
-    res.render('./layouts/main',{
-        chuyenmuc: 'Danh sách đội bóng',
-        filename: '../club/list',
-        activeDoibong: true,
-        cssfiles: [
-            '../../public/assets/css/style.logo.css',
-        ],
-        jsfiles:[]
+    club.find().then(succ=>{
+
+        console.log(succ);
+
+        res.render('./layouts/main',{
+            edit: false,
+            danhsachdoibong: succ,
+            chuyenmuc: 'Danh sách đội bóng',
+            filename: '../club/list',
+            activeDoibong: true,
+            cssfiles: [
+                '../../public/assets/css/style.logo.css',
+            ],
+            jsfiles:[]
+        })
+
+    })
+    .catch(err=>{
+        console.log(err);
     })
 })
 
@@ -103,6 +114,7 @@ router.get('/info/:clubID&:edit', (req,res) => {
 
     club.findById(clubID)
         .then(succ=>{
+            console.log(succ);
             res.render('./layouts/main',{
                 edit : edit,
                 thongtindoibong : succ,
@@ -111,8 +123,15 @@ router.get('/info/:clubID&:edit', (req,res) => {
                 activeDoibong: true,
                 cssfiles: [
                     '../../public/assets/css/style.logo.css',
+                    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
+                    '../../public/vendors/chosen/chosen.min.css',
                 ],
                 jsfiles:[
+                    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
+                    '../../public/assets/js/club/edit.club.js',
+                    '../../public/vendors/chosen/chosen.jquery.min.js',
+                    '../../public/assets/js/multiple.select.js',
                 ]
             })
         })

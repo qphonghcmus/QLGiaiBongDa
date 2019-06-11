@@ -173,7 +173,6 @@ router.get('/info/:seasonID&:edit', (req, res) => {
                     'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
                     'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
                     '../../public/vendors/chosen/chosen.min.css',
-                    
                 ],
                 jsfiles: [
                     'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js',

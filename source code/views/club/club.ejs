@@ -3,9 +3,10 @@
         <div class="alert  alert-success alert-dismissible fade show" role="alert">
             <span class="badge badge-pill badge-success">Đội bóng</span>
             <% if (edit=="true") { %>
-                <a <i href="/club/info/<%=thongtindoibong._id%>&false" class="fa fa-ban close "></i> Tắt chỉnh sửa </a>
+            <a <i href="/club/info/<%=thongtindoibong._id%>&false" class="fa fa-ban close "></i> Tắt chỉnh sửa </a>
             <% } else { %>
-                <a <i href="/club/info/<%=thongtindoibong._id%>&true" class="fa fa-pen close" style="margin-right: 30px"> Chỉnh sửa </i></a>
+            <a <i href="/club/info/<%=thongtindoibong._id%>&true" class="fa fa-pen close" style="margin-right: 30px">
+                Chỉnh sửa </i></a>
             <%}%>
             
         </div>
@@ -15,74 +16,90 @@
 
 <div class="animated fadeIn">
     <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-8">
             <div class="card">
                 <div class="card-header">
                     <strong>Thông tin</strong>
                 </div>
                 <div class="card-body card-block">
-                    <form action="/club/info/update/<%=thongtindoibong._id%>" method="post" id="update" class="form-horizontal">
+                    <form action="/club/info/update/<%=thongtindoibong._id%>" method="post" id="update"
+            class="form-horizontal">
 
-                        <div class="row form-group">
+            <div class="row form-group">
 
-                            <div class="col col-md-3 "><label for="tendoibong" class=" form-control-label "> Tên đội bóng</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <input type="text" id="tendoibong" name="tendoibong" placeholder="Tên đội bóng"
-                                    class="form-control" value="<%=thongtindoibong.tenDoiBong%>"
-                                    <% if (edit=="false") { %>
-                                        disabled
-                                    <% } %> >
-                            </div>
+                <div class="col col-md-3 "><label for="tendoibong" class=" form-control-label "> Tên đội bóng</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <input type="text" id="tendoibong" name="tendoibong" placeholder="Tên đội bóng" class="form-control"
+                        value="<%=thongtindoibong.tenDoiBong%>" <% if (edit=="false") { %> disabled <% } %>>
+                </div>
 
 
 
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3 "><label for="svd" class=" form-control-label ">Sân vận
-                                    động</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <input type="text" id="svd" name="svd" placeholder="Sân vận động" class="form-control"
-                                value="<%=thongtindoibong.svd%>" <% if (edit=="false") { %>
-                                    disabled
-                                <% } %>>
+            </div>
+            <div class="row form-group">
+                <div class="col col-md-3 "><label for="svd" class=" form-control-label ">Sân vận
+                        động</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <input type="text" id="svd" name="svd" placeholder="Sân vận động" class="form-control"
+                        value="<%=thongtindoibong.svd%>" <% if (edit=="false") { %> disabled <% } %>>
 
-                            </div>
+                </div>
 
-                        </div>
+            </div>
 
-                        <div class="row form-group">
+            <div class="row form-group">
 
-                            <div class="col col-md-3 "><label for="hlv" class=" form-control-label ">Huấn luyện
-                                    viên</label>
-                            </div>
-                            <div class="col-12 col-md-9">
-                                <input type="text" id="hlv" name="hlv" placeholder="Huấn luyện viên"
-                                    class="form-control" value="<%=thongtindoibong.hlv%>" <% if (edit=="false") { %>
-                                        disabled
-                                    <% } %> >
+                <div class="col col-md-3 "><label for="hlv" class=" form-control-label ">Huấn luyện
+                        viên</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <input type="text" id="hlv" name="hlv" placeholder="Huấn luyện viên" class="form-control"
+                        value="<%=thongtindoibong.hlv%>" <% if (edit=="false") { %> disabled <% } %>>
 
-                            </div>
-                        </div>
-                        <button form="update" type="submit" class="btn btn-primary btn-sm">
-                            <i class="fa fa-check"></i> Cập nhật
-                        </button>
-                        <form><input type="button" class="btn btn-danger btn-sm" value="Refresh" onclick="history.go(0)" value="Reset"></form>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col col-md-3 "><label for="dsthamdu" class=" form-control-label ">Cầu thủ dự giải</label>
+            </div>
+            <div class="col-12 col-md-9">
+                    <select name="dsthamdu" id="dsthamdu" data-placeholder="Chọn cầu thủ..." multiple class="standardSelect" <% if (edit=="false") { %> disabled <% } %>>
+                    </select>
+            </div>
+            </div>
+
+            <input type="hidden" id="imgPath" name="imgPath" value="<%= thongtindoibong.logo %>">
+            <% if(edit=="true") { %>
+            <button form="update" type="submit" class="btn btn-primary btn-sm">
+                <i class="fa fa-check"></i> Cập nhật
+            </button>
+            <form><input type="button" class="btn btn-danger btn-sm" value="Refresh" onclick="history.go(0)"
+                    value="Reset"></form>
+            <%}%>
                     </form>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card">
                 <div class="card-header">
                     <strong>Logo</strong>
                 </div>
                 <div class="card-body card-block">
-                    <img class="logo-team"
-                        src="../<%=thongtindoibong.logo%>"
-                        alt="image">
+                    <!-- <img class="logo-team"
+                        src="../../public/assets/img/logo/<%=thongtindoibong.logo%>"
+            alt="image"> -->
+            <% if(edit=="true") { %>
+            <div class="file-loading">
+                <input id="logo" name="logo" type="file" multiple>
+            </div>
+            <% } else {%>
+            <img class="logo-team-edit" src="../../public/assets/img/logo/<%= thongtindoibong.logo %>"
+                alt="<%= thongtindoibong.logo %>">
+            <%}%>
 
                 </div>
             </div>
@@ -109,22 +126,22 @@
                         </thead>
                         <tbody>
                             <% for(var i=1; i < 5; i++) { %>
-                            <tr>
-                                <td><%=i%></td>
+            <tr>
+                <td><%=i%></td>
 
-                                <td>Scott McTominay</td>
-                                <td>01/01/1999</td>
-                                <td>38</td>
+                <td>Scott McTominay</td>
+                <td>01/01/1999</td>
+                <td>38</td>
 
-                            </tr>
-                            <% } %>
+            </tr>
+            <% } %>
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            </tbody>
+            </table>
         </div>
-
-
     </div>
+</div>
+
+
+</div>
 </div>
