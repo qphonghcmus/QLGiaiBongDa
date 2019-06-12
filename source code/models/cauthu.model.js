@@ -6,43 +6,63 @@ const Schema = mongoose.Schema;
 var cauthuSchema = new mongoose.Schema({
     idCauThu: Number,
     tenCauThu: String,
-    loaiCauThu: {type: Number, min: 0, max: 1},
+    loaiCauThu: { type: Number, min: 0, max: 1 },
     quocTich: String,
     ngaySinh: String,
-    tenDoiBong: {type: String, default: "Cầu thủ tự do"},
-    doiBong: [Schema.Types.ObjectId],
+    tenDoiBong: { type: String, default: "Cầu thủ tự do" },
+    doiBong: Schema.Types.ObjectId,
     // Thay đổi ds trận đấu chỉ ghi id trận đấu, và thêm trường số phút thi đấu
     dsTranDau: [Schema.Types.ObjectId],
-    soPhutThiDau: { Type : Number, default : 0},
-    soBanThang: {type: Number, default: 0},
-    soKienTao: {type: Number, default: 0},
-    soTheDo: {type: Number, default: 0},
-    soTheVang: {type: Number, default: 0},
-    viTriThiDau: {type: Number, min:1,max:4},
-    soTranGiuSachLuoi:{type: Number, default: 0},
+    soPhutThiDau: { type: Number, default: 0 },
+    soBanThang: { type: Number, default: 0 },
+    soKienTao: { type: Number, default: 0 },
+    soTheDo: { type: Number, default: 0 },
+    soTheVang: { type: Number, default: 0 },
+    viTriThiDau: { type: Number, min: 1, max: 4 },
+    soTranGiuSachLuoi: { type: Number, default: 0 },
 })
 
+
+const cauthu = mongoose.model('cauthus', cauthuSchema);
+
+
 // auto increment _id
-cauthuSchema.plugin(autoIncrement,{inc_field: 'idCauThu'});
+cauthuSchema.plugin(autoIncrement, { inc_field: 'idCauThu' });
 
 module.exports = {
     find: () => {
-        return new Promise((resolve, reject) =>{
-            var cauthu = mongoose.model('cauthus',cauthuSchema);
-            cauthu.find().exec((err,succ) => {
-                if(err)
+        return new Promise((resolve, reject) => {
+
+            cauthu.find().exec((err, succ) => {
+                if (err)
                     reject(err);
-                else
+                else {
                     resolve(succ);
+                }
             })
         });
     },
 
+    findByClub: (clubID) => {
+        return new Promise((resolve, reject) => {
+            cauthu.find({ doiBong: clubID }).exec((err, succ) => {
+                if (err)
+                    reject(err);
+                else {
+                    console.log(succ);
+                    resolve(succ);
+                }
+            })
+        })
+    },
+
+
+
     findById: (id) => {
-        return new Promise((resolve, reject) =>{
-            var cauthu = mongoose.model('cauthus',cauthuSchema);
-            cauthu.find({idCauThu: id}).exec((err,succ) => {
-                if(err)
+        return new Promise((resolve, reject) => {
+
+            cauthu.find({ idCauThu: id }).exec((err, succ) => {
+                if (err)
                     reject(err);
                 else
                     resolve(succ);
@@ -51,12 +71,12 @@ module.exports = {
     },
 
     count: () => {
-        return new Promise((resolve, reject) =>{
-            var cauthu = mongoose.model('cauthus',cauthuSchema);
-            cauthu.countDocuments().exec((err,succ) => {
-                if(err)
+        return new Promise((resolve, reject) => {
+
+            cauthu.countDocuments().exec((err, succ) => {
+                if (err)
                     reject(err);
-                else{
+                else {
                     resolve(succ);
                 }
             })
@@ -64,8 +84,9 @@ module.exports = {
     },
 
     add: (entity) => {
-        return new Promise((resolve, reject) =>{
-            var cauthu = mongoose.model('cauthus',cauthuSchema);
+        return new Promise((resolve, reject) => {
+            var club = require('./doibong.model');
+
             var obj = new cauthu({
                 tenCauThu: entity.tenCauThu,
                 loaiCauThu: entity.loaiCauThu,
@@ -82,21 +103,27 @@ module.exports = {
                 viTriThiDau: entity.viTriThiDau,
                 soTranGiuSachLuoi: entity.soTranGiuSachLuoi,
             })
-            obj.save((err,succ) => {
-                if(err)
-                    reject(err);
-                else{
-                    resolve(succ);
-                }
+            club.findById(obj.doiBong).then(succ => {
+                obj.tenDoiBong = succ.tenDoiBong;
+                obj.save((err, succ) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(succ);
+                    }
+                })
             })
+                .catch(err => {
+                    reject(err)
+                })
         });
     },
 
     update: (entity) => {
         return new Promise((resolve, reject) => {
-            var cauthu = mongoose.model('cauthus',cauthuSchema);
-            
-            cauthu.updateOne({idCauThu: entity.idCauThu},{
+
+
+            cauthu.updateOne({ idCauThu: entity.idCauThu }, {
                 tenCauThu: entity.tenCauThu,
                 loaiCauThu: entity.loaiCauThu,
                 quocTich: entity.quocTich,
@@ -109,7 +136,7 @@ module.exports = {
                 viTriThiDau: entity.viTriThiDau,
                 soTranGiuSachLuoi: entity.soTranGiuSachLuoi,
             }).exec((err, succ) => {
-                if(err)
+                if (err)
                     reject(err);
                 else
                     resolve(succ.changedRows);
@@ -119,14 +146,14 @@ module.exports = {
 
     delete: (id) => {
         return new Promise((resolve, reject) => {
-            var cauthu = mongoose.model('cauthus',cauthuSchema);
-            cauthu.removeOne({idCauThu:id}).exec((err, succ) => {
-                if(err)
+
+            cauthu.removeOne({ idCauThu: id }).exec((err, succ) => {
+                if (err)
                     reject(err);
-                else{
+                else {
                     resolve(succ.affectedRows);
                 }
             })
         });
-    },      
+    },
 }

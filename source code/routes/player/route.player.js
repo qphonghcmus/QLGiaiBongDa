@@ -2,9 +2,21 @@ var express = require('express');
 var router = express.Router();
 
 const player = require('../../models/cauthu.model');
-
+const club = require('../../models/doibong.model');
+var messagesSuccess = "";
 router.get('/lookup', (req, res) => {
     player.find().then(succ =>{
+        // for( let i = 0; i < succ.length; i++){
+        //     club.findById(succ[i].doiBong).then(uclub=>{
+        //         console.log(succ[i]);
+        //         console.log(uclub);
+        //         succ[i].tenDoiBong = uclub.tenDoiBong;
+        //     })
+        //     .catch(err=>{
+        //         console.log(err);
+        //     })
+        // }
+        
         res.render('./layouts/main', {
         danhsachcauthu : succ,
         chuyenmuc: 'Tra cứu cầu thủ',
@@ -46,46 +58,80 @@ router.get('/lookup', (req, res) => {
 })
 
 router.get('/add', (req, res) => {
-    res.render('./layouts/main', {
-        chuyenmuc: 'Đăng ký cầu thủ',
-        filename: '../player/add-player',
-        activeCauthu: true,
-        cssfiles: [
-            'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
-            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css'
-
-        ],
-        jsfiles: [
-            'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js',
-            '../../public/assets/js/add.player.validation.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
-            '../../public/assets/js/upload.img.js',            
-        ],
-        success: false,
+    club.find().then(succ=>{
+        res.render('./layouts/main', {
+            danhsachdoibong: succ,
+            chuyenmuc: 'Đăng ký cầu thủ',
+            filename: '../player/add-player',
+            activeCauthu: true,
+            cssfiles: [
+                'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
+                'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css'
+    
+            ],
+            jsfiles: [
+                'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js',
+                'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js',
+                '../../public/assets/js/add.player.validation.js',
+                'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+                'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
+                '../../public/assets/js/upload.img.js',            
+            ],
+            success: false,
+        })
     })
+    .catch(err=>{
+        console.log(err)
+    })
+    
 })
 
 router.post('/add', (req, res) => {
-
+    console.log(req.body);
     let entity = req.body;
-
-
     player.add(entity)
         .then(succ => {
-            const messagesSuccess = "Đã thêm cầu thủ  \" " + succ.tenCauThu + " \" thành công";
-            res.render('./layouts/main', {
-                chuyenmuc: 'Đăng ký cầu thủ',
-                filename: '../player/add-player',
-                activeCauthu: true,
-                cssfiles: [
-                ],
-                jsfiles: [
-                ],
-                messagesSuccess : messagesSuccess,
-                success : true,
+            var messagesSuccess = "Đã thêm cầu thủ  \" " + succ.tenCauThu + " \" thành công";
+
+            club.find().then(succ=>{
+                res.render('./layouts/main', {
+                    danhsachdoibong: succ,
+                    chuyenmuc: 'Đăng ký cầu thủ',
+                    filename: '../player/add-player',
+                    activeCauthu: true,
+                    cssfiles: [
+                        'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
+                        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css'
+            
+                    ],
+                    jsfiles: [
+                        'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js',
+                        '../../public/assets/js/add.player.validation.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
+                        '../../public/assets/js/upload.img.js',            
+                    ],
+                    success: true ,
+                    messagesSuccess: messagesSuccess
+                })
             })
+            .catch(err=>{
+                console.log(err)
+            })
+
+            // res.render('./layouts/main', {
+            //     chuyenmuc: 'Đăng ký cầu thủ',
+            //     filename: '../player/add-player',
+            //     activeCauthu: true,
+            //     cssfiles: [
+            //     ],
+            //     jsfiles: [
+            //     ],
+            //     messagesSuccess : messagesSuccess,
+            //     success : messagesSuccess.length,
+            // })
+            
         })
         .catch(err => {
             console.log(err);

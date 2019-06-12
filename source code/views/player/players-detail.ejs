@@ -65,21 +65,29 @@
             <thead class="thead-dark">
               <tr>
                 <th><i class="fa fa-user"></i> Cầu thủ</th>
-                <th><i class="fa fa-calendar-alt"></i> Ngày sinh</th>
                 <th><i class="fa fa-users"></i> Đội bóng</th>
-                <th><i class="fa fa-running"> Số trận ra sân</th>
+                <th><i class="fa fa-calendar-alt"> Ngày sinh</i></th>
+                <th><i class="fa fa-flag"></th>
+                <th><i class="fa fa-running"></th>
                 <th><i class="fa fa-futbol"></th>
                 <th><i class="fa fa-shoe-prints"></th>
                 <th><i class="fa fa-file fa-file-yellow"></th>
                 <th><i class="fa fa-file fa-file-red"></th>
                 <th><i class="fa fa-check-square fa-file-green"></th>
                 <th><i class="fa fa-check-square fa-stopwatch"></th>
+
+                <!-- <th><i class="fa fa-user-edit"></th> -->
+                <!-- <td></td> -->
               </tr>
             </thead>
             <tbody>
               <% for(var i = 0; i < danhsachcauthu.length; i++) { %>
               <tr>
-                <td><strong><%= danhsachcauthu[i].tenCauThu %></strong></br>
+                <td>
+                  <!-- <button><i class="fa fa-search"></button> -->
+                  <a data-toggle="modal" data-target="#largeModal"><strong> <%=danhsachcauthu[i].tenCauThu %>
+                    </strong></a>
+                  </br>
                   <% if (danhsachcauthu[i].viTriThiDau == 1) { %>
                   Thủ môn
                   <% } %>
@@ -92,8 +100,9 @@
                   <% if (danhsachcauthu[i].viTriThiDau == 4) { %>
                   Tiền đạo
                   <% } %> </td>
-                <td><%= danhsachcauthu[i].ngaySinh %></td>
                 <td><%= danhsachcauthu[i].tenDoiBong %></td>
+                <td><%= danhsachcauthu[i].ngaySinh %></td>
+                <td><%= danhsachcauthu[i].quocTich %></td>
                 <td><%= danhsachcauthu[i].dsTranDau.length %></td>
                 <td><%= danhsachcauthu[i].soBanThang %></td>
                 <td><%= danhsachcauthu[i].soKienTao %></td>
@@ -101,6 +110,8 @@
                 <td><%= danhsachcauthu[i].soTheDo %></td>
                 <td><%= danhsachcauthu[i].soTranGiuSachLuoi %></td>
                 <td><%= danhsachcauthu[i].soPhutThiDau %></td>
+
+                <!-- <td><i class="fa fa-search"></i></td> -->
               </tr>
               <% } %>
             </tbody>

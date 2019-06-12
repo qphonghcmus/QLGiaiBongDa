@@ -1,14 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
-const club = require('../../models/doibong.model.js')
+const club = require('../../models/doibong.model')
+const player = require('../../models/cauthu.model')
 
-router.get('/', (req,res) => {
-    club.find().then(succ=>{
+router.get('/', (req, res) => {
+    club.find().then(succ => {
 
         console.log(succ);
 
-        res.render('./layouts/main',{
+        res.render('./layouts/main', {
             edit: false,
             danhsachdoibong: succ,
             chuyenmuc: 'Danh sách đội bóng',
@@ -17,22 +18,22 @@ router.get('/', (req,res) => {
             cssfiles: [
                 '../../public/assets/css/style.logo.css',
             ],
-            jsfiles:[]
+            jsfiles: []
         })
 
     })
-    .catch(err=>{
-        console.log(err);
-    })
+        .catch(err => {
+            console.log(err);
+        })
 })
 
-router.get('/list', (req,res) => {
+router.get('/list', (req, res) => {
 
-    club.find().then(succ=>{
+    club.find().then(succ => {
 
         console.log(succ);
 
-        res.render('./layouts/main',{
+        res.render('./layouts/main', {
             edit: false,
             danhsachdoibong: succ,
             chuyenmuc: 'Danh sách đội bóng',
@@ -41,19 +42,19 @@ router.get('/list', (req,res) => {
             cssfiles: [
                 '../../public/assets/css/style.logo.css',
             ],
-            jsfiles:[]
+            jsfiles: []
         })
 
     })
-    .catch(err=>{
-        console.log(err);
-    })
+        .catch(err => {
+            console.log(err);
+        })
 
 
 })
 
-router.get('/add', (req,res) => {
-    res.render('./layouts/main',{
+router.get('/add', (req, res) => {
+    res.render('./layouts/main', {
         chuyenmuc: 'Đăng ký đội bóng',
         filename: '../club/add',
         activeDoibong: true,
@@ -61,26 +62,26 @@ router.get('/add', (req,res) => {
             '../../public/vendors/chosen/chosen.min.css',
             'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css'
         ],
-        jsfiles:[
+        jsfiles: [
             '../../public/vendors/chosen/chosen.jquery.min.js',
             '../../public/assets/js/multiple.select.js',
             'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
             'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
-            '../../public/assets/js/club.img.upload.js',         
+            '../../public/assets/js/club.img.upload.js',
         ],
         success: false,
     })
 })
 
 
-router.post('/add',(req,res)=>{
+router.post('/add', (req, res) => {
 
     let entity = req.body;
 
     club.add(entity)
-        .then(succ=>{
+        .then(succ => {
             const messagesSuccess = "Đã thêm đội bóng  \" " + entity.tendoibong + " \" thành công";
-            res.render('./layouts/main',{
+            res.render('./layouts/main', {
                 chuyenmuc: 'Đăng ký đội bóng',
                 filename: '../club/add',
                 activeDoibong: true,
@@ -88,16 +89,16 @@ router.post('/add',(req,res)=>{
                     '../../public/vendors/chosen/chosen.min.css',
                     'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css'
                 ],
-                jsfiles:[
+                jsfiles: [
                     '../../public/vendors/chosen/chosen.jquery.min.js',
                     '../../public/assets/js/multiple.select.js',
                     'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
                     'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
-                    '../../public/assets/js/club.img.upload.js',         
+                    '../../public/assets/js/club.img.upload.js',
                 ],
                 success: true,
-                messagesSuccess : messagesSuccess
-                
+                messagesSuccess: messagesSuccess
+
             })
         })
         .catch(err => {
@@ -105,7 +106,7 @@ router.post('/add',(req,res)=>{
         });
 })
 
-router.get('/info/:clubID&:edit', (req,res) => {
+router.get('hide/info/:clubID&:edit', (req, res) => {
 
     let clubID = req.params.clubID;
 
@@ -113,49 +114,149 @@ router.get('/info/:clubID&:edit', (req,res) => {
 
 
     club.findById(clubID)
-        .then(succ=>{
+        .then(succ => {
             console.log(succ);
-            res.render('./layouts/main',{
-                edit : edit,
-                thongtindoibong : succ,
-                chuyenmuc: 'Thông tin đội bóng',
-                filename: '../club/club',
-                activeDoibong: true,
-                cssfiles: [
-                    '../../public/assets/css/style.logo.css',
-                    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
-                    '../../public/vendors/chosen/chosen.min.css',
-                ],
-                jsfiles:[
-                    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
-                    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
-                    '../../public/assets/js/club/edit.club.js',
-                    '../../public/vendors/chosen/chosen.jquery.min.js',
-                    '../../public/assets/js/multiple.select.js',
-                ]
-            })
+
+            if (edit === "true") {
+                player.findByClub(clubID).then(listPlayer => {
+                    console.log(listPlayer);
+                    res.render('./layouts/main', {
+                        cauthubienche: listPlayer,
+                        edit: edit,
+                        thongtindoibong: succ,
+                        chuyenmuc: 'Thông tin đội bóng',
+                        filename: '../club/club',
+                        activeDoibong: true,
+                        cssfiles: [
+                            '../../public/assets/css/style.logo.css',
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
+                            '../../public/vendors/chosen/chosen.min.css',
+                        ],
+                        jsfiles: [
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
+                            '../../public/assets/js/club/edit.club.js',
+                            '../../public/vendors/chosen/chosen.jquery.min.js',
+                            '../../public/assets/js/multiple.select.js',
+                        ]
+                    })
+                })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            }
+            else {
+                // res.render('./layouts/main', {
+                //     edit: edit,
+                //     thongtindoibong: succ,
+                //     chuyenmuc: 'Thông tin đội bóng',
+                //     filename: '../club/club',
+                //     activeDoibong: true,
+                //     cssfiles: [
+                //         '../../public/assets/css/style.logo.css',
+                //         'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
+                //         '../../public/vendors/chosen/chosen.min.css',
+                //     ],
+                //     jsfiles: [
+                //         'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+                //         'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
+                //         '../../public/assets/js/club/edit.club.js',
+                //         '../../public/vendors/chosen/chosen.jquery.min.js',
+                //         '../../public/assets/js/multiple.select.js',
+                //     ]
+                // })
+                player.findByClub(clubID).then(listPlayer => {
+                    console.log(listPlayer);
+                    res.render('./layouts/main', {
+                        cauthubienche: listPlayer,
+                        edit: edit,
+                        thongtindoibong: succ,
+                        chuyenmuc: 'Thông tin đội bóng',
+                        filename: '../club/club',
+                        activeDoibong: true,
+                        cssfiles: [
+                            '../../public/assets/css/style.logo.css',
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
+                            '../../public/vendors/chosen/chosen.min.css',
+                        ],
+                        jsfiles: [
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
+                            '../../public/assets/js/club/edit.club.js',
+                            '../../public/vendors/chosen/chosen.jquery.min.js',
+                            '../../public/assets/js/multiple.select.js',
+                        ]
+                    })
+                })
+                    .catch(err => {
+                        console.log(err);
+                    })
+
+            }
         })
         .catch(err=>{
             console.log(err);
         })
-
-
 })
 
-router.post('/info/update/:id',(req,res)=>{
+router.get('/info/:clubID&:edit', (req, res) => {
+
+    let clubID = req.params.clubID;
+
+    let edit = req.params.edit;
+
+
+    club.findById(clubID)
+        .then(succ => {
+            console.log(succ);
+                player.findByClub(clubID).then(listPlayer => {
+                    console.log(listPlayer);
+                    res.render('./layouts/main', {
+                        cauthubienche: listPlayer,
+                        edit: edit,
+                        thongtindoibong: succ,
+                        chuyenmuc: 'Thông tin đội bóng',
+                        filename: '../club/club',
+                        activeDoibong: true,
+                        cssfiles: [
+                            '../../public/assets/css/style.logo.css',
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
+                            '../../public/vendors/chosen/chosen.min.css',
+                        ],
+                        jsfiles: [
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
+                            '../../public/assets/js/club/edit.club.js',
+                            '../../public/vendors/chosen/chosen.jquery.min.js',
+                            '../../public/assets/js/multiple.select.js',
+                        ]
+                    })
+                })
+                    .catch(err => {
+                        console.log(err);
+                    })
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+})
+
+router.post('/info/update/:id', (req, res) => {
 
     let id = req.params.id;
 
     let entity = req.body;
 
-    let redirect = '/club/info/'+id+"&false";
+    let redirect = '/club/info/' + id + "&false";
 
-    club.findByIdAndUpdate(entity,id)
-        .then(succ=>{
+    console.log(entity);
+
+    club.findByIdAndUpdate(entity, id)
+        .then(succ => {
             console.log(succ);
             res.redirect(redirect);
         })
-        .catch(err=>{
+        .catch(err => {
             console.log(err);
         })
 })

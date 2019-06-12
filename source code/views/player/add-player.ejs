@@ -56,20 +56,23 @@
                             <label for="txtDOB">Date of birth</label>
                             <input type="text" class="form-control" id="txtDOB" name="dob">
                         </div>
-                        <!-- <div class="row form-group">
+                        <div class="row form-group">
                                 <div class="col-12 col-md-12">
-                                        <label for="doibong" class=" form-control-label ">Đội bóng</label>
+                                        <label for="doiBong" class=" form-control-label ">Đội bóng</label>
                         
-                                        <select id="doibong" name="doibong" class="form-control">
-                                                <option selected>Chọn CLB</option>
+                                        <select id="doiBong" name="doiBong" class="form-control">
+                                                <% for(var i = 0; i < danhsachdoibong.length; i++) { %>
+                                                    <option value="<%=  danhsachdoibong[i]._id %>"><%=danhsachdoibong[i].tenDoiBong%>  </option>
+                                                <% } %>
+                                                <!-- <option selected>Chọn CLB</option>
                                                 <option>MU</option>
                                                 <option>Chelsea</option>
                                                 <option>City</option>
-                                                <option>Spurs</option>
+                                                <option>Spurs</option> -->
                                               </select>
                                         
                                 </div>
-                            </div> -->
+                            </div>
                         <div class="row form-group">
                             <div class="col-12 col-md-9">
                                 <label for="logo" class=" form-control-label">Hình ảnh</label>

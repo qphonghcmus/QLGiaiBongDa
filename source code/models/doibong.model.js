@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-sequence')(mongoose);
-
+const Schema = mongoose.Schema;
 // schema
 var doibongSchema = new mongoose.Schema({
     idDoiBong: Number,
     tenDoiBong: String,
     svd: String,
     hlv: String,
-    dsCauThu: [Number],
-    dsTranDau: [Number],
+    dsCauThu: [Schema.Types.ObjectId],
+    dsTranDau: [Schema.Types.ObjectId],
     soCauThuNuocNgoai: Number,
     logo: {type:String, default:'../public/assets/img/logo/HAGL.png'}
 })
@@ -115,7 +115,8 @@ module.exports = {
                 tenDoiBong: entity.tendoibong,
                 svd: entity.svd,
                 hlv: entity.hlv,
-                logo: entity.imgPath
+                logo: entity.imgPath,
+                dsCauThu: entity.dsCauThu
             };
 
             doibong.findByIdAndUpdate(id, obj).exec((err, succ) => {
