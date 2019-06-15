@@ -220,16 +220,22 @@ router.get('/info/:clubID&:edit', (req, res) => {
                         filename: '../club/club',
                         activeDoibong: true,
                         cssfiles: [
+                            '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',
+                            
                             '../../public/assets/css/style.logo.css',
                             'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
                             '../../public/vendors/chosen/chosen.min.css',
                         ],
                         jsfiles: [
-                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',//
                             'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
                             '../../public/assets/js/club/edit.club.js',
-                            '../../public/vendors/chosen/chosen.jquery.min.js',
-                            '../../public/assets/js/multiple.select.js',
+                            '../../public/vendors/chosen/chosen.jquery.min.js',//
+                            '../../public/assets/js/multiple.select.js',//
+                    
+                            '../../public/vendors/datatables.net/js/jquery.dataTables.min.js',
+                            '../../public/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js',
+                            '../../public/assets/js/datatable.js',
                         ]
                     })
                 })

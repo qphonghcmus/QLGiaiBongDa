@@ -12,13 +12,13 @@ var doibongSchema = new mongoose.Schema({
     soCauThuNuocNgoai: Number,
     logo: {type:String, default:'../public/assets/img/logo/HAGL.png'}
 })
-
+const doibong = mongoose.model('doibongs',doibongSchema);
 doibongSchema.plugin(autoIncrement,{inc_field:'idDoiBong'});
 
 module.exports = {
     find: () => {
         return new Promise((resolve, reject) =>{
-            var doibong = mongoose.model('doibongs',doibongSchema);
+            // var doibong = mongoose.model('doibongs',doibongSchema);
             doibong.find().exec((err,dbs) => {
                 if(err)
                     reject(err);
@@ -30,7 +30,7 @@ module.exports = {
 
     findById: (id) => {
         return new Promise((resolve, reject) => {
-            var doibong = mongoose.model('doibongs',doibongSchema);
+            // var doibong = mongoose.model('doibongs',doibongSchema);
             doibong.findById(id).exec((err, succ) => {
                 if (err)
                     reject(err);
@@ -42,7 +42,7 @@ module.exports = {
 
     count: () => {
         return new Promise((resolve, reject) =>{
-            var doibong = mongoose.model('doibongs',doibongSchema);
+            // var doibong = mongoose.model('doibongs',doibongSchema);
             doibong.countDocuments().exec((err,dbs) => {
                 if(err)
                     reject(err);
@@ -55,7 +55,7 @@ module.exports = {
 
     add: (entity) => {
         return new Promise((resolve, reject) =>{
-            var doibong = mongoose.model('doibongs',doibongSchema);
+            // var doibong = mongoose.model('doibongs',doibongSchema);
             var obj = new doibong({
                 tenDoiBong: entity.tendoibong,
                 svd: entity.svd,
@@ -77,7 +77,7 @@ module.exports = {
 
     update: (entity) => {
         return new Promise((resolve, reject) => {
-            var doibong = mongoose.model('doibongs',doibongSchema);
+            // var doibong = mongoose.model('doibongs',doibongSchema);
             doibong.updateOne({idDoiBong:entity.idDoiBong},{
                 tenDoiBong: entity.tenDoiBong,
                 svd: entity.svd,
@@ -97,7 +97,7 @@ module.exports = {
 
     delete: (id) => {
         return new Promise((resolve, reject) => {
-            var doibong = mongoose.model('doibongs',doibongSchema);
+            // var doibong = mongoose.model('doibongs',doibongSchema);
             doibong.removeOne({idDoiBong:id}).exec((err, dbs) => {
                 if(err)
                     reject(err);
@@ -110,7 +110,7 @@ module.exports = {
     
     findByIdAndUpdate: (entity, id)  => {
         return new Promise((resolve, reject) => {
-            var doibong = mongoose.model('doibongs',doibongSchema);
+            // var doibong = mongoose.model('doibongs',doibongSchema);
             var obj = {
                 tenDoiBong: entity.tendoibong,
                 svd: entity.svd,

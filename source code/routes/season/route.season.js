@@ -132,6 +132,7 @@ router.get('/info/:seasonID&:edit', (req, res) => {
                         cssfiles: [
                             'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
                             'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
+                            
                             '../../public/vendors/chosen/chosen.min.css',
                             
                         ],
@@ -142,6 +143,7 @@ router.get('/info/:seasonID&:edit', (req, res) => {
                             'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
                             'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
                             '../../public/assets/js/season/edit.season.js',
+
                             '../../public/vendors/chosen/chosen.jquery.min.js',
                             '../../public/assets/js/multiple.select.js',
                         ]

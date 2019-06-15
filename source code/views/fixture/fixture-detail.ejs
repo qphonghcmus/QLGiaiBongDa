@@ -3,7 +3,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Lịch thi đấu - Vòng 1</strong>
+                        <strong class="card-title">Lịch thi đấu - Vòng <%=vongdau%></strong>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
@@ -59,12 +59,36 @@
                                                           </select></th> -->
                                         </tr>
                                 </thead>
-                               <%- include('./fixture-round') -%>        
+                                <tbody>
+                                    <% for(let i=0; i<trandaus.length ; i++){%>
+                                        <tr>
+                                            <td><%=i+1%></td>
+                                            <td><%= trandaus[i].doiNha.tenDoiBong%></td>
+                                            <td><%= trandaus[i].doiKhach.tenDoiBong%></td>
+                                            <td><%= trandaus[i].doiNha.svd%></td>
+                                            <td></td>
+                                        </tr>
+                                    <%}%>
+                                    
+                                </tbody>
+                                     
                         </table>
+                         
                         <div style="float:right;">
-                                <button type="button" class="btn btn-outline-primary btn-sm">Vòng kế trước</button>
-                                <button type="button" class="btn btn-outline-primary btn-sm">Vòng kế tiếp</button>
+                            <% if (vongdau!=10) { %>
+                                <form method="get" action="/fixture/fixture-detail/<%=vongsau%>">
+                            <button type="submit" class="btn btn-outline-primary btn-sm">Vòng kế tiếp</button>
+                                </form>
+                            <% } %>
                         </div>
+                        <div style="float:right;">
+                                <% if (vongdau!=1) { %>
+                                    <form method="get" action="/fixture/fixture-detail/<%=vongtruoc%>">
+                                <button  type="submit" class="btn btn-outline-primary btn-sm">Vòng kế trước</button>
+                                    </form>
+                                <%}%>
+                        </div>
+                       
                     </div>
                     
                 </div>

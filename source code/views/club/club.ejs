@@ -68,7 +68,6 @@
                     <select name="dsCauThu" id="dsCauThu" data-placeholder="Chọn cầu thủ..." multiple
                         class="standardSelect" <% if (edit=="false") { %> disabled <% } %>>
 
-
                         <% cauthubienche.forEach(cauthu => { %>
                         <% if(thongtindoibong.dsCauThu.includes(cauthu._id)) {%>
                         <option value="<%= cauthu._id%>" selected><%= cauthu.tenCauThu %></option>
