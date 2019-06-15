@@ -46,29 +46,19 @@
                     <% if (edit=="false") { %> disabled <% } %>>
             </div>
             <div class="row form-group">
-                            
-                            <div class="col-12 col-md-12">
-                            <label for="club" class=" form-control-label ">Đội bóng tham dự</label>
 
-                                <select name="club" id="club" data-placeholder="Chọn đội bóng..." multiple class="standardSelect" <% if (edit=="false") { %> disabled <% } %>>
-                                    
-                                    <% if (edit=="true") { %>
-                                        
-                                        <% seasonInfo.allClub.forEach(e => { %>
-                                            <% if(seasonInfo.dsDoiBong.includes(e.tenDoiBong)) {%>
-                                            <option value="<%= e.tenDoiBong%>" selected><%= e.tenDoiBong %></option>
-                                            <%} else {%>
-                                            <option value="<%= e.tenDoiBong%>" > <%= e.tenDoiBong%></option>
-                                            <%}%>
-                                    <%    }) %>
-                                    <%} else {%>
-                                        <% seasonInfo.dsDoiBong.forEach(e =>{ %>
-                                            <option value="<%= e %>" selected><%= e %></option>
-                                            <% }) %>
-                                    <%}%>
-                                </select>
-                            </div>
-                        </div>
+                <div class="col-12 col-md-12">
+                    <label for="club" class=" form-control-label ">Đội bóng tham dự</label>
+
+                    <select name="club" id="club" data-placeholder="Chọn đội bóng..." multiple class="standardSelect"
+                        disabled>
+
+                        <% seasonInfo.allClub.forEach(e => { %>
+                        <option value="<%= e.tenDoiBong%>" selected><%= e.tenDoiBong %></option>
+                        <%    }) %>
+                    </select>
+                </div>
+            </div>
             <div class="row form-group">
                 <div class="col-12 col-md-12">
                     <label for="duC1" class=" form-control-label ">Vị trí dự C1</label>

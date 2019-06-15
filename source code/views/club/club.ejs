@@ -61,25 +61,6 @@
                 </div>
             </div>
 
-            <div class="row form-group">
-                <div class="col col-md-3 "><label for="dsCauThu" class=" form-control-label ">Cầu thủ dự giải</label>
-                </div>
-                <div class="col-12 col-md-9">
-                    <select name="dsCauThu" id="dsCauThu" data-placeholder="Chọn cầu thủ..." multiple
-                        class="standardSelect" <% if (edit=="false") { %> disabled <% } %>>
-
-                        <% cauthubienche.forEach(cauthu => { %>
-                        <% if(thongtindoibong.dsCauThu.includes(cauthu._id)) {%>
-                        <option value="<%= cauthu._id%>" selected><%= cauthu.tenCauThu %></option>
-                        <%} else {%>
-                        <option value="<%= cauthu._id%>"> <%= cauthu.tenCauThu%></option>
-                        <%}%>
-                        <%    }) %>
-
-                    </select>
-                </div>
-            </div>
-
             <input type="hidden" id="imgPath" name="imgPath" value="<%= thongtindoibong.logo %>">
             <% if(edit=="true") { %>
             <button form="update" type="submit" class="btn btn-primary btn-sm">
@@ -99,9 +80,6 @@
                     <strong>Logo</strong>
                 </div>
                 <div class="card-body card-block">
-                    <!-- <img class="logo-team"
-                        src="../../public/assets/img/logo/<%=thongtindoibong.logo%>"
-            alt="image"> -->
             <% if(edit=="true") { %>
             <div class="file-loading">
                 <input id="logo" name="logo" type="file" multiple>

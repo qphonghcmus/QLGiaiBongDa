@@ -105,90 +105,49 @@ router.get('/info/:seasonID&:edit', (req, res) => {
             })
 
             var allclubs = [];
-            if(edit === "true"){
-                doibong.find().then(clubs =>{
-                    allclubs = clubs;
-                    var season = {
-                        idMuaGiai: succ[0].idMuaGiai,
-                        tenMuaGiai: succ[0].tenMuaGiai,
-                        ngayBatDau: succ[0].ngayBatDau,
-                        ngayKetThuc: succ[0].ngayKetThuc,
-                        soDoiThamDu: succ[0].soDoiThamDu,
-                        viTriXuongHang: xuonghang,
-                        viTriDuC1: duC1,
-                        viTriDuC2: duC2,
-                        dsDoiBong: succ[0].dsDoiBong,
-                        dsVongDau: succ[0].dsVongDau,
-                        cover: succ[0].cover,
-                        allClub: allclubs,
-                    }
-        
-                    res.render('./layouts/main', {
-                        edit: edit,
-                        seasonInfo: season,
-                        chuyenmuc: 'Hồ sơ mùa giải',
-                        filename: '../season/info',
-                        activeAdmin: true,
-                        cssfiles: [
-                            'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
-                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
-                            
-                            '../../public/vendors/chosen/chosen.min.css',
-                            
-                        ],
-                        jsfiles: [
-                            'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js',
-                            'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js',
-                            '../../public/assets/js/season/add.season.validation.js',
-                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
-                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
-                            '../../public/assets/js/season/edit.season.js',
 
-                            '../../public/vendors/chosen/chosen.jquery.min.js',
-                            '../../public/assets/js/multiple.select.js',
-                        ]
-                    })
-                }).catch(err =>{})
-            }else{
-            var season = {
-                idMuaGiai: succ[0].idMuaGiai,
-                tenMuaGiai: succ[0].tenMuaGiai,
-                ngayBatDau: succ[0].ngayBatDau,
-                ngayKetThuc: succ[0].ngayKetThuc,
-                soDoiThamDu: succ[0].soDoiThamDu,
-                viTriXuongHang: xuonghang,
-                viTriDuC1: duC1,
-                viTriDuC2: duC2,
-                dsDoiBong: succ[0].dsDoiBong,
-                dsVongDau: succ[0].dsVongDau,
-                cover: succ[0].cover,
-                allClub: allclubs,
-            }
-            console.log(season);
-            res.render('./layouts/main', {
-                edit: edit,
-                seasonInfo: season,
-                chuyenmuc: 'Hồ sơ mùa giải',
-                filename: '../season/info',
-                activeAdmin: true,
-                cssfiles: [
-                    'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
-                    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
-                    '../../public/vendors/chosen/chosen.min.css',
-                ],
-                jsfiles: [
-                    'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js',
-                    'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js',
-                    '../../public/assets/js/season/add.season.validation.js',
-                    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
-                    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
-                    '../../public/assets/js/season/edit.season.js',
-                    '../../public/vendors/chosen/chosen.jquery.min.js',
-                    '../../public/assets/js/multiple.select.js',
-                ]
-            })
-        }
-        })
+            doibong.find().then(clubs => {
+                allclubs = clubs;
+                var season = {
+                    idMuaGiai: succ[0].idMuaGiai,
+                    tenMuaGiai: succ[0].tenMuaGiai,
+                    ngayBatDau: succ[0].ngayBatDau,
+                    ngayKetThuc: succ[0].ngayKetThuc,
+                    soDoiThamDu: succ[0].soDoiThamDu,
+                    viTriXuongHang: xuonghang,
+                    viTriDuC1: duC1,
+                    viTriDuC2: duC2,
+                    dsDoiBong: succ[0].dsDoiBong,
+                    dsVongDau: succ[0].dsVongDau,
+                    cover: succ[0].cover,
+                    allClub: allclubs,
+                }
+                
+                res.render('./layouts/main', {
+                    edit: edit,
+                    seasonInfo: season,
+                    chuyenmuc: 'Hồ sơ mùa giải',
+                    filename: '../season/info',
+                    activeAdmin: true,
+                    cssfiles: [
+                        'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
+                        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
+                        '../../public/vendors/chosen/chosen.min.css',
+                    ],
+                    jsfiles: [
+                        'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js',
+                        '../../public/assets/js/season/add.season.validation.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
+                        '../../public/assets/js/season/edit.season.js',
+                        '../../public/vendors/chosen/chosen.jquery.min.js',
+                        '../../public/assets/js/multiple.select.js',
+                    ]
+                })
+            }).catch(err => { })
+
+        }).catch()
 })
 
 router.post('/info/update/:id',(req,res,next) => {
