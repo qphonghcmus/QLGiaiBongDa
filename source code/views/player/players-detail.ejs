@@ -66,18 +66,13 @@
               <tr>
                 <th><i class="fa fa-user"></i> Cầu thủ</th>
                 <th><i class="fa fa-users"></i> Đội bóng</th>
-                <th><i class="fa fa-calendar-alt"> Ngày sinh</i></th>
-                <th><i class="fa fa-flag"></th>
-                <th><i class="fa fa-running"></th>
+                <th><i class="fa fa-calendar-alt"></i> Ngày sinh</th>
+                <th><i class="fa fa-flag"></i> Quốc tịch</th>
                 <th><i class="fa fa-futbol"></th>
                 <th><i class="fa fa-shoe-prints"></th>
                 <th><i class="fa fa-file fa-file-yellow"></th>
                 <th><i class="fa fa-file fa-file-red"></th>
-                <th><i class="fa fa-check-square fa-file-green"></th>
-                <th><i class="fa fa-check-square fa-stopwatch"></th>
-
-                <!-- <th><i class="fa fa-user-edit"></th> -->
-                <!-- <td></td> -->
+                <th> Cập nhật</th>
               </tr>
             </thead>
             <tbody>
@@ -103,14 +98,14 @@
                 <td><%= danhsachcauthu[i].tenDoiBong %></td>
                 <td><%= danhsachcauthu[i].ngaySinh %></td>
                 <td><%= danhsachcauthu[i].quocTich %></td>
-                <td><%= danhsachcauthu[i].dsTranDau.length %></td>
                 <td><%= danhsachcauthu[i].soBanThang %></td>
                 <td><%= danhsachcauthu[i].soKienTao %></td>
                 <td><%= danhsachcauthu[i].soTheVang %></td>
                 <td><%= danhsachcauthu[i].soTheDo %></td>
-                <td><%= danhsachcauthu[i].soTranGiuSachLuoi %></td>
-                <td><%= danhsachcauthu[i].soPhutThiDau %></td>
-
+                <td>
+                  <a <i href="/player/edit/<%= danhsachcauthu[i]._id %>" class="fa fa-pen close"
+                    style="margin-right: 30px"></i></a>
+                </td>
                 <!-- <td><i class="fa fa-search"></i></td> -->
               </tr>
               <% } %>

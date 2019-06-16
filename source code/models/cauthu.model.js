@@ -27,7 +27,7 @@ const cauthu = mongoose.model('cauthus', cauthuSchema);
 
 
 // auto increment _id
-cauthuSchema.plugin(autoIncrement, { inc_field: 'idCauThu' });
+//cauthuSchema.plugin(autoIncrement, { inc_field: 'idCauThu' });
 
 module.exports = {
     find: () => {
@@ -61,7 +61,7 @@ module.exports = {
     findById: (id) => {
         return new Promise((resolve, reject) => {
 
-            cauthu.find({ idCauThu: id }).exec((err, succ) => {
+            cauthu.find({ _id: id }).exec((err, succ) => {
                 if (err)
                     reject(err);
                 else
@@ -121,33 +121,39 @@ module.exports = {
 
     update: (entity) => {
         return new Promise((resolve, reject) => {
+            var club = require('./doibong.model');
+            club.findById(entity.doiBong).then(succ => {
+                cauthu.updateOne({ _id: entity.idCauThu }, {
+                    tenCauThu: entity.tenCauThu,
+                    loaiCauThu: entity.loaiCauThu,
+                    quocTich: entity.quocTich,
+                    ngaySinh: entity.ngaySinh,
+                    dsTranDau: entity.dsTranDau,
+                    soBanThang: entity.soBanThang,
+                    soKienTao: entity.soKienTao,
+                    soTheDo: entity.soTheDo,
+                    soTheVang: entity.soTheVang,
+                    viTriThiDau: entity.viTriThiDau,
+                    soTranGiuSachLuoi: entity.soTranGiuSachLuoi,
+                    doiBong: entity.doiBong,
+                    tenDoiBong: succ.tenDoiBong
+                }).exec((err, succ) => {
+                    if (err)
+                        reject(err);
+                    else
+                        resolve(succ.changedRows);
+                })
+            }).catch(err => {
+                    reject(err)
+                })
 
-
-            cauthu.updateOne({ idCauThu: entity.idCauThu }, {
-                tenCauThu: entity.tenCauThu,
-                loaiCauThu: entity.loaiCauThu,
-                quocTich: entity.quocTich,
-                ngaySinh: entity.ngaySinh,
-                dsTranDau: entity.dsTranDau,
-                soBanThang: entity.soBanThang,
-                soKienTao: entity.soKienTao,
-                soTheDo: entity.soTheDo,
-                soTheVang: entity.soTheVang,
-                viTriThiDau: entity.viTriThiDau,
-                soTranGiuSachLuoi: entity.soTranGiuSachLuoi,
-            }).exec((err, succ) => {
-                if (err)
-                    reject(err);
-                else
-                    resolve(succ.changedRows);
-            })
         });
     },
 
     delete: (id) => {
         return new Promise((resolve, reject) => {
 
-            cauthu.removeOne({ idCauThu: id }).exec((err, succ) => {
+            cauthu.removeOne({ _id: id }).exec((err, succ) => {
                 if (err)
                     reject(err);
                 else {

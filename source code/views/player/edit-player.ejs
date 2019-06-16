@@ -1,0 +1,134 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-9">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Thông tin cầu thủ</strong>
+                </div>
+                <div class="card-body card-block">
+                    <form id="registerForm" action="/player/edit/<%= cauthu._id %>" method="POST" class="form-horizontal">
+                        <% if (success) { %>
+                        <div class="alert alert-success" role="alert">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Success!</strong>
+                            <%= messagesSuccess %>
+                        </div>
+                        <% } %>
+                        <div class="row form-group">
+                            <div class="col-12 col-md-12">
+                                <label for="tenCauThu" class=" form-control-label ">Tên cầu
+                                    thủ</label>
+                                <input type="text" id="tenCauThu" name="tenCauThu" class="form-control"
+                                    required="required" value="<%= cauthu.tenCauThu %>">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-12 col-md-12">
+                                <label for="loaiCauThu" class=" form-control-label ">Loại cầu thủ</label>
+                                <!-- <input type="text" id="loaicauthu" name="loaicauthu" class="form-control"> -->
+                                <select id="loaiCauThu" name="loaiCauThu" class="form-control" required="required">
+                                    <option value="1" <% if(cauthu.loaiCauThu === 1) {%>selected<%}%> >Cầu thủ nội</option>
+                                    <option value="0"<% if(cauthu.loaiCauThu === 0) {%>selected<%}%> >Cầu thủ ngoại</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-12 col-md-12">
+                                <label for="viTriThiDau" class=" form-control-label ">Vị trí thi đấu</label>
+                                <!-- <input type="text" id="loaicauthu" name="loaicauthu" class="form-control"> -->
+                                <select id="viTriThiDau" name="viTriThiDau" class="form-control" required="required">
+                                    <option value="1" <% if(cauthu.viTriThiDau === 1) {%>selected<%}%> >Thủ môn</option>
+                                    <option value="2"<% if(cauthu.viTriThiDau === 2) {%>selected<%}%> >Hậu vệ</option>
+                                    <option value="3"<% if(cauthu.viTriThiDau === 3) {%>selected<%}%> >Tiền vệ</option>
+                                    <option value="4"<% if(cauthu.viTriThiDau === 4) {%>selected<%}%> >Tiền đạo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-12 col-md-12">
+                                <label for="quocTich" class=" form-control-label ">Quốc tịch</label>
+                                <input type="text" id="quocTich" name="quocTich" class="form-control"
+                                    required="required" value="<%= cauthu.quocTich%>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtDOB">Ngày sinh</label>
+                            <input type="text" class="form-control" id="txtDOB" name="dob"
+                                value="<%= cauthu.ngaySinh%>">
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-12 col-md-12">
+                                <label for="doiBong" class=" form-control-label ">Đội bóng</label>
+
+                                <select id="doiBong" name="doiBong" class="form-control">
+                                    <% for(var i = 0; i < danhsachdoibong.length; i++) { %> 
+                                    
+                                        <% if(danhsachdoibong[i].tenDoiBong === cauthu.tenDoiBong) {%>
+                                        <option
+                                        value="<%=  danhsachdoibong[i]._id %>" selected><%=danhsachdoibong[i].tenDoiBong%>
+                                            <%} else {%>
+                                        <option
+                                        value="<%=  danhsachdoibong[i]._id %>"><%=danhsachdoibong[i].tenDoiBong%>
+                                    </option>
+                                    <% } %>
+                                    <% } %>
+                                </select>
+
+                            </div>
+                        </div>
+                        <!-- <div class="row form-group"> -->
+                        <!-- <div class="col-12 col-md-9"> -->
+                        <!-- <label for="logo" class=" form-control-label">Hình ảnh</label> -->
+                        <!-- <input type="file" id="avatar" name="avatar" class="form-control-file"></div> -->
+                        <!-- <div class="file-loading"> -->
+                        <!-- <input id="avatar" name="avatar" type="file" multiple> -->
+                        <!-- </div> -->
+                        <!-- </div> -->
+                        <!-- <input type="hidden" id="imgPath" name="imgPath" value=""> -->
+
+                        <!-- </div> -->
+
+                        <div class="row form-group">
+                            <div class="col col-md-2 "><label for="sobanthang" class=" form-control-label ">Số bàn
+                                    thắng</label>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <input type="number" name="sobanthang" id="sobanthang" class="form-control" value="<%= cauthu.soBanThang %>">
+                            </div>
+                            <div class="col col-md-1"></div>
+                            <div class="col col-md-2 "><label for="sokientao" class=" form-control-label ">Số kiến
+                                    tạo</label>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <input type="number" name="sokientao" id="sokientao" class="form-control" value="<%= cauthu.soKienTao %>">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-2 "><label for="sothevang" class=" form-control-label ">Số thẻ
+                                    vàng</label>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <input type="number" name="sothevang" id="sothevang" class="form-control" value="<%= cauthu.soTheVang%>">
+                            </div>
+                            <div class="col col-md-1"></div>
+                            <div class="col col-md-2 "><label for="#" class=" form-control-label ">Số thẻ đỏ</label>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <input type="number" name="sothedo" id="sothedo" class="form-control" value="<%= cauthu.soTheDo%>">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" form="registerForm" class="btn btn-primary btn-sm" onclick="">
+                        <i class="fa fa-check"></i> Cập nhật
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Hủy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
