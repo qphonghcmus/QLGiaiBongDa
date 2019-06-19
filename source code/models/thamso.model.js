@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 // schema
 const thamsoSchema = new mongoose.Schema({
+    idMuaGiai: Schema.Types.ObjectId,
     tuoiMin: {type: Number, default: 16},
     tuoiMax: {type: Number, default: 40},
     soCauThuMin: {type: Number, default: 14},
@@ -30,10 +32,52 @@ module.exports = {
         });
     },
 
+    findByIdMuaGiai: id => {
+        return new Promise((resolve, reject) =>{
+            var thamso = mongoose.model('thamsos',thamsoSchema);
+            thamso.find({idMuaGiai: id}).exec((err,succ) => {
+                if(err)
+                    reject(err);
+                else
+                    resolve(succ);
+            })
+        });
+    },
+
+    add: entity => {
+        return new Promise((resolve, reject) =>{
+            var thamso = mongoose.model('thamsos',thamsoSchema);
+            var obj = new thamso({
+                idMuaGiai: entity.idMuaGiai,
+                tuoiMin: entity.tuoiMin,
+                tuoiMax: entity.tuoiMax,
+                soCauThuMin: entity.soCauThuMin,
+                soCauThuMax: entity.soCauThuMax,
+                soNgoaiBinhMax: entity.soNgoaiBinhMax,
+                soPhutBuGioMax: entity.soPhutBuGioMax,
+                diemSoThang: entity.diemSoThang,
+                diemSoHoa: entity.diemSoHoa,
+                diemSoThua: entity.diemSoThua,
+                thuTuUuTien: entity.thuTuUuTien,
+                soDoiXuongHang: entity.soDoiXuongHang,
+                soDoiDuC1: entity.soDoiDuC1,
+                soDoiDuC2: entity.soDoiDuC2
+            })
+            obj.save((err,succ) => {
+                if(err)
+                    reject(err);
+                else{
+                    resolve(succ);
+                }
+            })
+        });
+    },
+
     updateAll: entity => {
         return new Promise((resolve, reject) =>{
             var thamso = mongoose.model('thamsos',thamsoSchema);
             thamso.updateOne({},{
+                idMuaGiai: entity.idMuaGiai,
                 tuoiMin: entity.tuoiMin,
                 tuoiMax: entity.tuoiMax,
                 soCauThuMin: entity.soCauThuMin,
@@ -68,5 +112,7 @@ module.exports = {
                     resolve(succ.changedRows);
             })
         });
-    }
+    },
+    
+    
 }

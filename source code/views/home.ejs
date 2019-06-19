@@ -1,6 +1,7 @@
 <div class="col-sm-12">
     <div class="alert  alert-success alert-dismissible fade show" role="alert">
         <span class="badge badge-pill badge-success">Hồ sơ giải đấu</span>
+        <a href="./season/add"> <i class="fa fa-plus-square close"></i></a>    
     </div>
 </div>
 <% for(var i=0; i < listSeason.length; i++) { %>
@@ -10,7 +11,7 @@
             <h5 class="card-title"><%= listSeason[i].tenMuaGiai %></h5>
             <img src="../public/assets/img/season/<%= listSeason[i].cover %>" alt="image">
             <p></p>
-            <a href="./season/info/<%=listSeason[i].idMuaGiai%>&false" class="btn btn-primary col-sm-12">Xem chi tiết</a>
+            <a href="./season/info/<%=listSeason[i]._id%>&false" class="btn btn-primary col-sm-12">Xem chi tiết</a>
         </div>
     </div>
 </div>

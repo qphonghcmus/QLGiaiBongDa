@@ -1,3 +1,18 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="alert  alert-success alert-dismissible fade show" role="alert">
+            <span class="badge badge-pill badge-success">Mùa giải</span>
+            <% if (edit=="true") { %>
+            <a <i href="/dieule/info/<%=quydinh.idMuaGiai%>&false" class="fa fa-ban close "></i> Tắt chỉnh sửa </a>
+            <% } else { %>
+            <a <i href="/dieule/info/<%=quydinh.idMuaGiai%>&true" class="fa fa-pen close" style="margin-right: 30px">
+                Chỉnh sửa </i></a>
+            <%}%>
+                
+            </div>
+        </div>
+    </div>
+
 <div class="animated fadeIn">
     <div class="row">
         <div class="col-lg-2">
@@ -12,157 +27,145 @@
 
                         <div class="row form-group">
 
-                            <div class="col col-md-4 "><label for="#" class=" form-control-label ">Điểm số
+                            <div class="col col-md-4 "><label for="diemthang" class=" form-control-label ">Điểm số
                                     thắng</label>
                             </div>
                             <div class="col-12 col-md-2">
-                                <select name="diemthang" id="diemthang" class="form-control-sm form-control">
-                                    <option value="0">2</option>
-                                    <option value="1">3</option>
-                                </select>
-                            </div>
-                            <div class="col col-md-4 "><label for="#" class=" form-control-label ">Điểm số
-                                    hòa</label>
-                            </div>
-                            <div class="col-12 col-md-2">
-                                <select name="diemhoa" id="diemhoa" class="form-control-sm form-control">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                </select>
-                            </div>
+                                <input type="number" name="diemthang" id="diemthang"
+                                    class="form-control-sm form-control" value="<%= quydinh.diemSoThang %>"
+            <% if (edit=="false") { %> disabled <% } %>>
 
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-4 "><label for="#" class=" form-control-label ">Điểm số
-                                    thua</label>
-                            </div>
-                            <div class="col-12 col-md-2">
-                                <select name="diemthua" id="diemthua" class="form-control-sm form-control">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                </select>
-                            </div>
-                            <div class="col col-md-4 "><label for="#" class=" form-control-label ">Số đội
-                                    xuống hạng</label>
-                            </div>
-                            <div class="col-12 col-md-2">
-                                <select name="sodoixuonghang" id="sodoixuonghang" class="form-control-sm form-control">
-                                    <option value="0">1</option>
-                                    <option value="1">2</option>
-                                    <option value="1">3</option>
-                                </select>
-                            </div>
-                        </div>
+        </div>
+        <div class="col col-md-4 "><label for="diemhoa" class=" form-control-label ">Điểm số
+                hòa</label>
+        </div>
+        <div class="col-12 col-md-2">
+            <input type="number" name="diemhoa" id="diemhoa" class="form-control-sm form-control"
+                value="<%= quydinh.diemSoHoa %>" <% if (edit=="false") { %> disabled <% } %>>
 
-                        <div class="row form-group">
+        </div>
 
-                            <div class="col col-md-4 "><label for="#" class=" form-control-label ">Số đội dự
-                                    C1</label>
-                            </div>
-                            <div class="col-12 col-md-2">
-                                <select name="sodoiduC1" id="sodoiduC1" class="form-control-sm form-control">
-                                    <option value="0">1</option>
-                                    <option value="1">2</option>
-                                    <option value="1">3</option>
-                                </select>
-                            </div>
-                            <div class="col col-md-4 "><label for="#" class=" form-control-label ">Số đội dự
-                                    C2</label>
-                            </div>
+    </div>
+    <div class="row form-group">
+        <div class="col col-md-4 "><label for="diemthua" class=" form-control-label ">Điểm số
+                thua</label>
+        </div>
+        <div class="col-12 col-md-2">
+            <input type="number" name="diemthua" id="diemthua" class="form-control-sm form-control"
+                value="<%= quydinh.diemSoThua %>" <% if (edit=="false") { %> disabled <% } %>>
 
-                            <div class="col-12 col-md-2">
-                                <select name="sodoiduC2" id="sodoiduC2" class="form-control-sm form-control">
-                                    <option value="0">1</option>
-                                    <option value="1">2</option>
-                                    <option value="1">3</option>
-                                </select>
-                            </div>
-                        </div>
+        </div>
+        <div class="col col-md-4 "><label for="sodoixuonghang" class=" form-control-label ">Số đội
+                xuống hạng</label>
+        </div>
+        <div class="col-12 col-md-2">
+            <input type="number" name="sodoixuonghang" id="sodoixuonghang" class="form-control-sm form-control"
+                value="<%= quydinh.soDoiXuongHang %>" <% if (edit=="false") { %> disabled <% } %>>
 
-                        <div class="row form-group">
-                            <div class="col col-md-4 ">
-                                <label for="#" class=" form-control-label ">Số cầu
-                                    thủ ngoại tối đa</label>
-                            </div>
-                            <div class="col-12 col-md-2">
-                                <select name="ngoaibinhMax" id="ngoaibinhMax" class="form-control-sm form-control">
-                                    <option value="0">1</option>
-                                    <option value="1">4</option>
-                                </select>
-                            </div>
-                            <div class="col col-md-4 "><label for="#" class=" form-control-label ">Số phút
-                                    bù giờ tối đa</label>
-                            </div>
-                            <div class="col-12 col-md-2">
-                                <select name="bugioMax" id="bugioMax" class="form-control-sm form-control">
-                                    <option value="0">9</option>
-                                    <option value="1">10</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-2"><label for="#" class=" form-control-label">Tuổi cầu
-                                    thủ</label>
-                            </div>
-                            <div class="col-12 col-md-2">
-                                <select name="tuoiMin" id="tuoiMin" class="form-control-sm form-control">
-                                    <option value="0">16</option>
-                                    <option value="1">17</option>
-                                </select>
-                            </div>
-                            <div class="col-12 col-md-2">
-                                <select name="tuoiMax" id="tuoiMax" class="form-control-sm form-control">
-                                    <option value="0">39</option>
-                                    <option value="1">40</option>
-                                </select>
-                            </div>
-
-
-                            <div class="col col-md-2"><label for="#" class=" form-control-label">Số cầu
-                                    thủ</label>
-                            </div>
-                            <div class="col-12 col-md-2">
-                                <select name="selectSm" id="cauthuMin" class="form-control-sm form-control">
-                                    <option value="0">16</option>
-                                    <option value="1">17</option>
-                                </select>
-                            </div>
-
-                            <div class="col-12 col-md-2">
-                                <select name="selectSm" id="cauthuMax" class="form-control-sm form-control">
-                                    <option value="0">39</option>
-                                    <option value="1">40</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row form-group">
-                            <div class="col col-md-4 "><label for="#" class=" form-control-label ">Thứ tự ưu
-                                    tiên</label>
-                            </div>
-                            <div class="col-12 col-md-8">
-                                <select data-placeholder="Chọn theo thứ tự giảm dần..." multiple class="standardSelect">
-                                    <option value=""></option>
-                                    <option value="United States">Điểm</option>
-                                    <option value="United Kingdom">Hệ số</option>
-                                    <option value="Afghanistan">Bàn thắng</option>
-                                    <option value="Aland Islands">Đối đầu</option>
-                                </select>
-                            </div>
-                        </div>
-
-
-                    </form>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary btn-sm">
-                        <i class="fa fa-edit"></i> Cập nhật
-                    </button>
-                    <button type="reset" class="btn btn-danger btn-sm">
-                        <i class="fa fa-ban"></i> Mặc định
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
+
+    <div class="row form-group">
+
+        <div class="col col-md-4 "><label for="sodoiduC1" class=" form-control-label ">Số đội dự
+                C1</label>
+        </div>
+        <div class="col-12 col-md-2">
+            <input type="number" name="sodoiduC1" id="sodoiduC1" class="form-control-sm form-control"
+                value="<%= quydinh.soDoiDuC1 %>" <% if (edit=="false") { %> disabled <% } %>>
+
+        </div>
+        <div class="col col-md-4 "><label for="sodoiduC2" class=" form-control-label ">Số đội dự
+                C2</label>
+        </div>
+
+        <div class="col-12 col-md-2">
+            <input type="number" name="sodoiduC2" id="sodoiduC2" class="form-control-sm form-control"
+                value="<%= quydinh.soDoiDuC2 %>" <% if (edit=="false") { %> disabled <% } %>>
+
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col col-md-4 ">
+            <label for="ngoaibinhMax" class=" form-control-label ">Số cầu
+                thủ ngoại tối đa</label>
+        </div>
+        <div class="col-12 col-md-2">
+            <input type="number" name="ngoaibinhMax" id="ngoaibinhMax" class="form-control-sm form-control"
+                value="<%= quydinh.soNgoaiBinhMax %>" <% if (edit=="false") { %> disabled <% } %>>
+
+        </div>
+        <div class="col col-md-4 "><label for="bugioMax" class=" form-control-label ">Số phút
+                bù giờ tối đa</label>
+        </div>
+        <div class="col-12 col-md-2">
+            <input type="number" name="bugioMax" id="bugioMax" class="form-control-sm form-control"
+                value="<%= quydinh.soPhutBuGioMax %>" <% if (edit=="false") { %> disabled <% } %>>
+
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col col-md-2"><label for="#" class=" form-control-label">Tuổi cầu
+                thủ</label>
+        </div>
+        <div class="col-12 col-md-2">
+            <input type="number" name="tuoiMin" id="tuoiMin" class="form-control-sm form-control"
+                value="<%= quydinh.tuoiMin %>" <% if (edit=="false") { %> disabled <% } %>>
+
+        </div>
+        <div class="col-12 col-md-2">
+            <input type="number" name="tuoiMax" id="tuoiMax" class="form-control-sm form-control"
+                value="<%= quydinh.tuoiMax %>" <% if (edit=="false") { %> disabled <% } %>>
+        </div>
+
+
+        <div class="col col-md-2"><label for="#" class=" form-control-label">Số cầu
+                thủ</label>
+        </div>
+        <div class="col-12 col-md-2">
+            <input type="number" name="cauthuMin" id="cauthuMin" class="form-control-sm form-control"
+                value="<%= quydinh.soCauThuMin %>" <% if (edit=="false") { %> disabled <% } %>>
+            </select>
+        </div>
+
+        <div class="col-12 col-md-2">
+            <input type="number" name="cauthuMax" id="cauthuMax" class="form-control-sm form-control"
+                value="<%= quydinh.soCauThuMax %>" <% if (edit=="false") { %> disabled <% } %>>
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col col-md-4 "><label for="#" class=" form-control-label ">Thứ tự ưu
+                tiên</label>
+        </div>
+        <div class="col-12 col-md-8">
+            <select data-placeholder="Chọn theo thứ tự giảm dần..." multiple class="standardSelect"
+                <% if (edit=="false") { %> disabled <% } %>>
+                <option value=""></option>
+                <option value="United States">Điểm</option>
+                <option value="United Kingdom">Hệ số</option>
+                <option value="Afghanistan">Bàn thắng</option>
+                <option value="Aland Islands">Đối đầu</option>
+            </select>
+        </div>
+    </div>
+
+
+    </form>
+</div>
+<div class="card-footer">
+    <% if(edit=="true") { %>
+    <button type="submit" class="btn btn-primary btn-sm">
+        <i class="fa fa-edit"></i> Cập nhật
+    </button>
+    <button type="reset" class="btn btn-danger btn-sm">
+        <i class="fa fa-ban"></i> Mặc định
+    </button>
+    <%}%>
+
+</div>
+</div>
+</div>
+</div>
 </div>

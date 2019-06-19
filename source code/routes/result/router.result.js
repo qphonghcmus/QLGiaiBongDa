@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/result-detail', (req,res) => {
+router.get('/result-detail/:seasonID', (req,res) => {
+    let idMuaGiai = req.params.seasonID;
     res.render('./layouts/main',{
         chuyenmuc: 'Kết quả thi đấu',
         filename: '../result/result-detail',
+        idSeason: idMuaGiai,
         activeKetqua: true,
         cssfiles: [
             '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',
@@ -17,10 +19,12 @@ router.get('/result-detail', (req,res) => {
     })
 })
 
-router.get('/add-result', (req,res) => {
+router.get('/add-result/:seasonID', (req,res) => {
+    let idMuaGiai = req.params.seasonID;
     res.render('./layouts/main',{
         chuyenmuc: 'Cập nhật kết qủả thi đấu',
         filename: '../result/add-result',
+        idSeason: idMuaGiai,
         activeKetqua: true,
         cssfiles: [
             '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',

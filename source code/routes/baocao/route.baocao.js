@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/bxh', (req,res) => {
-    console.log('debug');
-    res.render('./layouts/main',{
+router.get('/bxh/:seasonID', (req, res) => {
+    let idMuaGiai = req.params.seasonID;
+    res.render('./layouts/main', {
         chuyenmuc: 'Bảng xếp hạng',
         filename: '../baocao/bxh',
+        idSeason: idMuaGiai,
         activeBaocao: true,
         cssfiles: [
             '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',
@@ -18,11 +19,12 @@ router.get('/bxh', (req,res) => {
     })
 })
 
-router.get('/ghiban', (req,res) => {
-    console.log('debug');
-    res.render('./layouts/main',{
+router.get('/ghiban/:seasonID', (req, res) => {
+    let idMuaGiai = req.params.seasonID;
+    res.render('./layouts/main', {
         chuyenmuc: 'Top ghi bàn',
         filename: '../baocao/ghiban',
+        idSeason: idMuaGiai,
         activeBaocao: true,
         cssfiles: [
             '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',
@@ -35,11 +37,13 @@ router.get('/ghiban', (req,res) => {
     })
 })
 
-router.get('/kientao', (req,res) => {
-    console.log('debug');
-    res.render('./layouts/main',{
+router.get('/kientao/:seasonID', (req, res) => {
+    let idMuaGiai = req.params.seasonID;
+
+    res.render('./layouts/main', {
         chuyenmuc: 'Top kiến tạo',
         filename: '../baocao/kientao',
+        idSeason: idMuaGiai,
         activeBaocao: true,
         cssfiles: [
             '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',

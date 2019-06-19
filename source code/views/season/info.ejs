@@ -51,11 +51,29 @@
                     <label for="club" class=" form-control-label ">Đội bóng tham dự</label>
 
                     <select name="club" id="club" data-placeholder="Chọn đội bóng..." multiple class="standardSelect"
-                        disabled>
-
-                        <% seasonInfo.allClub.forEach(e => { %>
-                        <option value="<%= e.tenDoiBong%>" selected><%= e.tenDoiBong %></option>
-                        <%    }) %>
+                    <% if (edit=="false") { %> disabled <% } %> >
+                        <% if (edit=="true") { %>
+                            <% seasonInfo.allClubs.forEach(e => { %>
+                                <% if(dsDoiBong.length > 0) { %> 
+                                    <% dsDoiBong.forEach(e2 => { %>
+                                        <%  if( e2.tenDoiBong === e.tenDoiBong ) {%>
+                                        <option value="<%= e._id%>" selected><%= e.tenDoiBong %></option>
+                                        <%} else {%>
+                                        <option value="<%= e._id%>" > <%= e.tenDoiBong%></option>
+                                        <%}%>
+                                    <% }) %> 
+                                <% }  else { %> 
+                                    <option value="<%= e._id%>" > <%= e.tenDoiBong%></option>
+                                <%}%>
+                            <%})%>
+                        <%} else {%>
+                            <% dsDoiBong.forEach(e => { %>
+                                <option value="<%= e._id %>" selected><%= e.tenDoiBong %></option>
+                                <% }) %>
+                        <%}%>
+                        <!-- <% seasonInfo.allClubs.forEach(e => { %> -->
+                        <!-- <option value="<%= e.tenDoiBong%>" selected><%= e.tenDoiBong %></option> -->
+                        <!-- <%    }) %> -->
                     </select>
                 </div>
             </div>

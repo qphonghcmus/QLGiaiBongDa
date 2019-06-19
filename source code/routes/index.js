@@ -5,7 +5,7 @@ var muagiai = require('../models/muagiai.model');
 router.get('/', (req,res) => {
     muagiai.find().then(succ => {
         console.log(succ);
-        res.render('./layouts/main',{
+        res.render('./home/home',{
             chuyenmuc: 'Trang chủ',
             filename: '../home',
             activeAdmin: true,
@@ -14,5 +14,6 @@ router.get('/', (req,res) => {
     }).catch(err => console.log(err))
    
 })
+
 
 module.exports = router;

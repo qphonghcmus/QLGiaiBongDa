@@ -4,14 +4,16 @@ var router = express.Router();
 const player = require('../../models/cauthu.model');
 const club = require('../../models/doibong.model');
 var messagesSuccess = "";
-router.get('/lookup', (req, res) => {
+router.get('/lookup/:seasonID', (req, res) => {
+    let idMuaGiai = req.params.seasonID;
     player.find().then(succ =>{
     
         res.render('./layouts/main', {
         danhsachcauthu : succ,
         chuyenmuc: 'Tra cứu cầu thủ',
         filename: '../player/players-detail',
-        activeCauthu: true,
+                    idSeason: idMuaGiai,
+                    activeCauthu: true,
         cssfiles: [
             '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',
             'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
@@ -31,13 +33,15 @@ router.get('/lookup', (req, res) => {
     });
 })
 
-router.get('/add', (req, res) => {
+router.get('/add/:seasionID', (req, res) => {
+    let idMuaGiai = req.params.seasonID;
     club.find().then(succ=>{
         res.render('./layouts/main', {
             danhsachdoibong: succ,
             chuyenmuc: 'Đăng ký cầu thủ',
             filename: '../player/add-player',
-            activeCauthu: true,
+                    idSeason: idMuaGiai,
+                    activeCauthu: true,
             cssfiles: [
                 'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
                 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css'
@@ -60,8 +64,8 @@ router.get('/add', (req, res) => {
     
 })
 
-router.post('/add', (req, res) => {
-    console.log(req.body);
+router.post('/add/:seasonID', (req, res) => {
+    let idMuaGiai = req.params.seasonID;
     let entity = req.body;
     player.add(entity)
         .then(succ => {
@@ -72,6 +76,7 @@ router.post('/add', (req, res) => {
                     danhsachdoibong: succ,
                     chuyenmuc: 'Đăng ký cầu thủ',
                     filename: '../player/add-player',
+                    idSeason: idMuaGiai,
                     activeCauthu: true,
                     cssfiles: [
                         'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
@@ -114,7 +119,8 @@ router.post('/add', (req, res) => {
 
 })
 
-router.get('/edit/:id',(req,res)=>{
+router.get('/edit/:id&:seasonID',(req,res)=>{
+    let idMuaGiai = req.params.seasonID;
     var id = req.params.id;
 
     var p1 = club.find();
@@ -127,7 +133,8 @@ router.get('/edit/:id',(req,res)=>{
             cauthu: values[1][0],
             chuyenmuc: 'Cập nhật cầu thủ',
             filename: '../player/edit-player',
-            activeCauthu: true,
+                    idSeason: idMuaGiai,
+                    activeCauthu: true,
             cssfiles: [
                 'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
                 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css'
@@ -147,7 +154,8 @@ router.get('/edit/:id',(req,res)=>{
 
 })
 
-router.post('/edit/:id',(req,res)=>{
+router.post('/edit/:id&:seasonID',(req,res)=>{
+    let idMuaGiai = req.params.seasonID;
     var id = req.params.id;
     var obj = {
         idCauThu: id,
@@ -164,7 +172,7 @@ router.post('/edit/:id',(req,res)=>{
     }
 
     player.update(obj).then(succ => {
-        res.redirect('/player/lookup')
+        res.redirect('/player/lookup/'+idMuaGiai)
     }).catch()
 })
 

@@ -23,7 +23,7 @@
                     aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./">
+                <a class="navbar-brand" href="/">
                     <p></p>
                 </a>
             </div>
@@ -40,8 +40,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Đội bóng</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-list"></i><a href="/club/list">Danh sách các đội</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="/club/add">Đăng ký đội bóng</a></li>
+                            <li><i class="fa fa-list"></i><a href="/club/list/<%=idSeason%>">Danh sách các đội</a></li>
+                            <li><i class="fa fa-id-badge"></i><a href="/club/add/<%=idSeason%>">Đăng ký đội bóng</a></li>
                         </ul>
                     </li>
                     <li
@@ -49,8 +49,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Cầu thủ</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-search"></i><a href="/player/lookup">Tra cứu cầu thủ</a></li>
-                            <li><i class="fa fa-plus-square"></i><a href="/player/add">Đăng ký cầu thủ</a></li>
+                            <li><i class="fa fa-search"></i><a href="/player/lookup/<%=idSeason%>">Tra cứu cầu thủ</a></li>
+                            <li><i class="fa fa-plus-square"></i><a href="/player/add/<%=idSeason%>">Đăng ký cầu thủ</a></li>
 
                         </ul>
                     </li>
@@ -59,8 +59,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"> <i class="menu-icon fa fa-calendar"></i>Lịch thi đấu</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-calendar-alt"></i><a href="/fixture/fixture-detail/1">Xem lịch thi đấu</a></li>
-                            <li><i class="menu-icon fa fa-plus-square"></i><a href="/fixture/add-fixture">Lập lịch thi đấu</a></li>
+                            <li><i class="menu-icon fa fa-calendar-alt"></i><a href="/fixture/fixture-detail/1&<%=idSeason%>">Xem lịch thi đấu</a></li>
+                            <li><i class="menu-icon fa fa-plus-square"></i><a href="/fixture/add-fixture/<%=idSeason%>">Lập lịch thi đấu</a></li>
                         </ul>
                     </li>
                     <li
@@ -68,8 +68,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"> <i class="menu-icon fa fa-paste"></i>Kết quả vòng đấu</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-plus-square"></i><a href="/result/add-result">Ghi nhận kết quả</a></li>
-                            <li><i class="menu-icon fa fa-list-alt"></i><a href="/result/result-detail">Xem kết quả</a></li>
+                            <li><i class="menu-icon fa fa-plus-square"></i><a href="/result/add-result/<%=idSeason%>">Ghi nhận kết quả</a></li>
+                            <li><i class="menu-icon fa fa-list-alt"></i><a href="/result/result-detail/<%=idSeason%>">Xem kết quả</a></li>
                         </ul>
                     </li>
                     <li
@@ -77,17 +77,17 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Báo cáo</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-th-list"></i><a href="/baocao/bxh">Bảng xếp hạng</a></li>
-                            <li><i class="menu-icon fa fa-list-ol"></i><a href="/baocao/ghiban">Danh sách ghi bàn</a></li>
-                            <li><i class="menu-icon fa fa-list"></i><a href="/baocao/kientao">Danh sách kiến tạo</a></li>
+                            <li><i class="menu-icon fa fa-th-list"></i><a href="/baocao/bxh/<%=idSeason%>">Bảng xếp hạng</a></li>
+                            <li><i class="menu-icon fa fa-list-ol"></i><a href="/baocao/ghiban/<%=idSeason%>">Danh sách ghi bàn</a></li>
+                            <li><i class="menu-icon fa fa-list"></i><a href="/baocao/kientao/<%=idSeason%>">Danh sách kiến tạo</a></li>
                         </ul>
                     </li>
                     <li
                         class="menu-item-has-children dropdown <% if( typeof(activeDieule) != 'undefined' && activeDieule === true){ %> active <% } %>">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        <a href="/dieule/edit" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"> <i class="menu-icon fa fa-file-alt"></i>Điều lệ giải</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-edit"></i><a href="/dieule/edit">Thay đổi quy định</a></li>
+                            <li><i class="menu-icon fa fa-edit"></i><a href="/dieule/info/<%=idSeason%>&false">Thay đổi quy định</a></li>
                         </ul>
                     </li>
                 </ul>

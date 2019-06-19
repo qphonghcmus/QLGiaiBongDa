@@ -3,7 +3,7 @@ var autoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 // schema
 var doibongSchema = new mongoose.Schema({
-    idDoiBong: Number,
+    // idDoiBong: Number,
     tenDoiBong: String,
     svd: String,
     hlv: String,

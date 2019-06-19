@@ -7,7 +7,7 @@
                     <strong>Thông tin cầu thủ</strong>
                 </div>
                 <div class="card-body card-block">
-                    <form id="registerForm" action="/player/add" method="post" class="form-horizontal">
+                    <form id="registerForm" action="/player/add/<%=idSeason%>" method="post" class="form-horizontal">
                         <% if (success) { %>
                         <div class="alert alert-success" role="alert">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

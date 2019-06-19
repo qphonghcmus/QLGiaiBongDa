@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 var muagiai = require('../../models/muagiai.model');
 var doibong = require('../../models/doibong.model');
+var thamdu = require('../../models/thamdu.model');
 
 router.get('/add', (req, res, next) => {
-    res.render('./layouts/main', {
+    res.render('./home/home', {
         chuyenmuc: 'Tạo hồ sơ giải đấu',
         filename: '../season/add',
         activeAdmin: true,
@@ -45,7 +46,6 @@ router.post('/add', (req, res, next) => {
         viTriDuC1: duC1,
         viTriDuC2: duC2,
         cover: req.body.imgPath,
-        dsDoiBong: [],
     }
 
     muagiai.add(obj)
@@ -106,29 +106,31 @@ router.get('/info/:seasonID&:edit', (req, res) => {
 
             var allclubs = [];
 
-            doibong.find().then(clubs => {
-                allclubs = clubs;
+            Promise.all([
+                doibong.find(),
+                thamdu.findByMuagiai(idMuaGiai),
+            ]).then(values => {
+                console.log(values[0]);console.log(values[1][0])
+                allclubs = values[0]
                 var season = {
-                    idMuaGiai: succ[0].idMuaGiai,
+                    idMuaGiai: succ[0]._id,
                     tenMuaGiai: succ[0].tenMuaGiai,
                     ngayBatDau: succ[0].ngayBatDau,
                     ngayKetThuc: succ[0].ngayKetThuc,
-                    soDoiThamDu: succ[0].soDoiThamDu,
+
                     viTriXuongHang: xuonghang,
                     viTriDuC1: duC1,
                     viTriDuC2: duC2,
-                    dsDoiBong: succ[0].dsDoiBong,
-                    dsVongDau: succ[0].dsVongDau,
                     cover: succ[0].cover,
-                    allClub: allclubs,
+                    allClubs: allclubs,
                 }
-                
                 res.render('./layouts/main', {
                     edit: edit,
-                    seasonInfo: season,
+                    seasonInfo: season, dsDoiBong: values[1][0].DsDoiBong,
                     chuyenmuc: 'Hồ sơ mùa giải',
                     filename: '../season/info',
                     activeAdmin: true,
+                    idSeason: idMuaGiai,
                     cssfiles: [
                         'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
                         'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css',
@@ -145,8 +147,7 @@ router.get('/info/:seasonID&:edit', (req, res) => {
                         '../../public/assets/js/multiple.select.js',
                     ]
                 })
-            }).catch(err => { })
-
+            }).catch()
         }).catch()
 })
 
@@ -164,21 +165,26 @@ router.post('/info/update/:id',(req,res,next) => {
         duC2.push(Number(element));
     });;
 
-    var obj = {
-        idMuaGiai: Number(req.params.id),
+    var obj_muagiai = {
+        idMuaGiai: req.params.id,
         tenMuaGiai: req.body.tenMuaGiai,
         ngayBatDau: req.body.dateStart,
         ngayKetThuc: req.body.dateEnd,
-        soDoiThamDu: req.body.club.length,
-        dsDoiBong: req.body.club,
         viTriXuongHang: xuonghang,
         viTriDuC1: duC1,
         viTriDuC2: duC2,
         cover: req.body.imgPath,
     }
-    muagiai.update(obj).then( succ => {
-        console.log(obj);
 
+    var obj_thamdu = {
+        DsDoiBong: req.body.club,
+        idMuaGiai:  req.params.id,
+    }
+    console.log(obj_muagiai);console.log(obj_thamdu);
+    Promise.all([
+        muagiai.update(obj_muagiai),
+        thamdu.update(obj_thamdu)
+    ]).then(values => {
         res.redirect('/season/info/'+req.params.id + '&false');
     }).catch(err => {});
 })

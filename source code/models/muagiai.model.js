@@ -4,20 +4,20 @@ const Schema = mongoose.Schema;
 
 // schema
 var muagiaiSchema = new mongoose.Schema({
-    idMuaGiai: Number,
+    // idMuaGiai: Number,
     tenMuaGiai: String,
     ngayBatDau: String,
     ngayKetThuc: String,
-    soDoiThamDu: {type: Number, default: 0},
+    // soDoiThamDu: {type: Number, default: 0},
     viTriXuongHang: [Number],
     viTriDuC1: [Number],
     viTriDuC2: [Number],
     // moi object gom 2 truong: ma doi (idDoiBong) va ten doi (tenDoiBong)
     // dsDoiBong: [Schema.Types.ObjectId],
     // dsDoiBong: {type:[Schema.Types.ObjectId], default:[]},
-    dsDoiBong: [String],
+    // dsDoiBong: [String],
 
-    dsVongDau: [Number],
+    // dsVongDau: [Number],
     cover: String
 })
 
@@ -36,11 +36,11 @@ module.exports = {
             })
         });
     },
-
+    //
     findById: id => {
         return new Promise((resolve, reject) =>{
             var muagiai = mongoose.model('muagiais',muagiaiSchema);
-            muagiai.find({idMuaGiai: id}).exec((err,succ) => {
+            muagiai.find({_id: id}).exec((err,succ) => {
                 if(err)
                     reject(err);
                 else
@@ -70,12 +70,11 @@ module.exports = {
                 tenMuaGiai: entity.tenMuaGiai,
                 ngayBatDau: entity.ngayBatDau,
                 ngayKetThuc: entity.ngayKetThuc,
-                soDoiThamDu: entity.soDoiThamDu,
                 viTriXuongHang: entity.viTriXuongHang,
                 viTriDuC1: entity.viTriDuC1,
                 viTriDuC2: entity.viTriDuC2,
-                dsDoiBong: entity.dsDoiBong,
-                dsVongDau: entity.dsVongDau,
+                // dsDoiBong: entity.dsDoiBong,
+                // dsVongDau: entity.dsVongDau,
                 cover: entity.cover,
             })
             obj.save((err,succ) => {
@@ -92,16 +91,13 @@ module.exports = {
         return new Promise((resolve, reject) => {
             var muagiai = mongoose.model('muagiais',muagiaiSchema);
             console.log('updating');
-            muagiai.updateOne({idMuaGiai: entity.idMuaGiai},{
+            muagiai.updateOne({_id: entity.idMuaGiai},{
                 tenMuaGiai: entity.tenMuaGiai,
                 ngayBatDau: entity.ngayBatDau,
                 ngayKetThuc: entity.ngayKetThuc,
-                soDoiThamDu: entity.soDoiThamDu,
                 viTriXuongHang: entity.viTriXuongHang,
                 viTriDuC1: entity.viTriDuC1,
                 viTriDuC2: entity.viTriDuC2,
-                dsDoiBong: entity.dsDoiBong,
-                dsVongDau: entity.dsVongDau,
                 cover:entity.cover
             }).exec((err, succ) => {
                 if(err)
@@ -115,7 +111,7 @@ module.exports = {
     delete: (id) => {
         return new Promise((resolve, reject) => {
             var muagiai = mongoose.model('muagiais',muagiaiSchema);
-            muagiai.removeOne({idMuaGiai:id}).exec((err, succ) => {
+            muagiai.removeOne({_id:id}).exec((err, succ) => {
                 if(err)
                     reject(err);
                 else{

@@ -3,9 +3,9 @@
         <div class="alert  alert-success alert-dismissible fade show" role="alert">
             <span class="badge badge-pill badge-success">Đội bóng</span>
             <% if (edit=="true") { %>
-            <a <i href="/club/info/<%=thongtindoibong._id%>&false" class="fa fa-ban close "></i> Tắt chỉnh sửa </a>
+            <a <i href="/club/info/<%=thongtindoibong._id%>&false&<%=idSeason%>" class="fa fa-ban close "></i> Tắt chỉnh sửa </a>
             <% } else { %>
-            <a <i href="/club/info/<%=thongtindoibong._id%>&true" class="fa fa-pen close" style="margin-right: 30px">
+            <a <i href="/club/info/<%=thongtindoibong._id%>&true&<%=idSeason%>" class="fa fa-pen close" style="margin-right: 30px">
                 Chỉnh sửa </i></a>
             <%}%>
             
@@ -22,7 +22,7 @@
                     <strong>Thông tin</strong>
                 </div>
                 <div class="card-body card-block">
-                    <form action="/club/info/update/<%=thongtindoibong._id%>" method="post" id="update"
+                    <form action="/club/info/update/<%=thongtindoibong._id%>&<%=idSeason%>" method="post" id="update"
             class="form-horizontal">
 
             <div class="row form-group">
@@ -61,15 +61,36 @@
                 </div>
             </div>
 
-            <input type="hidden" id="imgPath" name="imgPath" value="<%= thongtindoibong.logo %>">
-            <% if(edit=="true") { %>
-            <button form="update" type="submit" class="btn btn-primary btn-sm">
-                <i class="fa fa-check"></i> Cập nhật
-            </button>
-            <form><input type="button" class="btn btn-danger btn-sm" value="Refresh" onclick="history.go(0)"
-                    value="Reset"></form>
-            <%}%>
-                    </form>
+            <div class="row form-group">
+                <div class="col col-md-3 "><label for="dsCauThu" class=" form-control-label ">Cầu thủ dự giải</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <select name="dsCauThu" id="dsCauThu" data-placeholder="Chọn cầu thủ..." multiple
+                        class="standardSelect" <% if (edit=="false") { %> disabled <% } %>>
+
+
+                        <% cauthubienche.forEach(cauthu => { %>
+                        <% if(thongtindoibong.dsCauThu.includes(cauthu._id)) {%>
+                        <option value="<%= cauthu._id%>" selected><%= cauthu.tenCauThu %></option>
+                        <%} else {%>
+                        <option value="<%= cauthu._id%>"> <%= cauthu.tenCauThu%></option>
+                        <%}%>
+                        <%    }) %>
+
+                    </select>
+                </div>
+
+                <input type="hidden" id="imgPath" name="imgPath" value="<%= thongtindoibong.logo %>">
+                <% if(edit=="true") { %>
+                <button form="update" type="submit" class="btn btn-primary btn-sm">
+                    <i class="fa fa-check"></i> Cập nhật
+                </button>
+                <form><input type="button" class="btn btn-danger btn-sm" value="Refresh" onclick="history.go(0)"
+                        value="Reset">
+                </form>
+                <%}%>
+                   
+                </div>
                 </div>
             </div>
         </div>
@@ -81,13 +102,13 @@
                 </div>
                 <div class="card-body card-block">
             <% if(edit=="true") { %>
-            <div class="file-loading">
-                <input id="logo" name="logo" type="file" multiple>
-            </div>
-            <% } else {%>
-            <img class="logo-team-edit" src="../../public/assets/img/logo/<%= thongtindoibong.logo %>"
-                alt="<%= thongtindoibong.logo %>">
-            <%}%>
+                <div class="file-loading">
+                    <input id="logo" name="logo" type="file" multiple>
+                </div>
+                <% } else {%>
+                <img class="logo-team-edit" src="../../public/assets/img/logo/<%= thongtindoibong.logo %>"
+                    alt="<%= thongtindoibong.logo %>">
+                <%}%>
 
                 </div>
             </div>
@@ -121,59 +142,59 @@
             <tbody  >
               <% cauthubienche.forEach(cauthu => { %>
                 <% if(thongtindoibong.dsCauThu.includes(cauthu._id)) {%>
-                    <tr>
-                            <td>
-                              <!-- <button><i class="fa fa-search"></button> -->
-                              <a><strong> <%=cauthu.tenCauThu %>
-                                </strong></a>
-                              </br>
-                              <% if (cauthu.viTriThiDau == 1) { %>
-                              Thủ môn
-                              <% } %>
-                              <% if (cauthu.viTriThiDau == 2) { %>
-                              Hậu vệ
-                              <% } %>
-                              <% if (cauthu.viTriThiDau == 3) { %>
-                              Tiền vệ
-                              <% } %>
-                              <% if (cauthu.viTriThiDau == 4) { %>
-                              Tiền đạo
-                              <% } %> </td>
-                            <td><%= cauthu.ngaySinh %></td>
-                            <td><%= cauthu.quocTich %></td>
-                            <td><i class="fa fa-check-square fa-file-green"></i></td>
-                          </tr>
+                <tr>
+                    <td>
+                        <!-- <button><i class="fa fa-search"></button> -->
+                        <a><strong> <%=cauthu.tenCauThu %>
+                            </strong></a>
+                        </br>
+                        <% if (cauthu.viTriThiDau == 1) { %>
+                        Thủ môn
+                        <% } %>
+                        <% if (cauthu.viTriThiDau == 2) { %>
+                        Hậu vệ
+                        <% } %>
+                        <% if (cauthu.viTriThiDau == 3) { %>
+                        Tiền vệ
+                        <% } %>
+                        <% if (cauthu.viTriThiDau == 4) { %>
+                        Tiền đạo
+                        <% } %> </td>
+                    <td><%= cauthu.ngaySinh %></td>
+                    <td><%= cauthu.quocTich %></td>
+                    <td><i class="fa fa-check-square fa-file-green"></i></td>
+                </tr>
                 <%} else {%>
-                    <tr>
-                            <td>
-                              <!-- <button><i class="fa fa-search"></button> -->
-                              <a><strong> <%=cauthu.tenCauThu %>
-                                </strong></a>
-                              </br>
-                              <% if (cauthu.viTriThiDau == 1) { %>
-                              Thủ môn
-                              <% } %>
-                              <% if (cauthu.viTriThiDau == 2) { %>
-                              Hậu vệ
-                              <% } %>
-                              <% if (cauthu.viTriThiDau == 3) { %>
-                              Tiền vệ
-                              <% } %>
-                              <% if (cauthu.viTriThiDau == 4) { %>
-                              Tiền đạo
-                              <% } %> </td>
-                            <td><%= cauthu.ngaySinh %></td>
-                            <td><%= cauthu.quocTich %></td>
-                            <td></i></td>
-                          </tr>
+                <tr>
+                    <td>
+                        <!-- <button><i class="fa fa-search"></button> -->
+                        <a><strong> <%=cauthu.tenCauThu %>
+                            </strong></a>
+                        </br>
+                        <% if (cauthu.viTriThiDau == 1) { %>
+                        Thủ môn
+                        <% } %>
+                        <% if (cauthu.viTriThiDau == 2) { %>
+                        Hậu vệ
+                        <% } %>
+                        <% if (cauthu.viTriThiDau == 3) { %>
+                        Tiền vệ
+                        <% } %>
+                        <% if (cauthu.viTriThiDau == 4) { %>
+                        Tiền đạo
+                        <% } %> </td>
+                    <td><%= cauthu.ngaySinh %></td>
+                    <td><%= cauthu.quocTich %></td>
+                    <td></i></td>
+                </tr>
                 <%}%>
                 <%    }) %>
 
-            </tbody>
-          </table>
+                </tbody>
+                </table>
+            </div>
         </div>
-      </div>
-<!-- <div class="animated fadeIn">
+        <!-- <div class="animated fadeIn">
     <div class="row">
 
         <div class="col-md-12">
