@@ -7,12 +7,12 @@ var trandauSchema = new mongoose.Schema({
     vongDau: Number,
     doiNha: {type:Schema.Types.ObjectId,ref:'doibongs',require:true},
     doiKhach: {type:Schema.Types.ObjectId,ref:'doibongs',require:true},
-    diemDoiNha: Number,
-    diemDoiKhach: Number,
-    theVangDoiNha: Number,
-    theDoDoiKhach: Number,
+    banThangDoiNha: Number,
+    banThangDoiKhach: Number,
     theVangDoiNha: Number,
     theDoDoiNha: Number,
+    theVangDoiKhach: Number,
+    theDoDoiKhach: Number,
     // dsBanThang: [Number],
 })
 
@@ -95,13 +95,32 @@ module.exports = {
         return new Promise((resolve, reject) => {
             var trandau = mongoose.model('trandaus',trandauSchema);
             
-            trandau.updateOne({idTranDau: entity.idTranDau},{
+            trandau.updateOne({_id: entity.idTranDau},{
                 doiNha: entity.doiNha,
                 doiKhach: entity.doiKhach,
                 svd: entity.svd,
                 tiSo: entity.tiSo,
                 dsBanThang: entity.dsBanThang,
                 idVongDau: entity.idVongDau,
+            }).exec((err, succ) => {
+                if(err)
+                    reject(err);
+                else
+                    resolve(succ.changedRows);
+            })
+        });
+    },
+
+    updateStat: (entity) => {
+        return new Promise((resolve, reject) => {
+            var trandau = mongoose.model('trandaus',trandauSchema);
+            
+            trandau.updateOne({_id: entity.idTranDau},{
+                $set:{
+                    banThangDoiNha: entity.banthangDoiNha, banThangDoiKhach: entity.banthangDoiKhach,
+                    theVangDoiNha: entity.theVangDoiNha, theDoDoiNha: entity.theDoDoiNha,
+                    theDoDoiKhach: entity.theDoDoiKhach, theVangDoiKhach: entity.theVangDoiKhach
+                }
             }).exec((err, succ) => {
                 if(err)
                     reject(err);

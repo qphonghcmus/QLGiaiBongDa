@@ -7,131 +7,68 @@
                 <!-- filter -->
                 <div class="row align-items-center justify-content-center">
                     <div class="col pt-3">
+                        <form action="/result/add-result/<%=idSeason%>" method="GET" id="frmvongdau">
                         <div class="form-group">
-                            <select id="categories" class="form-control">
-                                <option selected>Vòng 1</option>
-                                <option>Vòng 1</option>
-                                <option>Vòng 2</option>
-                                <option>Vòng 3</option>
-                                <option>Vòng 4</option>
+                            <select id="vong" class="form-control" name="vong">
+                                <% for(var i = 1; i <= DsVong; i++){ %> 
+                                    <% if(i === vonghientai) { %> 
+                                        <option value="<%=i%>" selected>Vòng <%=i%></option>
+                                    <% } else { %> 
+                                        <option value="<%=i%>">Vòng <%=i%></option>
+                                    <%}%> 
+                                <%}%>
                             </select>
                         </div>
+                    </form>
                     </div>
                     <div class="col pt-3">
-                        <div class="form-group">
-                            <select id="categories" class="form-control">
-                                <option selected>Chưa cập nhật</option>
-                                <option>Đã cập nhật</option>
-                            </select>
-                        </div>
                     </div>
                     <div class="col-md-3">
-                        <button type="button" class="btn btn-primary btn-block"><i class="fas fa-filter"></i>
-                            Lọc</button>
+                        <button type="submit" form="frmvongdau" class="btn btn-primary btn-block"><i class="fas fa-filter"></i>
+                            Xem </button>
                     </div>
                 </div> <!-- end filter-->
             </strong>
         </div>
 
         <div class="card-body">
-            <table class="table">
+            <table class="table" id="bangketqua">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col"><i>Trận đấu</th>
-                        <th scope="col"><i class="fa fa-check-square fa-flag-checkered"></i> Kết quả - Thống kê</th>
+                        <th scope="col">Mã trận</th>
+                        <th scope="col"><i>Đội nhà</th>
+                        <th scope="col"><i>Đội khách</th>
+                        <th scope="col"><i>Kết quả</th>
+                        <th scope="col"><i>Thẻ đỏ</th>
+                        <th scope="col"><i class="fa fa-check-square fa-map-marker-alt"></i> Thẻ vàng</th>
+                        <th scope="col"><i class="fa fa-check-square fa-flag-checkered"></i> Kết quả </th>
                         <!-- <th scope="col"><i class="fa fa-check-square fa-futbol"></i> Bàn thắng</th> -->
-                        <th scope="col"><i class="fa fa-check-square fa-map-marker-alt"></i> Sân vận động</th>
-                        <th scope="col"><i class="fa fa-check-square fa-stopwatch"></i> Thời gian</th>
+                        <!-- <th scope="col"><i class="fa fa-check-square fa-stopwatch"></i> Thời gian</th> -->
                     </tr>
                 </thead>
                 <tbody>
-
+                    <% for(let i=0; i<trandaus.length ; i++){%>
                     <tr>
-                        <th scope="row"></th>
+                            <!-- style="visibility:hidden"style="visibility:hidden" -->
+                        <td ><%= trandaus[i]._id%></td>
+                        <td><%= trandaus[i].doiNha.tenDoiBong%></td>
+                        <td><%= trandaus[i].doiKhach.tenDoiBong%></td>
+                        <% if ( typeof(trandaus[i].banThangDoiNha) === 'undefied') {%> 
+                            <td>  -  </td>
+                        <%} else {%>
+                            <td> <%= trandaus[i].banThangDoiNha %> - <%= trandaus[i].banThangDoiKhach %></td>
+                        <%}%>
+                        <td><%= trandaus[i].theDoDoiNha%> - <%=trandaus[i].theDoDoiKhach%></td>
+                        <td><%= trandaus[i].theVangDoiNha%> - <%=trandaus[i].theVangDoiKhach%></td>
                         <td>
-                            <div class="home-away">
-                                <div>Manchester United vs Manchster City</div>
-                            </div>
-                        </td>
-                        <!-- <td><input type="text" id="tisotrani" name="tisotrani"
-                            placeholder="h - a" class="form-control col-lg-3"></td> -->
-                        <td>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#largeModal">
+                            <button id="<%=i%>" type="button" class="btn btn-success" data-toggle="modal" data-target="#largeModal">
                                 Cập nhật
                             </button>
                         </td>
-                        <td>Old Trafford</td>
-                        <td>21:00 09/09/2019</td>
                     </tr>
-
-                    <tr>
-                        <th scope="row"></th>
-                        <td>
-                            <div class="home-away">
-                                <div>Manchester United vs Manchster City</div>
-                            </div>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#largeModal">
-                                Cập nhật
-                            </button>
-                        </td>
-                        <td>Old Trafford</td>
-                        <td>21:00 09/09/2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"></th>
-                        <td>
-                            <div class="home-away">
-                                <div>Manchester United vs Manchster City</div>
-                            </div>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#largeModal">
-                                Cập nhật
-                            </button>
-                        </td>
-                        <td>Old Trafford</td>
-                        <td>21:00 09/09/2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"></th>
-                        <td>
-                            <div class="home-away">
-                                <div>Manchester United vs Manchster City</div>
-                            </div>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#largeModal">
-                                Cập nhật
-                            </button>
-                        </td>
-                        <td>Old Trafford</td>
-                        <td>21:00 09/09/2019</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"></th>
-                        <td>
-                            <div class="home-away">
-                                <div>Manchester United vs Manchster City</div>
-                            </div>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#largeModal">
-                                Cập nhật
-                            </button>
-                        </td>
-                        <td>Old Trafford</td>
-                        <td>21:00 09/09/2019</td>
-                    </tr>
-
+                    <%}%>
                 </tbody>
             </table>
-            <div style="float:right;">
-                <button type="button" class="btn btn-outline-primary btn-sm">Vòng kế trước</button>
-                <button type="button" class="btn btn-outline-primary btn-sm">Vòng kế tiếp</button>
-            </div>
         </div>
 
     </div>
@@ -147,93 +84,56 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- <p>
-                        There are three species of zebras: the plains zebra, the mountain zebra and the Grévy's zebra. The plains zebra
-                        and the mountain zebra belong to the subgenus Hippotigris, but Grévy's zebra is the sole species of subgenus
-                        Dolichohippus. The latter resembles an ass, to which it is closely related, while the former two are more
-                        horse-like. All three belong to the genus Equus, along with other living equids.
-                    </p> -->
-
-                    <div class="info-result">
-                        <div class="side-side">
-                            <div>Home</div>
-                            <div class="component-side">
-                                Số bàn thắng
-                                <div>
-                                    <select name="select" id="select" class="form-control">
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>   
+                    <form action="/result/add-result/<%=vonghientai%>&<%=idSeason%>" method="POST" id="frmUpdate">
+                        <input type="hidden" id="trandau" name="trandau" value="">
+                        <div class="info-result">
+                            <div class="side-side">
+                                <div>Home</div>
+                                <div class="component-side">
+                                    Số bàn thắng
+                                    <div>
+                                        <input type="number" name="banthanghome" id="banthanghome" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="component-side">Số thẻ vàng
+                                    <div>
+                                        <input type="number" name="thevanghome" id="thevanghome" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="component-side">Số thẻ đỏ
+                                    <div>
+                                        <input type="number" name="thedohome" id="thedohome" class="form-control">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="component-side">Số thẻ vàng
-                                    <div>
-                                            <select name="select" id="select" class="form-control">
-                                                <option value="0">0</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                            </select>   
-                                        </div>    
-                            </div>
-                            <div class="component-side">Số thẻ đỏ 
-                                    <div>
-                                            <select name="select" id="select" class="form-control">
-                                                <option value="0">0</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                            </select>   
-                                        </div>
-                            </div>
-                        </div>
-                        <div class="side-side">
+                            <div class="side-side">
                                 <div>Away</div>
                                 <div class="component-side">
                                     Số bàn thắng
                                     <div>
-                                        <select name="select" id="select" class="form-control">
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>   
+                                        <input type="number" name="banthangaway" id="banthangaway" class="form-control">
                                     </div>
                                 </div>
                                 <div class="component-side">Số thẻ vàng
-                                        <div>
-                                                <select name="select" id="select" class="form-control">
-                                                    <option value="0">0</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                </select>   
-                                            </div>    
+                                    <div>
+                                        <input type="number" name="thevangaway" id="thevangaway" class="form-control">
+                                    </div>
                                 </div>
-                                <div class="component-side">Số thẻ đỏ 
-                                        <div>
-                                                <select name="select" id="select" class="form-control">
-                                                    <option value="0">0</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                </select>   
-                                            </div>
+                                <div class="component-side">Số thẻ đỏ
+                                    <div>
+                                        <input type="number" name="thedoaway" id="thedoaway" class="form-control">
+                                    </div>
                                 </div>
                             </div>
-
-                    </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Confirm</button>
-                </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" form="frmUpdate" class="btn btn-primary">Confirm</button>
+                    </div>
             </div>
         </div>
     </div>
-    <!-- End Modal -->
-
-
 </div>
+<!-- End Modal -->

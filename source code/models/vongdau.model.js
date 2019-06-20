@@ -1,18 +1,20 @@
 var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-sequence')(mongoose);
+const Schema = mongoose.Schema;
 
 // schema
 var vongdauSchema = new mongoose.Schema({
-    idVongDau: Number,
-    tenVongDau: String
+    idMuaGiai: {type:Schema.Types.ObjectId,ref:'muagiais',require:true},
+    thuTu: Number,
+    DsTranDau: [{type:Schema.Types.ObjectId,ref:'trandaus',require:true}],
 })
 
-vongdauSchema.plugin(autoIncrement,{inc_field: 'idVongDau'});
+// vongdauSchema.plugin(autoIncrement,{inc_field: 'idVongDau'});
+const vongdau = mongoose.model('vongdaunews',vongdauSchema);
 
 module.exports = {
     find: () => {
         return new Promise((resolve, reject) =>{
-            var vongdau = mongoose.model('vongdaus',vongdauSchema);
             vongdau.find().exec((err,succ) => {
                 if(err)
                     reject(err);
@@ -22,10 +24,9 @@ module.exports = {
         });
     },
 
-    findById: (id) => {
+    findByIdMuaGiai: (id) => {
         return new Promise((resolve, reject) =>{
-            var vongdau = mongoose.model('vongdaus',vongdauSchema);
-            vongdau.find({idVongDau: id}).exec((err,succ) => {
+            vongdau.find({idMuaGiai: id}).exec((err,succ) => {
                 if(err)
                     reject(err);
                 else
@@ -34,10 +35,9 @@ module.exports = {
         });
     },
 
-    count: () => {
+    count: (id) => {
         return new Promise((resolve, reject) =>{
-            var vongdau = mongoose.model('vongdaus',vongdauSchema);
-            vongdau.countDocuments().exec((err,succ) => {
+            vongdau.countDocuments({idMuaGiai: id}).exec((err,succ) => {
                 if(err)
                     reject(err);
                 else{
@@ -49,10 +49,10 @@ module.exports = {
 
     add: (entity) => {
         return new Promise((resolve, reject) =>{
-            var vongdau = mongoose.model('vongdaus',vongdauSchema);
-
             var obj = new vongdau({
-                tenVongDau: entity.tenVongDau
+                idMuaGiai: entity.idMuaGiai,
+                thuTu: entity.thuTu,
+                DsTranDau: entity.DsTranDau,
             })
             obj.save((err,succ) => {
                 if(err)
@@ -68,8 +68,9 @@ module.exports = {
         return new Promise((resolve, reject) => {
             var vongdau = mongoose.model('vongdaus',vongdauSchema);
             
-            vongdau.updateOne({idVongDau: entity.idVongDau},{
-                tenVongDau: entity.tenVongDau
+            vongdau.updateOne({idMuaGiai: entity.idMuaGiai},{
+                thuTu: entity.thuTu,
+                DsTranDau: entity.DsTranDau,
             }).exec((err, succ) => {
                 if(err)
                     reject(err);
@@ -82,7 +83,7 @@ module.exports = {
     delete: (id) => {
         return new Promise((resolve, reject) => {
             var vongdau = mongoose.model('vongdaus',vongdauSchema);
-            vongdau.removeOne({idVongDau:id}).exec((err, succ) => {
+            vongdau.removeOne({idMuaGiai:id}).exec((err, succ) => {
                 if(err)
                     reject(err);
                 else{
