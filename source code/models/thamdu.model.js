@@ -36,7 +36,7 @@ module.exports = {
     findByMuagiai: id => {
         return new Promise((resolve, reject) =>{
                       
-            thamdu.find({idMuaGiai: id}).populate('DsDoiBong', '_id tenDoiBong').exec((err,succ) => {
+            thamdu.find({idMuaGiai: id}).populate('DsDoiBong', 'tenDoiBong').exec((err,succ) => {
                 if(err)
                     reject(err);
                 else

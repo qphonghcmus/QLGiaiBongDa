@@ -54,26 +54,26 @@
                     <% if (edit=="false") { %> disabled <% } %> >
                         <% if (edit=="true") { %>
                             <% seasonInfo.allClubs.forEach(e => { %>
-                                <% if(dsDoiBong.length > 0) { %> 
-                                    <% dsDoiBong.forEach(e2 => { %>
-                                        <%  if( e2.tenDoiBong === e.tenDoiBong ) {%>
-                                        <option value="<%= e._id%>" selected><%= e.tenDoiBong %></option>
-                                        <%} else {%>
+                                <% if(dsDoiBong !== null) { %> 
+                                    <% var tmp = 0 %>
+                                    <% for (var i = 0; i < dsDoiBong.length; i++ ) { %> 
+                                        <% if( dsDoiBong[i].tenDoiBong === e.tenDoiBong)  { %>
+                                            <option value="<%= e._id%>" selected><%= e.tenDoiBong %></option>
+                                            <% tmp = 1 %>
+                                            <% break %>
+                                        <%} %>
+                                        
+                                    <% } %>
+                                    <% if (tmp === 0) {%>
                                         <option value="<%= e._id%>" > <%= e.tenDoiBong%></option>
-                                        <%}%>
-                                    <% }) %> 
-                                <% }  else { %> 
-                                    <option value="<%= e._id%>" > <%= e.tenDoiBong%></option>
-                                <%}%>
-                            <%})%>
+                                    <%}%>  
+                                <%}%>  
+                            <% }) %> 
                         <%} else {%>
                             <% dsDoiBong.forEach(e => { %>
                                 <option value="<%= e._id %>" selected><%= e.tenDoiBong %></option>
                                 <% }) %>
                         <%}%>
-                        <!-- <% seasonInfo.allClubs.forEach(e => { %> -->
-                        <!-- <option value="<%= e.tenDoiBong%>" selected><%= e.tenDoiBong %></option> -->
-                        <!-- <%    }) %> -->
                     </select>
                 </div>
             </div>

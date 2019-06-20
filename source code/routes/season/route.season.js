@@ -80,7 +80,7 @@ router.get('/info/:seasonID&:edit', (req, res) => {
     let idMuaGiai = req.params.seasonID;
     let edit = req.params.edit;
 
-    muagiai.findById(idMuaGiai)
+    muagiai.findByIdWithDoiBong(idMuaGiai)
         .then(succ => {
             var xuonghang = "";
             succ[0].viTriXuongHang.forEach(e => {
@@ -103,30 +103,23 @@ router.get('/info/:seasonID&:edit', (req, res) => {
                 else
                     duC2 += "," + e;
             })
-
-            var allclubs = [];
-
-            Promise.all([
-                doibong.find(),
-                thamdu.findByMuagiai(idMuaGiai),
-            ]).then(values => {
-                console.log(values[0]);console.log(values[1][0])
-                allclubs = values[0]
+            
+            doibong.find().then(values => {
+                console.log(values);
                 var season = {
                     idMuaGiai: succ[0]._id,
                     tenMuaGiai: succ[0].tenMuaGiai,
                     ngayBatDau: succ[0].ngayBatDau,
                     ngayKetThuc: succ[0].ngayKetThuc,
-
                     viTriXuongHang: xuonghang,
                     viTriDuC1: duC1,
                     viTriDuC2: duC2,
                     cover: succ[0].cover,
-                    allClubs: allclubs,
+                    allClubs: values,
                 }
                 res.render('./layouts/main', {
                     edit: edit,
-                    seasonInfo: season, dsDoiBong: values[1][0].DsDoiBong,
+                    seasonInfo: season, dsDoiBong: succ[0].dsDoiBong,
                     chuyenmuc: 'Hồ sơ mùa giải',
                     filename: '../season/info',
                     activeAdmin: true,
@@ -174,17 +167,10 @@ router.post('/info/update/:id',(req,res,next) => {
         viTriDuC1: duC1,
         viTriDuC2: duC2,
         cover: req.body.imgPath,
+        dsDoiBong: req.body.club
     }
 
-    var obj_thamdu = {
-        DsDoiBong: req.body.club,
-        idMuaGiai:  req.params.id,
-    }
-    console.log(obj_muagiai);console.log(obj_thamdu);
-    Promise.all([
-        muagiai.update(obj_muagiai),
-        thamdu.update(obj_thamdu)
-    ]).then(values => {
+    muagiai.update(obj_muagiai).then(values => {
         res.redirect('/season/info/'+req.params.id + '&false');
     }).catch(err => {});
 })

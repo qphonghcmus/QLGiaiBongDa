@@ -4,20 +4,13 @@ const Schema = mongoose.Schema;
 
 // schema
 var muagiaiSchema = new mongoose.Schema({
-    // idMuaGiai: Number,
     tenMuaGiai: String,
     ngayBatDau: String,
     ngayKetThuc: String,
-    // soDoiThamDu: {type: Number, default: 0},
     viTriXuongHang: [Number],
     viTriDuC1: [Number],
     viTriDuC2: [Number],
-    // moi object gom 2 truong: ma doi (idDoiBong) va ten doi (tenDoiBong)
-    // dsDoiBong: [Schema.Types.ObjectId],
-    // dsDoiBong: {type:[Schema.Types.ObjectId], default:[]},
-    // dsDoiBong: [String],
-
-    // dsVongDau: [Number],
+    dsDoiBong: [{type:Schema.Types.ObjectId,ref:'doibongs',require:true}],
     cover: String
 })
 
@@ -36,11 +29,24 @@ module.exports = {
             })
         });
     },
-    //
+    
     findById: id => {
         return new Promise((resolve, reject) =>{
             var muagiai = mongoose.model('muagiais',muagiaiSchema);
             muagiai.find({_id: id}).exec((err,succ) => {
+                if(err)
+                    reject(err);
+                else
+                    resolve(succ);
+            })
+        });
+    },
+
+    findByIdWithDoiBong: id => {
+        return new Promise((resolve, reject) =>{
+
+            var muagiai = mongoose.model('muagiais',muagiaiSchema);
+            muagiai.find({_id: id}).populate('dsDoiBong','_id tenDoiBong').exec((err,succ) => {
                 if(err)
                     reject(err);
                 else
@@ -73,8 +79,7 @@ module.exports = {
                 viTriXuongHang: entity.viTriXuongHang,
                 viTriDuC1: entity.viTriDuC1,
                 viTriDuC2: entity.viTriDuC2,
-                // dsDoiBong: entity.dsDoiBong,
-                // dsVongDau: entity.dsVongDau,
+                dsDoiBong: entity.dsDoiBong,
                 cover: entity.cover,
             })
             obj.save((err,succ) => {
@@ -98,6 +103,7 @@ module.exports = {
                 viTriXuongHang: entity.viTriXuongHang,
                 viTriDuC1: entity.viTriDuC1,
                 viTriDuC2: entity.viTriDuC2,
+                dsDoiBong: entity.dsDoiBong,
                 cover:entity.cover
             }).exec((err, succ) => {
                 if(err)

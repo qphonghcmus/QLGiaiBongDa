@@ -1,24 +1,19 @@
 var mongoose = require('mongoose');
-var autoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 // schema
 var doibongSchema = new mongoose.Schema({
-    // idDoiBong: Number,
     tenDoiBong: String,
     svd: String,
     hlv: String,
     dsCauThu: [Schema.Types.ObjectId],
-    dsTranDau: [Schema.Types.ObjectId],
     soCauThuNuocNgoai: Number,
     logo: {type:String, default:'../public/assets/img/logo/HAGL.png'}
 })
 const doibong = mongoose.model('doibongs',doibongSchema);
-doibongSchema.plugin(autoIncrement,{inc_field:'idDoiBong'});
 
 module.exports = {
     find: () => {
         return new Promise((resolve, reject) =>{
-            // var doibong = mongoose.model('doibongs',doibongSchema);
             doibong.find().exec((err,dbs) => {
                 if(err)
                     reject(err);
@@ -30,7 +25,6 @@ module.exports = {
 
     findById: (id) => {
         return new Promise((resolve, reject) => {
-            // var doibong = mongoose.model('doibongs',doibongSchema);
             doibong.findById(id).exec((err, succ) => {
                 if (err)
                     reject(err);
@@ -42,7 +36,6 @@ module.exports = {
 
     count: () => {
         return new Promise((resolve, reject) =>{
-            // var doibong = mongoose.model('doibongs',doibongSchema);
             doibong.countDocuments().exec((err,dbs) => {
                 if(err)
                     reject(err);
@@ -55,13 +48,11 @@ module.exports = {
 
     add: (entity) => {
         return new Promise((resolve, reject) =>{
-            // var doibong = mongoose.model('doibongs',doibongSchema);
             var obj = new doibong({
                 tenDoiBong: entity.tendoibong,
                 svd: entity.svd,
                 hlv: entity.hlv,
                 dsCauThu: entity.dsCauThu,
-                dsTranDau: entity.dsTranDau,
                 soCauThuNuocNgoai: entity.soCauThuNuocNgoai,
                 logo: entity.imgPath
             })
@@ -77,13 +68,11 @@ module.exports = {
 
     update: (entity) => {
         return new Promise((resolve, reject) => {
-            // var doibong = mongoose.model('doibongs',doibongSchema);
-            doibong.updateOne({idDoiBong:entity.idDoiBong},{
-                tenDoiBong: entity.tenDoiBong,
+            doibong.updateOne({_id:entity.idDoiBong},{
+                tenDoiBong: entity.tendoibong,
                 svd: entity.svd,
                 hlv: entity.hlv,
                 dsCauThu: entity.dsCauThu,
-                dsTranDau: entity.dsTranDau,
                 soCauThuNuocNgoai: entity.soCauThuNuocNgoai,
                 logo: entity.imgPath
             }).exec((err, dbs) => {
@@ -97,8 +86,7 @@ module.exports = {
 
     delete: (id) => {
         return new Promise((resolve, reject) => {
-            // var doibong = mongoose.model('doibongs',doibongSchema);
-            doibong.removeOne({idDoiBong:id}).exec((err, dbs) => {
+            doibong.removeOne({_id:id}).exec((err, dbs) => {
                 if(err)
                     reject(err);
                 else{
@@ -110,15 +98,14 @@ module.exports = {
     
     findByIdAndUpdate: (entity, id)  => {
         return new Promise((resolve, reject) => {
-            // var doibong = mongoose.model('doibongs',doibongSchema);
             var obj = {
                 tenDoiBong: entity.tendoibong,
                 svd: entity.svd,
                 hlv: entity.hlv,
                 logo: entity.imgPath,
-                dsCauThu: entity.dsCauThu
+                dsCauThu: entity.dsCauThu,
+                soCauThuNuocNgoai: entity.soCauThuNuocNgoai
             };
-
             doibong.findByIdAndUpdate(id, obj).exec((err, succ) => {
                 if (err)
                     reject(err);
