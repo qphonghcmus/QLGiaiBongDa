@@ -103,7 +103,7 @@ module.exports = {
             })
         });
     },
-
+    
     count: (id) => {
         return new Promise((resolve, reject) =>{
             vongdau.countDocuments({idMuaGiai: id}).exec((err,succ) => {

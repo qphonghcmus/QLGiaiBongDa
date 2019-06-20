@@ -23,20 +23,20 @@ router.get('/result-detail/:seasonID', (req, res) => {
 router.get('/add-result/:seasonID', (req, res) => {
     let idMuaGiai = req.params.seasonID;
     let vong = req.query.vong || 1;
-    console.log(req.query.vong);
+    
     Promise.all([
-        trandau.findByRound(vong),
-        vongdau.findByIdMuaGiai(idMuaGiai)
+        vongdau.findVongMotMuaGiai(vong,idMuaGiai),
+        vongdau.countSoVong(idMuaGiai),
     ]).then(values => {
         res.render('./layouts/main', {
-            trandaus: values[0],
+            trandaus: values[0].DsTranDau,
             vongtruoc: Number(vong) - 1,
             vonghientai: Number(vong),
             vongsau: Number(vong) + 1,
             chuyenmuc: 'Cập nhật kết quả thi đấu',
             filename: '../result/add-result',
             idSeason: idMuaGiai,
-            DsVong: 10 ,//values[1].length,
+            DsVong: values[1],
             cssfiles: [
                 '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',
             ],
@@ -51,14 +51,6 @@ router.get('/add-result/:seasonID', (req, res) => {
 })
 
 router.post('/add-result/:id&:seasonID', (req, res) => {
-    console.log('----------------------------')
-    console.log(req.body.trandau)
-    console.log(req.body.banthanghome)
-    console.log(req.body.thevanghome)
-    console.log(req.body.thedohome)
-    console.log(req.body.banthangaway)
-    console.log(req.body.thevangaway)
-    console.log(req.body.thedoaway)
 
     let idMuaGiai = req.params.seasonID;
     let vong = req.params.id;
