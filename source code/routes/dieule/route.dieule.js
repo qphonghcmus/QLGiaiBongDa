@@ -43,4 +43,29 @@ router.get('/info/:seasonID&:edit', (req, res) => {
         }).catch()
 })
 
+router.post('/update/:seasonID', (req, res) => {
+    let idMuaGiai = req.params.seasonID;
+    var obj = {
+        idMuaGiai: idMuaGiai,
+        tuoiMin: req.body.tuoiMin,
+        tuoiMax: req.body.tuoiMax,
+        soCauThuMin: req.body.cauthuMin,
+        soCauThuMax: req.body.cauthuMax,
+        soNgoaiBinhMax: req.body.ngoaibinhMax,
+        soPhutBuGioMax: req.body.bugioMax,
+        diemSoThang: req.body.diemthang,
+        diemSoHoa: req.body.diemhoa,
+        diemSoThua: req.body.diemthua,
+        thuTuUuTien: req.body.thutu,
+        soDoiXuongHang: req.body.sodoixuonghang,
+        soDoiDuC1: req.body.sodoiduC1,
+        soDoiDuC2: req.body.sodoiduC2
+    }
+
+    thamso.updateAll(obj)
+        .then(succ => {
+            res.redirect('/dieule/info/'+ idMuaGiai + '&false');
+        }).catch()
+})
+
 module.exports = router;

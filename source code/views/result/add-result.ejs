@@ -35,31 +35,29 @@
             <table class="table" id="bangketqua">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Mã trận</th>
+                        <th scope="col">#</th>
                         <th scope="col"><i>Đội nhà</th>
                         <th scope="col"><i>Đội khách</th>
-                        <th scope="col"><i>Kết quả</th>
-                        <th scope="col"><i>Thẻ đỏ</th>
-                        <th scope="col"><i class="fa fa-check-square fa-map-marker-alt"></i> Thẻ vàng</th>
-                        <th scope="col"><i class="fa fa-check-square fa-flag-checkered"></i> Kết quả </th>
-                        <!-- <th scope="col"><i class="fa fa-check-square fa-futbol"></i> Bàn thắng</th> -->
-                        <!-- <th scope="col"><i class="fa fa-check-square fa-stopwatch"></i> Thời gian</th> -->
+                        <th scope="col"><i class="fa fa-check-square fa-flag-checkered"></i></th>
+                        <th scope="col"><i class="fa fa-file fa-file-red"></th>
+                        <th scope="col"><i class="fa fa-file fa-file-yellow"></th>
+                        <th scope="col"><i class="fa fa-pen "></i></th>
                     </tr>
                 </thead>
                 <tbody>
                     <% for(let i=0; i<trandaus.length ; i++){%>
                     <tr>
                             <!-- style="visibility:hidden"style="visibility:hidden" -->
-                        <td ><%= trandaus[i]._id%></td>
-                        <td><%= trandaus[i].doiNha.tenDoiBong%></td>
-                        <td><%= trandaus[i].doiKhach.tenDoiBong%></td>
+                        <td style="max-width: 25px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;visibility: hidden"><%= trandaus[i]._id%></td>
+                        <td><strong><%= trandaus[i].doiNha.tenDoiBong%></strong></td>
+                        <td><strong><%= trandaus[i].doiKhach.tenDoiBong%></strong></td>
                         <% if ( typeof(trandaus[i].banThangDoiNha) === 'undefied') {%> 
                             <td>  -  </td>
                         <%} else {%>
-                            <td> <%= trandaus[i].banThangDoiNha %> - <%= trandaus[i].banThangDoiKhach %></td>
+                            <td><strong><%= trandaus[i].banThangDoiNha %> - <%= trandaus[i].banThangDoiKhach %></strong></td>
                         <%}%>
-                        <td><%= trandaus[i].theDoDoiNha%> - <%=trandaus[i].theDoDoiKhach%></td>
-                        <td><%= trandaus[i].theVangDoiNha%> - <%=trandaus[i].theVangDoiKhach%></td>
+                        <td><strong><%= trandaus[i].theDoDoiNha%> - <%=trandaus[i].theDoDoiKhach%></strong></td>
+                        <td><strong><%= trandaus[i].theVangDoiNha%> - <%=trandaus[i].theVangDoiKhach%></strong></td>
                         <td>
                             <button id="<%=i%>" type="button" class="btn btn-success" data-toggle="modal" data-target="#largeModal">
                                 Cập nhật

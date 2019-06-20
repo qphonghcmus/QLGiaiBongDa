@@ -4,20 +4,32 @@ const trandau = require('../../models/trandau.model');
 const vongdau = require('../../models/vongdau.model');
 router.get('/result-detail/:seasonID', (req, res) => {
     let idMuaGiai = req.params.seasonID;
-    res.render('./layouts/main', {
-        chuyenmuc: 'Kết quả thi đấu',
-        filename: '../result/result-detail',
-        idSeason: idMuaGiai,
-        activeKetqua: true,
-        cssfiles: [
-            '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',
-        ],
-        jsfiles: [
-            '../../public/vendors/datatables.net/js/jquery.dataTables.min.js',
-            '../../public/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js',
-            '../../public/assets/js/datatable.js'
-        ]
-    })
+    let vong = req.query.vong || 1;
+    
+    Promise.all([
+        vongdau.findVongMotMuaGiai(vong,idMuaGiai),
+        vongdau.countSoVong(idMuaGiai),
+    ]).then(values => {
+        res.render('./layouts/main', {
+            trandaus: values[0].DsTranDau,
+            vongtruoc: Number(vong) - 1,
+            vonghientai: Number(vong),
+            vongsau: Number(vong) + 1,
+            chuyenmuc: 'Kết quả thi đấu',
+            filename: '../result/result-detail',
+            idSeason: idMuaGiai,activeKetqua: true,
+            DsVong: values[1],
+            cssfiles: [
+                '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',
+            ],
+            jsfiles: [
+                '../../public/vendors/datatables.net/js/jquery.dataTables.min.js',
+                '../../public/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js',
+                '../../public/assets/js/script.js',
+                '../../public/assets/js/ketqua.trandau.js'
+            ]
+        })
+    }).catch()
 })
 
 router.get('/add-result/:seasonID', (req, res) => {
@@ -35,7 +47,7 @@ router.get('/add-result/:seasonID', (req, res) => {
             vongsau: Number(vong) + 1,
             chuyenmuc: 'Cập nhật kết quả thi đấu',
             filename: '../result/add-result',
-            idSeason: idMuaGiai,
+            idSeason: idMuaGiai, activeKetqua: true,
             DsVong: values[1],
             cssfiles: [
                 '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',

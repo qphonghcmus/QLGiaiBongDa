@@ -1,42 +1,67 @@
-
 <div class=" col-lg-12  ">
 
-            <div class=" card ">
-                    <div class="card-header">
-                        <strong class="card-title">
-                            
-                                                        <!-- filter -->
-      <div class="row align-items-center justify-content-center">
-            <div class="col pt-3">
-              <div class="form-group">
-                <select id="categories" class="form-control">
-                  <option selected>Vòng 1</option>
-                  <option>Vòng 1</option>
-                  <option>Vòng 2</option>
-                  <option>Vòng 3</option>
-                  <option>Vòng 4</option>
-                </select>
-              </div>
-            </div>
-            <div class="col pt-3">
-              <div class="form-group">
-                <select id="categories" class="form-control">
-                  <option selected>CLB</option>
-                  <option>Manchester City</option>
-                  <option>Manchester United</option>
-                  <option>Chelsea</option>
-                  <option>Arsenal</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <button type="button" class="btn btn-primary btn-block"><i class="fas fa-filter"></i> Lọc</button>
-            </div>
-          </div> <!-- end filter-->
-                        </strong>
-                    </div>
-                    <%- include('./result-round') -%>
-            </div>
-            
- 
-    </div>
+  <div class=" card ">
+      <div class="card-header">
+          <strong class="card-title">
+              <!-- filter -->
+              <div class="row align-items-center justify-content-center">
+                  <div class="col pt-3">
+                      <form action="/result/result-detail/<%=idSeason%>" method="GET" id="frmvongdau">
+                      <div class="form-group">
+                          <select id="vong" class="form-control" name="vong">
+                              <% for(var i = 1; i <= DsVong; i++){ %> 
+                                  <% if(i === vonghientai) { %> 
+                                      <option value="<%=i%>" selected>Vòng <%=i%></option>
+                                  <% } else { %> 
+                                      <option value="<%=i%>">Vòng <%=i%></option>
+                                  <%}%> 
+                              <%}%>
+                          </select>
+                      </div>
+                  </form>
+                  </div>
+                  <div class="col pt-3">
+                  </div>
+                  <div class="col-md-3">
+                      <button type="submit" form="frmvongdau" class="btn btn-primary btn-block"><i class="fas fa-filter"></i>
+                          Xem </button>
+                  </div>
+              </div> <!-- end filter-->
+          </strong>
+      </div>
+
+      <div class="card-body">
+          <table class="table" id="bangketqua">
+              <thead class="thead-dark">
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col"><i>Đội nhà</th>
+                      <th scope="col"><i>Đội khách</th>
+                      <th scope="col"><i class="fa fa-check-square fa-flag-checkered"></i></th>
+                      <th scope="col"><i class="fa fa-file fa-file-red"></th>
+                      <th scope="col"><i class="fa fa-file fa-file-yellow"></th>
+                      <th scope="col">Sân thi đấu</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <% for(let i=0; i<trandaus.length ; i++){%>
+                  <tr>
+                      <td style="max-width: 25px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;visibility: hidden" ><%= trandaus[i]._id%></td>
+                      <td><strong><%= trandaus[i].doiNha.tenDoiBong%></strong></td>
+                      <td><strong><%= trandaus[i].doiKhach.tenDoiBong%></strong></td>
+                      <% if ( typeof(trandaus[i].banThangDoiNha) === 'undefied') {%> 
+                          <td>  -  </td>
+                      <%} else {%>
+                          <td><strong><%= trandaus[i].banThangDoiNha %> - <%= trandaus[i].banThangDoiKhach %></strong></td>
+                      <%}%>
+                      <td><strong><%= trandaus[i].theDoDoiNha%> - <%=trandaus[i].theDoDoiKhach%></strong></td>
+                      <td><strong><%= trandaus[i].theVangDoiNha%> - <%=trandaus[i].theVangDoiKhach%></strong></td>
+                      <td><strong><%= trandaus[i].svd%></strong></td>
+                  </tr>
+                  <%}%>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+<!-- End Modal -->

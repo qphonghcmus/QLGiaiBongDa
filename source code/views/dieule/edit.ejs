@@ -23,7 +23,7 @@
                     <strong>Bảng thông số</strong>
                 </div>
                 <div class="card-body card-block">
-                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <form action="/dieule/update/<%=idSeason%>" method="post" class="form-horizontal" id="frmDieule">
 
                         <div class="row form-group">
 
@@ -140,13 +140,14 @@
                 tiên</label>
         </div>
         <div class="col-12 col-md-8">
-            <select data-placeholder="Chọn theo thứ tự giảm dần..." multiple class="standardSelect"
+            <select id="thutu" name="thutu" class="form-control" required="required"
                 <% if (edit=="false") { %> disabled <% } %>>
-                <option value=""></option>
-                <option value="United States">Điểm</option>
-                <option value="United Kingdom">Hệ số</option>
-                <option value="Afghanistan">Bàn thắng</option>
-                <option value="Aland Islands">Đối đầu</option>
+                <option value="1" selected>Điểm - Hệ số - Bàn thắng</option>
+                <option value="2">Điểm - Bàn thắng - Hệ số</option>
+                <option value="3">Hệ số - Điểm - Bàn thắng</option>
+                <option value="4">Hệ số - Bàn thắng - Điểm</option>
+                <option value="4">Bàn thắng - Điểm - Hệ số</option>
+                <option value="6">Bàn thắng - Hệ số - Điểm </option>
             </select>
         </div>
     </div>
@@ -156,10 +157,10 @@
 </div>
 <div class="card-footer">
     <% if(edit=="true") { %>
-    <button type="submit" class="btn btn-primary btn-sm">
+    <button type="submit" class="btn btn-primary btn-sm" onclick="javascript: jQuery('#frmDieule').submit();">
         <i class="fa fa-edit"></i> Cập nhật
     </button>
-    <button type="reset" class="btn btn-danger btn-sm">
+    <button type="reset" class="btn btn-danger btn-sm" onclick="javascript: jQuery('#frmDieule')[0].reset();" >
         <i class="fa fa-ban"></i> Mặc định
     </button>
     <%}%>
