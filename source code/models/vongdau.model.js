@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 var vongdauSchema = new mongoose.Schema({
     idMuaGiai: {type:Schema.Types.ObjectId,ref:'muagiais',require:true},
     thuTu: Number,
-    DsTranDau: [{type:Schema.Types.ObjectId,ref:'trandaus',require:true}],
+    DsTranDau: [{type:Schema.Types.ObjectId,ref:'trandaus',require:true,default:[]}],
 })
 
 // vongdauSchema.plugin(autoIncrement,{inc_field: 'idVongDau'});
@@ -23,6 +23,75 @@ module.exports = {
             })
         });
     },
+
+  
+
+    findVongMotMuaGiai: (sovong,idMuaGiai) =>{
+        return new Promise((resolve, reject)=>{
+            vongdau.findOne({
+                idMuaGiai: idMuaGiai,
+                thuTu: sovong
+            }).
+            populate({
+                path: 'DsTranDau',
+                // Get friends of friends - populate the 'friends' array for every friend
+                populate: { path: 'doiNha' },
+              })
+            .populate({
+                path: 'DsTranDau',
+                // Get friends of friends - populate the 'friends' array for every friend
+                populate: { path: 'doiKhach' },
+              })
+            .exec((err,succ) => {
+                if(err)
+                    reject(err);
+                else
+                    resolve(succ);
+            })
+        })
+    },
+
+    countSoVong: (idMuaGiai) =>{
+        return new Promise((resolve, reject)=>{
+            vongdau.countDocuments({
+                idMuaGiai: idMuaGiai,
+            }).
+            exec((err,succ) => {
+                if(err)
+                    reject(err);
+                else
+                    resolve(succ);
+            })
+        })
+    },
+    
+
+    addTranDauVaoVongDau: (idTrandau,idMuaGiai,thuTu)=>{
+        return new Promise((resolve, reject) =>{
+            vongdau.findOne({
+                idMuaGiai : idMuaGiai,
+                thuTu : thuTu,
+            }).exec((err,succ) => {
+                if(err)
+                    reject(err);
+                else{
+                    
+                    succ.DsTranDau.push(idTrandau);
+                    succ.save((err,succ) => {
+                        if(err)
+                            reject(err);
+                        else{
+                            resolve(succ);
+                        }
+                    })
+                }
+                    
+            })
+
+
+        });
+    },
+
 
     findByIdMuaGiai: (id) => {
         return new Promise((resolve, reject) =>{
@@ -52,7 +121,6 @@ module.exports = {
             var obj = new vongdau({
                 idMuaGiai: entity.idMuaGiai,
                 thuTu: entity.thuTu,
-                DsTranDau: entity.DsTranDau,
             })
             obj.save((err,succ) => {
                 if(err)
@@ -63,6 +131,7 @@ module.exports = {
             })
         });
     },
+
 
     update: (entity) => {
         return new Promise((resolve, reject) => {

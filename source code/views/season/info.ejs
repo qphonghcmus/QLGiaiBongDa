@@ -3,6 +3,11 @@
         <div class="alert  alert-success alert-dismissible fade show" role="alert">
             <span class="badge badge-pill badge-success">Mùa giải</span>
             <% if (edit=="true") { %>
+                <form id="updateCalendar" action="/season/info/updateCalendar/<%= seasonInfo.idMuaGiai%>" method="post">
+                    <button type="submit" form="updateCalendar" class="btn btn-primary btn-sm">
+                        <i class="fa fa-calendar"></i> Tạo lịch thi đấu mới
+                    </button>
+                    </form>
             <a <i href="/season/info/<%=seasonInfo.idMuaGiai%>&false" class="fa fa-ban close "></i> Tắt chỉnh sửa </a>
             <% } else { %>
             <a <i href="/season/info/<%=seasonInfo.idMuaGiai%>&true" class="fa fa-pen close" style="margin-right: 30px">
@@ -18,9 +23,11 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-9">
             <div class="card">
+                
                 <div class="card-header">
                     <strong>Hồ sơ giải đấu</strong>
                 </div>
+                
                 <div class="card-body card-block">
                     <form id="registerForm" action="/season/info/update/<%= seasonInfo.idMuaGiai%>" method="post"
             class="form-horizontal">
@@ -122,15 +129,17 @@
             </div>
             <div class="card-footer">
                 <% if(edit=="true") { %>
-                <button type="submit" form="registerForm" class="btn btn-primary btn-sm">
+                <button type="submit" form="registerForm" class="btn btn-success btn-sm">
                     <i class="fa fa-check"></i> Cập nhật
                 </button>
                 <button type="button" class="btn btn-danger btn-sm"
                     onclick="location.href='/season/info/<%=seasonInfo.idMuaGiai%>&true';">
                     <i class="fa fa-ban"></i> Mặc định
                 </button>
+                
                 <%}%>
             </div>
+            
         </div>
     </div>
 </div>

@@ -65,7 +65,7 @@
                                             <td><%=i+1%></td>
                                             <td><%= trandaus[i].doiNha.tenDoiBong%></td>
                                             <td><%= trandaus[i].doiKhach.tenDoiBong%></td>
-                                            <td><%= trandaus[i].doiNha.svd%></td>
+                                            <td><%= trandaus[i].svd%></td>
                                             <td></td>
                                         </tr>
                                     <%}%>
@@ -75,7 +75,7 @@
                         </table>
                          
                         <div style="float:right;">
-                            <% if (vongdau!=10) { %>
+                            <% if (vongdau < soVong) { %>
                                 <form method="get" action="/fixture/fixture-detail/<%=vongsau%>&<%=idSeason%>">
                             <button type="submit" class="btn btn-outline-primary btn-sm">Vòng kế tiếp</button>
                                 </form>

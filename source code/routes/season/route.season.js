@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var muagiai = require('../../models/muagiai.model');
 var doibong = require('../../models/doibong.model');
-var thamdu = require('../../models/thamdu.model');
+var vongdauModel = require('../../models/vongdau.model');
+var trandauModel = require('../../models/trandau.model');
 
 router.get('/add', (req, res, next) => {
     res.render('./home/home', {
@@ -173,6 +174,146 @@ router.post('/info/update/:id',(req,res,next) => {
     muagiai.update(obj_muagiai).then(values => {
         res.redirect('/season/info/'+req.params.id + '&false');
     }).catch(err => {});
+})
+
+router.post('/info/updateCalendar/:id',(req,res,next)=>{
+
+        
+
+    let idSeason = req.params.id;
+
+    // thamdu.findIDByMuaGiai(idSeason).then(succ=>{
+        muagiai.getDSThamdu(idSeason).then(succ=>{
+
+
+        let dsDoiBongThamDu = succ.dsDoiBong;
+
+        let n =  dsDoiBongThamDu.length / 2;
+
+    let home,away;
+
+    for (let i = 1 ; i < 2*n ; i++){
+        let sovong = i;
+        let vongdau ={
+            idMuaGiai : idSeason,
+            thuTu: sovong,
+        }
+        vongdauModel.add(vongdau).then(succ=>{
+        for ( let j = 0; j < n ; j++){
+
+                if ( j==0 ){
+                    home = i;   away = 2*n;
+                    let trandau = {
+                        // idMuaGiai: idSeason,
+                        // vongDau: sovong,
+                        doiNha:  dsDoiBongThamDu[home-1],
+                        doiKhach: dsDoiBongThamDu[away-1], 
+                    }
+                    trandauModel.add(trandau,idSeason,sovong).then(succ=>{
+                        console.log("Thêm 1 trận đấu");
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                    });
+                    console.log(trandau);
+                }
+                else {
+                    home = i - j; away = i + j;
+                    if(home < 0)	home = home + ( 2*n - 1)
+                    if(home ===0)	home = 2*n - 1
+                    if(away >= 2*n)	away = away % (2*n - 1)
+                    let trandau = {
+                        // idMuaGiai: idSeason,
+                        // vongDau: sovong,
+                        doiNha:  dsDoiBongThamDu[home-1],
+                        doiKhach: dsDoiBongThamDu[away-1], 
+                    }
+                    trandauModel.add(trandau,idSeason,sovong).then(succ=>{
+                        console.log(succ);
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                    });
+                    console.log(trandau);
+                }
+                
+
+
+        }
+    })
+
+            .catch(err=>{
+                console.log(err);
+            })
+
+    }
+    
+    for (var i = 1; i < 2*n; i++){
+        var f = i + 2*n - 1
+        let sovong = f;
+        let vongdau ={
+            idMuaGiai : idSeason,
+            thuTu: sovong,
+        }
+        vongdauModel.add(vongdau).then(succ=>{
+
+        for( var j = 0; j < n; j++) {
+
+                if(j == 0){
+                    home = i;	away = 2*n;
+                    let trandau = {
+                        // idMuaGiai: idSeason,
+                        // vongDau: sovong,
+                        doiNha:  dsDoiBongThamDu[home-1],
+                        doiKhach: dsDoiBongThamDu[away-1], 
+                    }
+                    trandauModel.add(trandau,idSeason,sovong).then(succ=>{
+                        console.log(succ);
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                    });
+                    console.log(trandau);
+                }else{
+                    home = i - j;	away = i+j;
+                    if(home < 0)	home = home + ( 2*n - 1)
+                    if(home ===0)	home = 2*n - 1
+                    if(away >= 2*n)	away = away % (2*n - 1)
+                    let trandau = {
+                        // idMuaGiai: idSeason,
+                        // vongDau: sovong,
+                        doiNha:  dsDoiBongThamDu[home-1],
+                        doiKhach: dsDoiBongThamDu[away-1], 
+                    }
+                    trandauModel.add(trandau,idSeason,sovong).then(succ=>{
+                        console.log(succ);
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                    });
+                    console.log(trandau);
+                }
+            // })
+            // .catch(err=>{
+            //     console.log(err);
+            // })
+
+        }
+
+    })            .catch(err=>{
+        console.log(err);
+    })
+
+    }
+            
+
+    res.redirect('/season/info/'+req.params.id + '&false');
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+
+
 })
 
 module.exports = router;

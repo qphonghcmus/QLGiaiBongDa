@@ -42,6 +42,20 @@ module.exports = {
         });
     },
 
+    getDSThamdu: (id) => {
+        return new Promise((resolve, reject) =>{
+            var muagiai = mongoose.model('muagiais',muagiaiSchema);
+            muagiai.findById(id)
+            .select('dsDoiBong')
+            .exec((err,succ) => {
+                if(err)
+                    reject(err);
+                else
+                    resolve(succ);
+            })
+        });
+    },
+
     findByIdWithDoiBong: id => {
         return new Promise((resolve, reject) =>{
 

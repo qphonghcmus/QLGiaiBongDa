@@ -4,9 +4,11 @@ const Schema = mongoose.Schema;
 // schema
 var trandauSchema = new mongoose.Schema({
     // idTranDau: Number,
-    vongDau: Number,
+    // idMuaGiai: {type: Schema.Types.ObjectId, ref:'muagiais', require:true},
+    // vongDau: Number,
     doiNha: {type:Schema.Types.ObjectId,ref:'doibongs',require:true},
     doiKhach: {type:Schema.Types.ObjectId,ref:'doibongs',require:true},
+    svd: String,
     banThangDoiNha: Number,
     banThangDoiKhach: Number,
     theVangDoiNha: Number,
@@ -16,12 +18,16 @@ var trandauSchema = new mongoose.Schema({
     // dsBanThang: [Number],
 })
 
-trandauSchema.plugin(autoIncrement,{inc_field: 'idTranDau'});
+const trandau = mongoose.model('trandaus',trandauSchema);
+
+// trandauSchema.plugin(autoIncrement,{inc_field: 'idTranDau'});
+const vongdau = require('./vongdau.model');
+const doibong = require('./doibong.model');
 
 module.exports = {
     find: () => {
         return new Promise((resolve, reject) =>{
-            var trandau = mongoose.model('trandaus',trandauSchema);
+            // var trandau = mongoose.model('trandaus',trandauSchema);
             trandau.find().exec((err,succ) => {
                 if(err)
                     reject(err);
@@ -31,10 +37,15 @@ module.exports = {
         });
     },
 
-    findByRound: (round) => {
+    findByRound: (round, idMuaGiai) => {
         return new Promise((resolve, reject) =>{
-            var trandau = mongoose.model('trandaus',trandauSchema);
-            trandau.find({vongDau:round})
+            // var trandau = mongoose.model('trandaus',trandauSchema);
+            trandau.find(
+                {
+                    vongDau:round,
+                    idMuaGiai: idMuaGiai,
+                }
+                )
             .populate('doiNha','tenDoiBong svd')
             .populate('doiKhach','tenDoiBong')
             .exec((err,succ) => {
@@ -47,9 +58,10 @@ module.exports = {
     },
 
 
+
     findById: (id) => {
         return new Promise((resolve, reject) =>{
-            var trandau = mongoose.model('trandaus',trandauSchema);
+            // var trandau = mongoose.model('trandaus',trandauSchema);
             trandau.find({idTranDau: id}).exec((err,succ) => {
                 if(err)
                     reject(err);
@@ -61,7 +73,7 @@ module.exports = {
 
     count: () => {
         return new Promise((resolve, reject) =>{
-            var trandau = mongoose.model('trandaus',trandauSchema);
+            // var trandau = mongoose.model('trandaus',trandauSchema);
             trandau.countDocuments().exec((err,succ) => {
                 if(err)
                     reject(err);
@@ -72,28 +84,52 @@ module.exports = {
         });
     },
 
-    add: (entity) => {
+    add: (entity,idMuaGiai,vongDau) => {
         return new Promise((resolve, reject) =>{
             let trandau = mongoose.model('trandaus',trandauSchema);
 
-            let obj = new trandau({
-                vongDau: entity.vongDau,
-                doiNha: entity.doiNha,
-                doiKhach: entity.doiKhach,
+            doibong.findById({
+                _id : entity.doiNha,
             })
-            obj.save((err,succ) => {
-                if(err)
-                    reject(err);
-                else{
-                    resolve(succ);
-                }
+            .then(succ=>{
+                let svd = succ.svd;
+
+                let obj = new trandau({
+                    // idMuaGiai: entity.idMuaGiai,
+                    // vongDau: entity.vongDau,
+                    doiNha: entity.doiNha,
+                    doiKhach: entity.doiKhach,
+                    svd: svd,
+                })
+                
+                obj.save((err,succ) => {
+                    if(err)
+                        reject(err);
+                    else{
+                        // vongdau.addTranDauVaoVongDau(succ._id,entity.idMuaGiai,entity.vongDau)
+                        vongdau.addTranDauVaoVongDau(succ._id,idMuaGiai,vongDau)
+                            .then(succ=>{
+                                resolve(succ);
+                            })
+                            .catch(err=>{
+                                reject(err);
+                            })
+                        // resolve(succ);
+                    }
+                })
+
             })
+            .catch(err=>{
+                console.log(err)
+            })
+
+
         });
     },
 
     update: (entity) => {
         return new Promise((resolve, reject) => {
-            var trandau = mongoose.model('trandaus',trandauSchema);
+            // var trandau = mongoose.model('trandaus',trandauSchema);
             
             trandau.updateOne({_id: entity.idTranDau},{
                 doiNha: entity.doiNha,
@@ -113,7 +149,7 @@ module.exports = {
 
     updateStat: (entity) => {
         return new Promise((resolve, reject) => {
-            var trandau = mongoose.model('trandaus',trandauSchema);
+            // var trandau = mongoose.model('trandaus',trandauSchema);
             
             trandau.updateOne({_id: entity.idTranDau},{
                 $set:{
@@ -132,7 +168,7 @@ module.exports = {
 
     delete: (id) => {
         return new Promise((resolve, reject) => {
-            var trandau = mongoose.model('trandaus',trandauSchema);
+            // var trandau = mongoose.model('trandaus',trandauSchema);
             trandau.removeOne({idTranDau:id}).exec((err, succ) => {
                 if(err)
                     reject(err);
