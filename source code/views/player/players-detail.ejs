@@ -80,30 +80,30 @@
               <tr>
                 <td>
                   <!-- <button><i class="fa fa-search"></button> -->
-                  <a data-toggle="modal" data-target="#largeModal"><strong> <%=danhsachcauthu[i].tenCauThu %>
+                  <a data-toggle="modal" data-target="#largeModal"><strong> <%=danhsachcauthu[i].idCauThu.tenCauThu %>
                     </strong></a>
                   </br>
-                  <% if (danhsachcauthu[i].viTriThiDau == 1) { %>
+                  <% if (danhsachcauthu[i].idCauThu.viTriThiDau == 1) { %>
                   Thủ môn
                   <% } %>
-                  <% if (danhsachcauthu[i].viTriThiDau == 2) { %>
+                  <% if (danhsachcauthu[i].idCauThu.viTriThiDau == 2) { %>
                   Hậu vệ
                   <% } %>
-                  <% if (danhsachcauthu[i].viTriThiDau == 3) { %>
+                  <% if (danhsachcauthu[i].idCauThu.viTriThiDau == 3) { %>
                   Tiền vệ
                   <% } %>
-                  <% if (danhsachcauthu[i].viTriThiDau == 4) { %>
+                  <% if (danhsachcauthu[i].idCauThu.viTriThiDau == 4) { %>
                   Tiền đạo
                   <% } %> </td>
-                <td><%= danhsachcauthu[i].tenDoiBong %></td>
-                <td><%= danhsachcauthu[i].ngaySinh %></td>
-                <td><%= danhsachcauthu[i].quocTich %></td>
+                <td><%= danhsachcauthu[i].idCauThu.tenDoiBong %></td>
+                <td><%= danhsachcauthu[i].idCauThu.ngaySinh %></td>
+                <td><%= danhsachcauthu[i].idCauThu.quocTich %></td>
                 <td><%= danhsachcauthu[i].soBanThang %></td>
                 <td><%= danhsachcauthu[i].soKienTao %></td>
                 <td><%= danhsachcauthu[i].soTheVang %></td>
                 <td><%= danhsachcauthu[i].soTheDo %></td>
                 <td>
-                  <a <i href="/player/edit/<%= danhsachcauthu[i]._id %>&<%=idSeason%>" class="fa fa-pen close"
+                  <a <i href="/player/edit/<%= danhsachcauthu[i].idCauThu._id %>&<%=idSeason%>" class="fa fa-pen close"
                     style="margin-right: 30px"></i></a>
                 </td>
                 <!-- <td><i class="fa fa-search"></i></td> -->

@@ -3,17 +3,19 @@ var router = express.Router();
 
 const player = require('../../models/cauthu.model');
 const club = require('../../models/doibong.model');
+const thongke = require('../../models/thongkecauthu.model');
+
 var messagesSuccess = "";
 router.get('/lookup/:seasonID', (req, res) => {
     let idMuaGiai = req.params.seasonID;
-    player.find().then(succ =>{
     
+    thongke.thongkeCauthu(idMuaGiai).then(succ => {
         res.render('./layouts/main', {
         danhsachcauthu : succ,
         chuyenmuc: 'Tra cứu cầu thủ',
         filename: '../player/players-detail',
-                    idSeason: idMuaGiai,
-                    activeCauthu: true,
+        idSeason: idMuaGiai,
+        activeCauthu: true,
         cssfiles: [
             '../../public/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css',
             'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
@@ -125,12 +127,14 @@ router.get('/edit/:id&:seasonID',(req,res)=>{
 
     var p1 = club.find();
     var p2 = player.findById(id);
+    var p3 = thongke.findByCauThu(id);
 
-    Promise.all([p1,p2]).then(values => {
-        console.log(values[1]);
+    Promise.all([p1,p2,p3]).then(values => {
+        console.log(values[1][0])
         res.render('./layouts/main', {
             danhsachdoibong: values[0],
             cauthu: values[1][0],
+            thongke: values[2][0],
             chuyenmuc: 'Cập nhật cầu thủ',
             filename: '../player/edit-player',
                     idSeason: idMuaGiai,
@@ -170,6 +174,22 @@ router.post('/edit/:id&:seasonID',(req,res)=>{
         viTriThiDau: req.body.viTriThiDau,
         doiBong: req.body.doiBong,
     }
+
+    var thongke_obj = {
+        idMuaGiai: idMuaGiai,
+        idCauThu: id,
+        soBanThang: req.body.sobanthang,
+        soKienTao: req.body.sokientao,
+        soTheVang: req.body.sothevang,
+        soTheDo: req.body.sothedo
+    }
+
+    Promise.all([
+        player.update(obj),
+        thongke.findAndUpdate(thongke_obj),
+    ]).then(values => {
+        res.redirect('/player/lookup/'+idMuaGiai)
+    }).catch()
 
     player.update(obj).then(succ => {
         res.redirect('/player/lookup/'+idMuaGiai)

@@ -18,31 +18,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% for(var i = 0; i < listPlayer.length; i++) { %>
                             <tr>
-                                <td>1</td>
-                                <td>J. Sancho</td>
-                                <td>Borussia Dortmund</td>
-                                <td>14</td>
-
+                                <td><%= i + 1 %></td>
+                                <td><strong><%= listPlayer[i].idCauThu.tenCauThu %></strong></td>
+                                <td><%= listPlayer[i].idCauThu.tenDoiBong %></td>
+                                <td><strong><%= listPlayer[i].soKienTao %></strong></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>J. Kimmich</td>
-                                <td>Bayern München	</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>J. Brandt</td>
-                                <td>Bayer Leverkusen</td>
-                                <td>11</td>
-                            </tr>
+                            <%} %>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>

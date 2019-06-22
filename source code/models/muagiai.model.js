@@ -69,6 +69,26 @@ module.exports = {
         });
     },
 
+    findByIdWithDoiBongAndCauThu: id => {
+        return new Promise((resolve, reject) =>{
+
+            var muagiai = mongoose.model('muagiais',muagiaiSchema);
+            muagiai.find({_id: id})
+            .populate('dsDoiBong','_id tenDoiBong dsCauThu')
+            // .populate({
+            //     path: 'dsDoiBong',
+            //     // Get friends of friends - populate the 'friends' array for every friend
+            //     populate: { path: 'dsCauThu' },
+            // })
+            .exec((err,succ) => {
+                if(err)
+                    reject(err);
+                else
+                    resolve(succ);
+            })
+        });
+    },
+
     count: () => {
         return new Promise((resolve, reject) =>{
             var muagiai = mongoose.model('muagiais',muagiaiSchema);

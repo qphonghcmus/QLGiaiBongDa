@@ -18,30 +18,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% for(var i = 0; i < listPlayer.length; i++) { %> 
                             <tr>
-                                <td>1</td>
-                                <td>Mohamed Salah</td>
-                                <td>Liverpool</td>
-                                <td>22</td>
-
+                                <td><%= i + 1 %></td>
+                                <td><strong><%= listPlayer[i].idCauThu.tenCauThu %></strong></td>
+                                <td><%= listPlayer[i].idCauThu.tenDoiBong %></td>
+                                <td><strong><%= listPlayer[i].soBanThang %></strong></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Pierre-Emerick Aubameyang</td>
-                                <td>Arsenal</td>
-                                <td>22</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Sadio Mané</td>
-                                <td>Liverpool</td>
-                                <td>22</td>
-                            </tr>
+                            <%} %>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
-
     </div>
+</div>

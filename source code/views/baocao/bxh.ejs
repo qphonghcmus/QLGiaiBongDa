@@ -22,43 +22,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Juventus</td>
-                                <td>38</td>
-                                <td>28</td>
-                                <td>6</td>
-                                <td>4</td>
-                                <td>70</td>
-                                <td>30</td>
-                                <td>40</td>
-                                <td>90</td>
-
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Napoli</td>
-                                <td>38</td>
-                                <td>24</td>
-                                <td>7</td>
-                                <td>7</td>
-                                <td>74</td>
-                                <td>36</td>
-                                <td>38</td>
-                                <td>79</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Atalanta</td>
-                                <td>38</td>
-                                <td>20</td>
-                                <td>9</td>
-                                <td>9</td>
-                                <td>77</td>
-                                <td>46</td>
-                                <td>31</td>
-                                <td>69</td>
-                            </tr>
+                            <% for(var i = 0; i < clubs.length; i++) { %>
+                                <tr>
+                                    <td><%= i+1%></td>
+                                    <td><%= clubs[i].name %></td>
+                                    <td><%= clubs[i].wins + clubs[i].draws + clubs[i].losts  %></td>
+                                    <td><%= clubs[i].wins %></td>
+                                    <td><%= clubs[i].draws %></td>
+                                    <td><%= clubs[i].losts %></td>
+                                    <td><%= clubs[i].goalsFor %></td>
+                                    <td><%= clubs[i].goalsAgainst %></td>
+                                    <td><%= clubs[i].goalsDiff %></td>
+                                    <td><%= clubs[i].point %></td>
+                                </tr>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>

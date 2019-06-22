@@ -71,6 +71,30 @@ module.exports = {
         });
     },
 
+    findHome: id => {
+        return new Promise((resolve, reject) =>{
+            // var trandau = mongoose.model('trandaus',trandauSchema);
+            trandau.find({doiNha: id}).exec((err,succ) => {
+                if(err)
+                    reject(err);
+                else
+                    resolve(succ);
+            })
+        });
+    },
+
+    findAway: id => {
+        return new Promise((resolve, reject) =>{
+            // var trandau = mongoose.model('trandaus',trandauSchema);
+            trandau.find({doiKhach: id}).exec((err,succ) => {
+                if(err)
+                    reject(err);
+                else
+                    resolve(succ);
+            })
+        });
+    },
+
     count: () => {
         return new Promise((resolve, reject) =>{
             // var trandau = mongoose.model('trandaus',trandauSchema);

@@ -76,7 +76,7 @@ module.exports = {
     updateAll: entity => {
         return new Promise((resolve, reject) =>{
             var thamso = mongoose.model('thamsos',thamsoSchema);
-            thamso.updateOne({},{
+            thamso.update({},{
                 idMuaGiai: entity.idMuaGiai,
                 tuoiMin: entity.tuoiMin,
                 tuoiMax: entity.tuoiMax,

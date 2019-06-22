@@ -142,12 +142,12 @@
         <div class="col-12 col-md-8">
             <select id="thutu" name="thutu" class="form-control" required="required"
                 <% if (edit=="false") { %> disabled <% } %>>
-                <option value="1" selected>Điểm - Hệ số - Bàn thắng</option>
-                <option value="2">Điểm - Bàn thắng - Hệ số</option>
-                <option value="3">Hệ số - Điểm - Bàn thắng</option>
-                <option value="4">Hệ số - Bàn thắng - Điểm</option>
-                <option value="4">Bàn thắng - Điểm - Hệ số</option>
-                <option value="6">Bàn thắng - Hệ số - Điểm </option>
+                <option value="1" <% if(quydinh.thuTuUuTien === 1) {%> selected <%} %>>Điểm - Hệ số - Bàn thắng</option>
+                <option value="2" <% if(quydinh.thuTuUuTien === 2) {%> selected <%} %>>Điểm - Bàn thắng - Hệ số</option>
+                <option value="3" <% if(quydinh.thuTuUuTien === 3) {%> selected <%} %>>Hệ số - Điểm - Bàn thắng</option>
+                <option value="4" <% if(quydinh.thuTuUuTien === 4) {%> selected <%} %>>Hệ số - Bàn thắng - Điểm</option>
+                <option value="5" <% if(quydinh.thuTuUuTien === 5) {%> selected <%} %>>Bàn thắng - Điểm - Hệ số</option>
+                <option value="6" <% if(quydinh.thuTuUuTien === 6) {%> selected <%} %>>Bàn thắng - Hệ số - Điểm </option>
             </select>
         </div>
     </div>
