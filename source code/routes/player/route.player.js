@@ -11,6 +11,7 @@ router.get('/lookup/:seasonID', (req, res) => {
     
     thongke.thongkeCauthu(idMuaGiai).then(succ => {
         res.render('./layouts/main', {
+            idSeason: idMuaGiai,
         danhsachcauthu : succ,
         chuyenmuc: 'Tra cứu cầu thủ',
         filename: '../player/players-detail',
@@ -35,10 +36,11 @@ router.get('/lookup/:seasonID', (req, res) => {
     });
 })
 
-router.get('/add/:seasionID', (req, res) => {
+router.get('/add/:seasonID', (req, res) => {
     let idMuaGiai = req.params.seasonID;
     club.find().then(succ=>{
         res.render('./layouts/main', {
+            idSeason: idMuaGiai,
             danhsachdoibong: succ,
             chuyenmuc: 'Đăng ký cầu thủ',
             filename: '../player/add-player',
@@ -66,7 +68,7 @@ router.get('/add/:seasionID', (req, res) => {
     
 })
 
-router.post('/add', (req, res) => {
+router.post('/add/:seasonID', (req, res) => {
     let idMuaGiai = req.params.seasonID;
     let entity = req.body;
     let now = new Date();
@@ -113,6 +115,7 @@ router.post('/add', (req, res) => {
     
                 club.find().then(succ=>{
                     res.render('./layouts/main', {
+                        idSeason: idMuaGiai,
                         danhsachdoibong: succ,
                         chuyenmuc: 'Đăng ký cầu thủ',
                         filename: '../player/add-player',
@@ -173,6 +176,7 @@ router.get('/edit/:id&:seasonID',(req,res)=>{
     Promise.all([p1,p2,p3]).then(values => {
         console.log(values[1][0])
         res.render('./layouts/main', {
+            idSeason: idMuaGiai,
             danhsachdoibong: values[0],
             cauthu: values[1][0],
             thongke: values[2][0],

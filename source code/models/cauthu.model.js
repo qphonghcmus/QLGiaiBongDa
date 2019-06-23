@@ -24,7 +24,7 @@ var cauthuSchema = new mongoose.Schema({
 
 
 const cauthu = mongoose.model('cauthus', cauthuSchema);
-
+const thongke = require('./thongkecauthu.model');
 
 // auto increment _id
 //cauthuSchema.plugin(autoIncrement, { inc_field: 'idCauThu' });
@@ -104,6 +104,9 @@ module.exports = {
                 soTranGiuSachLuoi: entity.soTranGiuSachLuoi,
             })
             club.findById(obj.doiBong).then(succ => {
+                thongke.add(cauthu).then(succ=>{
+
+                })
                 obj.tenDoiBong = succ.tenDoiBong;
                 obj.save((err, succ) => {
                     if (err)
