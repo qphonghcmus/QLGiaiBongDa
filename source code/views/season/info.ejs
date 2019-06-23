@@ -2,12 +2,18 @@
     <div class="col-sm-12">
         <div class="alert  alert-success alert-dismissible fade show" role="alert">
             <span class="badge badge-pill badge-success">Mùa giải</span>
+
             <% if (edit=="true") { %>
+                <% if( calendar ){%>
                 <form id="updateCalendar" action="/season/info/updateCalendar/<%= seasonInfo.idMuaGiai%>" method="post">
                     <button type="submit" form="updateCalendar" class="btn btn-primary btn-sm">
                         <i class="fa fa-calendar"></i> Tạo lịch thi đấu mới
                     </button>
                     </form>
+                    <% } else { %>
+                        <button disable type="submit" form="updateCalendar" class="btn btn-primary btn-sm">
+                                <i class="fa fa-calendar"></i> Số đội cần đúng để tạo lịch
+                                <%}%>
             <a <i href="/season/info/<%=seasonInfo.idMuaGiai%>&false" class="fa fa-ban close "></i> Tắt chỉnh sửa </a>
             <% } else { %>
             <a <i href="/season/info/<%=seasonInfo.idMuaGiai%>&true" class="fa fa-pen close" style="margin-right: 30px">
@@ -59,55 +65,37 @@
 
                     <select name="club" id="club" data-placeholder="Chọn đội bóng..." multiple class="standardSelect"
                     <% if (edit=="false") { %> disabled <% } %> >
-                        <% if (edit=="true") { %>
-                            <% seasonInfo.allClubs.forEach(e => { %>
-                                <% if(dsDoiBong !== null) { %> 
-                                    <% var tmp = 0 %>
-                                    <% for (var i = 0; i < dsDoiBong.length; i++ ) { %> 
-                                        <% if( dsDoiBong[i].tenDoiBong === e.tenDoiBong)  { %>
-                                            <option value="<%= e._id%>" selected><%= e.tenDoiBong %></option>
-                                            <% tmp = 1 %>
-                                            <% break %>
-                                        <%} %>
-                                        
-                                    <% } %>
-                                    <% if (tmp === 0) {%>
-                                        <option value="<%= e._id%>" > <%= e.tenDoiBong%></option>
-                                    <%}%>  
-                                <%}%>  
-                            <% }) %> 
+                    <% if (seasonInfo.allClubs !== null){ %>
+
+                    <% dsDoiBong.forEach(e => { %>
+                        <% var tmp = 0 %>
+                        
+                        <% for (var i = 0; i < seasonInfo.allClubs.length; i++ ) { %> 
+                            <% if( seasonInfo.allClubs[i].tenDoiBong === e.tenDoiBong)  { %>
+                                <option value="<%= e._id%>" selected><%= e.tenDoiBong %></option>
+                                <% tmp = 1 %>
+                                <% break %>
+                            <% } %>
+
+                           
+                            
+                         
+                        <% } %>
+                        <% if (tmp === 0) {%>
+                            <option value="<%= e._id%>" > <%= e.tenDoiBong%></option>
+                        <%}%>  
+                        
+                     
+                        <%})%>    
                         <%} else {%>
-                            <% dsDoiBong.forEach(e => { %>
-                                <option value="<%= e._id %>" selected><%= e.tenDoiBong %></option>
-                                <% }) %>
-                        <%}%>
+                            <% for (var i = 0; i < dsDoiBong.length; i++ ) { %> 
+                                <option value="<%= dsDoiBong[i]._id%>" > <%= dsDoiBong[i].tenDoiBong%></option>
+                            <% } %>
+                            <% } %>
                     </select>
                 </div>
             </div>
-            <div class="row form-group">
-                <div class="col-12 col-md-12">
-                    <label for="duC1" class=" form-control-label ">Vị trí dự C1</label>
-                    <input type="text" id="duC1" name="duC1" class="form-control"
-                        placeholder="Các vị trí cách nhau dấu ," required="required" value="<%= seasonInfo.viTriDuC1 %>"
-                        <% if (edit=="false") { %> disabled <% } %>>
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-12 col-md-12">
-                    <label for="duC2" class=" form-control-label ">Vị trí dự C2</label>
-                    <input type="text" id="duC2" name="duC2" class="form-control"
-                        placeholder="Các vị trí cách nhau dấu ," required="required" value="<%= seasonInfo.viTriDuC2 %>"
-                        <% if (edit=="false") { %> disabled <% } %>>
-                </div>
-            </div>
-            <div class="row form-group">
-                <div class="col-12 col-md-12">
-                    <label for="xuongHang" class=" form-control-label ">Vị trí xuống hạng</label>
-                    <input type="text" id="xuongHang" name="xuongHang" class="form-control"
-                        placeholder="Các vị trí cách nhau dấu ," required="required"
-                        value="<%= seasonInfo.viTriXuongHang %>" <% if (edit=="false") { %> disabled <% } %>>
-                </div>
-            </div>
+
             <div class="row form-group">
                 <div class="col-12 col-md-12">
                     <label for="cover" class=" form-control-label">Hình ảnh</label>

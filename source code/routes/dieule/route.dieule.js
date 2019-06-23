@@ -27,7 +27,7 @@ router.get('/info/:seasonID&:edit', (req, res) => {
         .then(succ => {
             res.render('./layouts/main', {
                 edit: edit,
-                quydinh: succ[0],
+                quydinh: succ,
                 chuyenmuc: 'Xem quy định',
                 filename: '../dieule/edit',
                 activeDieule: true,
@@ -59,7 +59,8 @@ router.post('/update/:seasonID', (req, res) => {
         thuTuUuTien: req.body.thutu,
         soDoiXuongHang: req.body.sodoixuonghang,
         soDoiDuC1: req.body.sodoiduC1,
-        soDoiDuC2: req.body.sodoiduC2
+        soDoiDuC2: req.body.sodoiduC2,
+        soDoiThamDu: req.body.soDoiThamDu
     }
 
     thamso.updateAll(obj)

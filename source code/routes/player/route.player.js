@@ -4,7 +4,7 @@ var router = express.Router();
 const player = require('../../models/cauthu.model');
 const club = require('../../models/doibong.model');
 const thongke = require('../../models/thongkecauthu.model');
-
+var thamso= require('../../models/thamso.model');
 var messagesSuccess = "";
 router.get('/lookup/:seasonID', (req, res) => {
     let idMuaGiai = req.params.seasonID;
@@ -66,57 +66,98 @@ router.get('/add/:seasionID', (req, res) => {
     
 })
 
-router.post('/add/:seasonID', (req, res) => {
+router.post('/add', (req, res) => {
     let idMuaGiai = req.params.seasonID;
     let entity = req.body;
-    player.add(entity)
-        .then(succ => {
-            var messagesSuccess = "Đã thêm cầu thủ  \" " + succ.tenCauThu + " \" thành công";
+    let now = new Date();
+    console.log(req.body.dob);
+    let age = now.getYear() - req.body.txtDOB
+    let fail;
+    console.log(age);
+    thamso.findByIdMuaGiai(idMuaGiai).then(info=>{
+        // if (age < info.tuoiMin || age > info.tuoiMax){
+        //     var messagesSuccess = "Cầu thủ không nằm trong giới hạn tuổi";
 
-            club.find().then(succ=>{
-                res.render('./layouts/main', {
-                    danhsachdoibong: succ,
-                    chuyenmuc: 'Đăng ký cầu thủ',
-                    filename: '../player/add-player',
-                    idSeason: idMuaGiai,
-                    activeCauthu: true,
-                    cssfiles: [
-                        'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
-                        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css'
+        //     club.find().then(succ=>{
+        //         res.render('./layouts/main', {
+        //             danhsachdoibong: succ,
+        //             chuyenmuc: 'Đăng ký cầu thủ',
+        //             filename: '../player/add-player',
+        //             idSeason: idMuaGiai,
+        //             activeCauthu: true,
+        //             cssfiles: [
+        //                 'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
+        //                 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css'
             
-                    ],
-                    jsfiles: [
-                        'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js',
-                        'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js',
-                        '../../public/assets/js/add.player.validation.js',
-                        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
-                        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
-                        '../../public/assets/js/upload.img.js',            
-                    ],
-                    success: true ,
-                    messagesSuccess: messagesSuccess
+        //             ],
+        //             jsfiles: [
+        //                 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js',
+        //                 'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js',
+        //                 '../../public/assets/js/add.player.validation.js',
+        //                 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+        //                 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
+        //                 '../../public/assets/js/upload.img.js',            
+        //             ],
+        //             success: true ,
+        //             messagesSuccess: messagesSuccess
+        //         })
+        //     })
+        //     .catch(err=>{
+        //         console.log(err)
+        //     })
+        // }
+        // else{
+            player.add(entity)
+            .then(succ => {
+                var messagesSuccess = "Đã thêm cầu thủ  \" " + succ.tenCauThu + " \" thành công";
+    
+                club.find().then(succ=>{
+                    res.render('./layouts/main', {
+                        danhsachdoibong: succ,
+                        chuyenmuc: 'Đăng ký cầu thủ',
+                        filename: '../player/add-player',
+                        idSeason: idMuaGiai,
+                        activeCauthu: true,
+                        cssfiles: [
+                            'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css',
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/css/fileinput.min.css'
+                
+                        ],
+                        jsfiles: [
+                            'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js',
+                            'https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js',
+                            '../../public/assets/js/add.player.validation.js',
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/js/fileinput.min.js',
+                            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.3/themes/fa/theme.min.js',
+                            '../../public/assets/js/upload.img.js',            
+                        ],
+                        success: true ,
+                        messagesSuccess: messagesSuccess
+                    })
                 })
+                .catch(err=>{
+                    console.log(err)
+                })
+    
+                // res.render('./layouts/main', {
+                //     chuyenmuc: 'Đăng ký cầu thủ',
+                //     filename: '../player/add-player',
+                //     activeCauthu: true,
+                //     cssfiles: [
+                //     ],
+                //     jsfiles: [
+                //     ],
+                //     messagesSuccess : messagesSuccess,
+                //     success : messagesSuccess.length,
+                // })
+                
             })
-            .catch(err=>{
-                console.log(err)
-            })
-
-            // res.render('./layouts/main', {
-            //     chuyenmuc: 'Đăng ký cầu thủ',
-            //     filename: '../player/add-player',
-            //     activeCauthu: true,
-            //     cssfiles: [
-            //     ],
-            //     jsfiles: [
-            //     ],
-            //     messagesSuccess : messagesSuccess,
-            //     success : messagesSuccess.length,
-            // })
-            
-        })
-        .catch(err => {
-            console.log(err);
-        });
+            .catch(err => {
+                console.log(err);
+            });
+        // }
+    })
+   
 
 
 })

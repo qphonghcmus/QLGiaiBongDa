@@ -14,9 +14,10 @@ const thamsoSchema = new mongoose.Schema({
     diemSoHoa: {type: Number, default: 1},
     diemSoThua: {type: Number, default: 0},
     thuTuUuTien: {type: Number, default: 1},
-    soDoiXuongHang: {type: Number, default: 3},
-    soDoiDuC1: {type: Number, default: 4},
-    soDoiDuC2: {type: Number, default: 3}
+    soDoiXuongHang: {type: Number, default: 2},
+    soDoiDuC1: {type: Number, default: 1},
+    soDoiDuC2: {type: Number, default: 2},
+    soDoiThamDu: {type:Number, default:6}
 })
 
 module.exports = {
@@ -35,7 +36,7 @@ module.exports = {
     findByIdMuaGiai: id => {
         return new Promise((resolve, reject) =>{
             var thamso = mongoose.model('thamsos',thamsoSchema);
-            thamso.find({idMuaGiai: id}).exec((err,succ) => {
+            thamso.findOne({idMuaGiai: id}).exec((err,succ) => {
                 if(err)
                     reject(err);
                 else
@@ -61,7 +62,38 @@ module.exports = {
                 thuTuUuTien: entity.thuTuUuTien,
                 soDoiXuongHang: entity.soDoiXuongHang,
                 soDoiDuC1: entity.soDoiDuC1,
-                soDoiDuC2: entity.soDoiDuC2
+                soDoiDuC2: entity.soDoiDuC2,
+                soDoiThamDu: entity.soDoiThamDu
+            })
+            obj.save((err,succ) => {
+                if(err)
+                    reject(err);
+                else{
+                    resolve(succ);
+                }
+            })
+        });
+    },
+
+    addNewSeasonID: entity => {
+        return new Promise((resolve, reject) =>{
+            var thamso = mongoose.model('thamsos',thamsoSchema);
+            var obj = new thamso({
+                idMuaGiai: entity._id,
+                // tuoiMin: entity.tuoiMin,
+                // tuoiMax: entity.tuoiMax,
+                // soCauThuMin: entity.soCauThuMin,
+                // soCauThuMax: entity.soCauThuMax,
+                // soNgoaiBinhMax: entity.soNgoaiBinhMax,
+                // soPhutBuGioMax: entity.soPhutBuGioMax,
+                // diemSoThang: entity.diemSoThang,
+                // diemSoHoa: entity.diemSoHoa,
+                // diemSoThua: entity.diemSoThua,
+                // thuTuUuTien: entity.thuTuUuTien,
+                // soDoiXuongHang: entity.soDoiXuongHang,
+                // soDoiDuC1: entity.soDoiDuC1,
+                // soDoiDuC2: entity.soDoiDuC2,
+                // soDoiThamDu: entity.soDoiThamDu
             })
             obj.save((err,succ) => {
                 if(err)
@@ -90,7 +122,8 @@ module.exports = {
                 thuTuUuTien: entity.thuTuUuTien,
                 soDoiXuongHang: entity.soDoiXuongHang,
                 soDoiDuC1: entity.soDoiDuC1,
-                soDoiDuC2: entity.soDoiDuC2
+                soDoiDuC2: entity.soDoiDuC2,
+                soDoiThamDu: entity.soDoiThamDu
             }).exec((err,succ) => {
                 if(err)
                     reject(err);

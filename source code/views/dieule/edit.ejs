@@ -22,6 +22,7 @@
                 <div class="card-header">
                     <strong>Bảng thông số</strong>
                 </div>
+                
                 <div class="card-body card-block">
                     <form action="/dieule/update/<%=idSeason%>" method="post" class="form-horizontal" id="frmDieule">
 
@@ -46,6 +47,8 @@
         </div>
 
     </div>
+
+    
     <div class="row form-group">
         <div class="col col-md-4 "><label for="diemthua" class=" form-control-label ">Điểm số
                 thua</label>
@@ -62,6 +65,19 @@
             <input type="number" name="sodoixuonghang" id="sodoixuonghang" class="form-control-sm form-control"
                 value="<%= quydinh.soDoiXuongHang %>" <% if (edit=="false") { %> disabled <% } %>>
 
+        </div>
+        
+        
+    </div>
+
+    <div class="row form-group">
+
+        <div class="col col-md-4 "><label for="soDoiThamDu" class=" form-control-label ">Số đội tham dự</label>
+        </div>
+        <div class="col-12 col-md-2">
+            <input type="number" min="2" step="2" name="soDoiThamDu" id="soDoiThamDu" class="form-control-sm form-control"
+                value="<%= quydinh.soDoiThamDu %>" <% if (edit=="false") { %> disabled <% } %>>
+                <!-- <input type="text" name="myinput" id="myinput" onkeyup="checkmyinput()"> -->
         </div>
     </div>
 
@@ -170,3 +186,20 @@
 </div>
 </div>
 </div>
+<script>
+    function checkmyinput () {
+    // Get inputfield
+    var inputfield = document.getElementById("myinput");
+
+    // Get value from inputfield
+    var inputval = inputfield.value;
+
+    // Remove non numeric input
+    var numeric = inputval.replace(/[^0-9]+/,"");
+
+    // Check if input is numeric and even, if not empty field
+    if (numeric.length != inputval.length || numeric%2 != 0) {
+        inputfield.value = '';
+    }
+}
+</script>

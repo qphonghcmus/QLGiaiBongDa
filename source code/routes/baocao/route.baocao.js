@@ -48,12 +48,12 @@ router.get('/bxh/:seasonID', (req, res) => {
                     wins: wins, draws: draws, losts: losts,
                     goalsFor: goalsFor, goalsAgainst: goalsAgainst,
                     goalsDiff: goalsFor - goalsAgainst,
-                    point: wins * values[2][0].diemSoThang + losts * values[2][0].diemSoThua + draws * values[2][0].diemSoHoa,
+                    point: wins * values[2].diemSoThang + losts * values[2].diemSoThua + draws * values[2].diemSoHoa,
                 }
 
                 allClubs.push(club);
                 if (count === listClub.length) {
-                    sortClubs(allClubs, values[2][0].thuTuUuTien);
+                    sortClubs(allClubs, values[2].thuTuUuTien);
 
                     res.render('./layouts/main', {
                         chuyenmuc: 'Bảng xếp hạng',
